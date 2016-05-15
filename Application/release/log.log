@@ -1,0 +1,211 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::             (v1.4.0.M1)
+
+2016-05-09 09:08:50.112  INFO 2208 --- [           main] com.happy3w.ideamgr.IdeaMgrApplication   : Starting IdeaMgrApplication on CNysgao.local with PID 2208 (started by ysgao in /Users/ysgao/Projects/ResourceManager/release)
+2016-05-09 09:08:50.114  INFO 2208 --- [           main] com.happy3w.ideamgr.IdeaMgrApplication   : The following profiles are active: wave3_uat
+2016-05-09 09:08:50.166  INFO 2208 --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1698c449: startup date [Mon May 09 09:08:50 CST 2016]; root of context hierarchy
+2016-05-09 09:08:50.665  INFO 2208 --- [           main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'beanNameViewResolver' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2016-05-09 09:08:50.871  INFO 2208 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bbecb3ac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-05-09 09:08:51.238  INFO 2208 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8070 (http) 8071 (https)
+2016-05-09 09:08:51.248  INFO 2208 --- [           main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2016-05-09 09:08:51.249  INFO 2208 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-05-09 09:08:51.889  INFO 2208 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2016-05-09 09:08:51.889  INFO 2208 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1727 ms
+2016-05-09 09:08:52.077  INFO 2208 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' to [/]
+2016-05-09 09:08:52.081  INFO 2208 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-05-09 09:08:52.081  INFO 2208 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2016-05-09 09:08:52.081  INFO 2208 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2016-05-09 09:08:52.081  INFO 2208 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'requestContextFilter' to: [/*]
+2016-05-09 09:08:52.198  INFO 2208 --- [           main] o.s.j.d.DriverManagerDataSource          : Loaded JDBC driver: com.mysql.jdbc.Driver
+2016-05-09 09:08:52.432  INFO 2208 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1698c449: startup date [Mon May 09 09:08:50 CST 2016]; root of context hierarchy
+2016-05-09 09:08:52.502  INFO 2208 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea],methods=[POST]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.add(javax.servlet.http.HttpServletRequest,com.happy3w.ideamgr.model.Idea)
+2016-05-09 09:08:52.503  INFO 2208 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/{id}],methods=[PUT]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.update(javax.servlet.http.HttpServletRequest,com.happy3w.ideamgr.model.Idea,int)
+2016-05-09 09:08:52.503  INFO 2208 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/{id}],methods=[DELETE]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.delete(javax.servlet.http.HttpServletRequest,int)
+2016-05-09 09:08:52.503  INFO 2208 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea],methods=[GET]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.queryAll(javax.servlet.http.HttpServletRequest,java.lang.Integer,java.lang.Integer)
+2016-05-09 09:08:52.503  INFO 2208 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/{id}],methods=[GET]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.querySingle(javax.servlet.http.HttpServletRequest,int,java.lang.Boolean)
+2016-05-09 09:08:52.503  INFO 2208 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/download],methods=[GET]}" onto public void com.happy3w.ideamgr.ctrl.IdeaCtrl.download(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-05-09 09:08:52.503  INFO 2208 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/upload],methods=[POST]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.upload(javax.servlet.http.HttpServletRequest)
+2016-05-09 09:08:52.506  INFO 2208 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2016-05-09 09:08:52.506  INFO 2208 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-05-09 09:08:52.509  INFO 2208 --- [           main] o.s.w.s.c.a.WebMvcConfigurerAdapter      : Adding welcome page: ServletContext resource [/index.html]
+2016-05-09 09:08:52.517  INFO 2208 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2016-05-09 09:08:52.525  INFO 2208 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-09 09:08:52.525  INFO 2208 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-09 09:08:52.552  INFO 2208 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-09 09:08:52.649  INFO 2208 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2016-05-09 09:08:52.958  INFO 2208 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8070 (http) 8071 (https)
+2016-05-09 09:08:52.961  INFO 2208 --- [           main] com.happy3w.ideamgr.IdeaMgrApplication   : Started IdeaMgrApplication in 3.19 seconds (JVM running for 3.906)
+2016-05-09 09:09:19.648  INFO 2208 --- [nio-8070-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2016-05-09 09:09:19.648  INFO 2208 --- [nio-8070-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2016-05-09 09:09:19.657  INFO 2208 --- [nio-8070-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 9 ms
+2016-05-13 11:36:53.011  INFO 2208 --- [       Thread-3] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1698c449: startup date [Mon May 09 09:08:50 CST 2016]; root of context hierarchy
+2016-05-13 11:36:53.126  INFO 2208 --- [       Thread-3] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::             (v1.4.0.M1)
+
+2016-05-14 00:45:38.344  INFO 3049 --- [           main] com.happy3w.ideamgr.IdeaMgrApplication   : Starting IdeaMgrApplication on bogon with PID 3049 (started by ysgao in /Users/ysgao/Projects/ResourceManager/release)
+2016-05-14 00:45:38.351  INFO 3049 --- [           main] com.happy3w.ideamgr.IdeaMgrApplication   : The following profiles are active: wave3_uat
+2016-05-14 00:45:38.409  INFO 3049 --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1698c449: startup date [Sat May 14 00:45:38 CST 2016]; root of context hierarchy
+2016-05-14 00:45:38.942  INFO 3049 --- [           main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'beanNameViewResolver' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2016-05-14 00:45:39.159  INFO 3049 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bbecb3ac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-05-14 00:45:39.552  INFO 3049 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8070 (http) 8071 (https)
+2016-05-14 00:45:39.563  INFO 3049 --- [           main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2016-05-14 00:45:39.564  INFO 3049 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-05-14 00:45:40.281  INFO 3049 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2016-05-14 00:45:40.282  INFO 3049 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1876 ms
+2016-05-14 00:45:40.476  INFO 3049 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' to [/]
+2016-05-14 00:45:40.480  INFO 3049 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-05-14 00:45:40.480  INFO 3049 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2016-05-14 00:45:40.480  INFO 3049 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2016-05-14 00:45:40.480  INFO 3049 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'requestContextFilter' to: [/*]
+2016-05-14 00:45:40.597  INFO 3049 --- [           main] o.s.j.d.DriverManagerDataSource          : Loaded JDBC driver: com.mysql.jdbc.Driver
+2016-05-14 00:45:40.843  INFO 3049 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1698c449: startup date [Sat May 14 00:45:38 CST 2016]; root of context hierarchy
+2016-05-14 00:45:40.914  INFO 3049 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea],methods=[POST]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.add(javax.servlet.http.HttpServletRequest,com.happy3w.ideamgr.model.Idea)
+2016-05-14 00:45:40.914  INFO 3049 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/{id}],methods=[PUT]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.update(javax.servlet.http.HttpServletRequest,com.happy3w.ideamgr.model.Idea,int)
+2016-05-14 00:45:40.914  INFO 3049 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/{id}],methods=[DELETE]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.delete(javax.servlet.http.HttpServletRequest,int)
+2016-05-14 00:45:40.914  INFO 3049 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea],methods=[GET]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.queryAll(javax.servlet.http.HttpServletRequest,java.lang.Integer,java.lang.Integer)
+2016-05-14 00:45:40.915  INFO 3049 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/{id}],methods=[GET]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.querySingle(javax.servlet.http.HttpServletRequest,int,java.lang.Boolean)
+2016-05-14 00:45:40.915  INFO 3049 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/download],methods=[GET]}" onto public void com.happy3w.ideamgr.ctrl.IdeaCtrl.download(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-05-14 00:45:40.915  INFO 3049 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/upload],methods=[POST]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.upload(javax.servlet.http.HttpServletRequest)
+2016-05-14 00:45:40.918  INFO 3049 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2016-05-14 00:45:40.918  INFO 3049 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-05-14 00:45:40.921  INFO 3049 --- [           main] o.s.w.s.c.a.WebMvcConfigurerAdapter      : Adding welcome page: ServletContext resource [/index.html]
+2016-05-14 00:45:40.928  INFO 3049 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2016-05-14 00:45:40.935  INFO 3049 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-14 00:45:40.935  INFO 3049 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-14 00:45:40.962  INFO 3049 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-14 00:45:41.058  INFO 3049 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2016-05-14 00:45:41.331  INFO 3049 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8070 (http) 8071 (https)
+2016-05-14 00:45:41.335  INFO 3049 --- [           main] com.happy3w.ideamgr.IdeaMgrApplication   : Started IdeaMgrApplication in 3.339 seconds (JVM running for 4.05)
+2016-05-14 00:45:59.290  INFO 3049 --- [nio-8070-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2016-05-14 00:45:59.291  INFO 3049 --- [nio-8070-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2016-05-14 00:45:59.300  INFO 3049 --- [nio-8070-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 9 ms
+Exception in thread "http-nio-8070-exec-2" java.lang.NoClassDefFoundError: ch/qos/logback/classic/spi/ThrowableProxy
+	at ch.qos.logback.classic.spi.LoggingEvent.<init>(LoggingEvent.java:120)
+	at ch.qos.logback.classic.Logger.buildLoggingEventAndAppend(Logger.java:440)
+	at ch.qos.logback.classic.Logger.filterAndLog_0_Or3Plus(Logger.java:396)
+	at ch.qos.logback.classic.Logger.log(Logger.java:788)
+	at org.slf4j.bridge.SLF4JBridgeHandler.callLocationAwareLogger(SLF4JBridgeHandler.java:221)
+	at org.slf4j.bridge.SLF4JBridgeHandler.publish(SLF4JBridgeHandler.java:303)
+	at java.util.logging.Logger.log(Logger.java:738)
+	at java.util.logging.Logger.doLog(Logger.java:765)
+	at java.util.logging.Logger.logp(Logger.java:1041)
+	at org.apache.juli.logging.DirectJDKLog.log(DirectJDKLog.java:182)
+	at org.apache.juli.logging.DirectJDKLog.error(DirectJDKLog.java:148)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1529)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1456)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Exception in thread "http-nio-8070-exec-3" java.lang.NoClassDefFoundError: ch/qos/logback/classic/spi/ThrowableProxy
+	at ch.qos.logback.classic.spi.LoggingEvent.<init>(LoggingEvent.java:120)
+	at ch.qos.logback.classic.Logger.buildLoggingEventAndAppend(Logger.java:440)
+	at ch.qos.logback.classic.Logger.filterAndLog_0_Or3Plus(Logger.java:396)
+	at ch.qos.logback.classic.Logger.log(Logger.java:788)
+	at org.slf4j.bridge.SLF4JBridgeHandler.callLocationAwareLogger(SLF4JBridgeHandler.java:221)
+	at org.slf4j.bridge.SLF4JBridgeHandler.publish(SLF4JBridgeHandler.java:303)
+	at java.util.logging.Logger.log(Logger.java:738)
+	at java.util.logging.Logger.doLog(Logger.java:765)
+	at java.util.logging.Logger.logp(Logger.java:1041)
+	at org.apache.juli.logging.DirectJDKLog.log(DirectJDKLog.java:182)
+	at org.apache.juli.logging.DirectJDKLog.error(DirectJDKLog.java:148)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1529)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1456)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Exception in thread "http-nio-8070-exec-4" java.lang.NoClassDefFoundError: ch/qos/logback/classic/spi/ThrowableProxy
+	at ch.qos.logback.classic.spi.LoggingEvent.<init>(LoggingEvent.java:120)
+	at ch.qos.logback.classic.Logger.buildLoggingEventAndAppend(Logger.java:440)
+	at ch.qos.logback.classic.Logger.filterAndLog_0_Or3Plus(Logger.java:396)
+	at ch.qos.logback.classic.Logger.log(Logger.java:788)
+	at org.slf4j.bridge.SLF4JBridgeHandler.callLocationAwareLogger(SLF4JBridgeHandler.java:221)
+	at org.slf4j.bridge.SLF4JBridgeHandler.publish(SLF4JBridgeHandler.java:303)
+	at java.util.logging.Logger.log(Logger.java:738)
+	at java.util.logging.Logger.doLog(Logger.java:765)
+	at java.util.logging.Logger.logp(Logger.java:1041)
+	at org.apache.juli.logging.DirectJDKLog.log(DirectJDKLog.java:182)
+	at org.apache.juli.logging.DirectJDKLog.error(DirectJDKLog.java:148)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1529)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1456)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Exception in thread "main" java.lang.UnsupportedClassVersionError: com/happy3w/ideamgr/IdeaMgrApplication : Unsupported major.minor version 52.0
+	at java.lang.ClassLoader.defineClass1(Native Method)
+	at java.lang.ClassLoader.defineClassCond(ClassLoader.java:637)
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:621)
+	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:141)
+	at java.net.URLClassLoader.defineClass(URLClassLoader.java:283)
+	at java.net.URLClassLoader.access$000(URLClassLoader.java:58)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:197)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:190)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:306)
+	at org.springframework.boot.loader.LaunchedURLClassLoader.loadClass(LaunchedURLClassLoader.java:77)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:101)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58)
+	at org.springframework.boot.loader.WarLauncher.main(WarLauncher.java:59)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::             (v1.4.0.M1)
+
+2016-05-14 16:16:08.713  INFO 5102 --- [           main] com.happy3w.ideamgr.IdeaMgrApplication   : Starting IdeaMgrApplication on bogon with PID 5102 (started by ysgao in /Users/ysgao/Projects/IdeaMgr/release)
+2016-05-14 16:16:08.716  INFO 5102 --- [           main] com.happy3w.ideamgr.IdeaMgrApplication   : The following profiles are active: wave3_uat
+2016-05-14 16:16:08.769  INFO 5102 --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1698c449: startup date [Sat May 14 16:16:08 CST 2016]; root of context hierarchy
+2016-05-14 16:16:09.281  INFO 5102 --- [           main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'beanNameViewResolver' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2016-05-14 16:16:09.495  INFO 5102 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bbecb3ac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-05-14 16:16:09.892  INFO 5102 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8070 (http) 8071 (https)
+2016-05-14 16:16:09.903  INFO 5102 --- [           main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2016-05-14 16:16:09.903  INFO 5102 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-05-14 16:16:10.560  INFO 5102 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2016-05-14 16:16:10.560  INFO 5102 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1794 ms
+2016-05-14 16:16:10.783  INFO 5102 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' to [/]
+2016-05-14 16:16:10.788  INFO 5102 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-05-14 16:16:10.788  INFO 5102 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2016-05-14 16:16:10.788  INFO 5102 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2016-05-14 16:16:10.788  INFO 5102 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'requestContextFilter' to: [/*]
+2016-05-14 16:16:10.925  INFO 5102 --- [           main] o.s.j.d.DriverManagerDataSource          : Loaded JDBC driver: com.mysql.jdbc.Driver
+2016-05-14 16:16:11.153  INFO 5102 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1698c449: startup date [Sat May 14 16:16:08 CST 2016]; root of context hierarchy
+2016-05-14 16:16:11.227  INFO 5102 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea],methods=[POST]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.add(javax.servlet.http.HttpServletRequest,com.happy3w.ideamgr.model.Idea)
+2016-05-14 16:16:11.228  INFO 5102 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/{id}],methods=[PUT]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.update(javax.servlet.http.HttpServletRequest,com.happy3w.ideamgr.model.Idea,int)
+2016-05-14 16:16:11.228  INFO 5102 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/{id}],methods=[DELETE]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.delete(javax.servlet.http.HttpServletRequest,int)
+2016-05-14 16:16:11.228  INFO 5102 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea],methods=[GET]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.queryAll(javax.servlet.http.HttpServletRequest,java.lang.Integer,java.lang.Integer)
+2016-05-14 16:16:11.229  INFO 5102 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/{id}],methods=[GET]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.querySingle(javax.servlet.http.HttpServletRequest,int,java.lang.Boolean)
+2016-05-14 16:16:11.229  INFO 5102 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/download],methods=[GET]}" onto public void com.happy3w.ideamgr.ctrl.IdeaCtrl.download(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-05-14 16:16:11.229  INFO 5102 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/svc/idea/upload],methods=[POST]}" onto public com.happy3w.common.model.WebCommonResult com.happy3w.ideamgr.ctrl.IdeaCtrl.upload(javax.servlet.http.HttpServletRequest)
+2016-05-14 16:16:11.231  INFO 5102 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2016-05-14 16:16:11.231  INFO 5102 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-05-14 16:16:11.234  INFO 5102 --- [           main] o.s.w.s.c.a.WebMvcConfigurerAdapter      : Adding welcome page: ServletContext resource [/index.html]
+2016-05-14 16:16:11.242  INFO 5102 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2016-05-14 16:16:11.250  INFO 5102 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-14 16:16:11.250  INFO 5102 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-14 16:16:11.278  INFO 5102 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-14 16:16:11.370  INFO 5102 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2016-05-14 16:16:11.672  INFO 5102 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8070 (http) 8071 (https)
+2016-05-14 16:16:11.675  INFO 5102 --- [           main] com.happy3w.ideamgr.IdeaMgrApplication   : Started IdeaMgrApplication in 3.301 seconds (JVM running for 4.028)
+2016-05-14 16:16:21.677  INFO 5102 --- [nio-8070-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2016-05-14 16:16:21.677  INFO 5102 --- [nio-8070-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2016-05-14 16:16:21.686  INFO 5102 --- [nio-8070-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 9 ms

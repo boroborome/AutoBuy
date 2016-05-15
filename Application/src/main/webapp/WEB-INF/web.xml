@@ -4,7 +4,7 @@
 	version="2.5">
 
 	<display-name>AutoBuy-Application</display-name>
-	<description>Idea</description>
+	<description>Auto Buy</description>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

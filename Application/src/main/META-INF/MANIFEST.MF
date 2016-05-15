@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Start-Class: com.happywww.autobuy.AutoBuyApplication
+Spring-Boot-Classes: WEB-INF/classes/
+Spring-Boot-Lib: WEB-INF/lib/
+Spring-Boot-Version: 1.4.0.M1
+Main-Class: com.happy3w.autobuy.AutoBuyApplication
+

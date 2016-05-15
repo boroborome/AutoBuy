@@ -1,12 +1,8 @@
 package com.happy3w.autobuy;
 
-import com.happy3w.autobuy.util.HttpsClientRequestFactory;
-import org.apache.commons.io.FileUtils;
-import org.apache.tomcat.jni.Buffer;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.core.io.AbstractResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +21,7 @@ import java.util.Set;
  */
 public class HomePageTest {
 
-    public static void main(String[] arg) throws InterruptedException {
+    public static void main2(String[] arg) throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "/Users/ysgao/Projects/HostIE/chromedriver");
         WebDriver wd = new ChromeDriver();
 //        WebDriver wd = new FirefoxDriver();
@@ -86,7 +82,7 @@ public class HomePageTest {
         param.add("jarFile", resource);
         param.add("fileName", "verifyCode.jpg");
 
-        restTemplate.postForObject("http://www.happy3w.com/buy3/upload.php", param, String.class);
+        restTemplate.postForObject("http://www.happy3w.com/autobuy/upload.php", param, String.class);
     }
 
     private static InputStream image2InputStream(BufferedImage image) throws IOException {
