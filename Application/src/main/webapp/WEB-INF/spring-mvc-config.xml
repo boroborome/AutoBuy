@@ -33,6 +33,16 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="200000"/>
     </bean>
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.apache.shiro.authz.UnauthenticatedException">pages/403</prop>
+				<prop key="org.apache.shiro.authz.UnauthorizedException">pages/403</prop>
+				<prop key="org.apache.shiro.authc.LockedAccountException">pages/locked</prop>
+				<prop key="java.lang.Throwable">pages/500</prop>
+			</props>
+		</property>
+	</bean>
 	<!--<mvc:resources mapping="**.html" location="/" />-->
 	 
 	<mvc:annotation-driven />

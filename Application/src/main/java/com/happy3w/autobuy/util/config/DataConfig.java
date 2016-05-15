@@ -27,6 +27,10 @@ public class DataConfig {
         return    env.getProperty("auth.url");
     }
 
+    public String getYyfaxAccount() { return env.getProperty("yyfax.account");}
+
+    public String getYyfaxPassword() { return env.getProperty("yyfax.password");}
+
     public int getPageSize() {
         String pageSize = env.getProperty("PreselectSettings.pageSize");
         if (pageSize == null || pageSize.isEmpty()) {

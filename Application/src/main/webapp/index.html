@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>AutoBuy</title>
+    <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+    <script src="js/vendor/jquery.ui.widget.js"></script>
+    <script src="js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript" src="js/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="js/autobuy.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            initUI();
+        });
+    </script>
 </head>
 <body>
- Hello
+ Hello<br>
+    <input type="button" id="btnStart" value="start"/>
+    <textarea id="lblStatus"></textarea>
 </body>
 </html>
