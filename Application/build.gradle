@@ -1,18 +1,20 @@
-group 'com.happy3w.ideamgr'
+group 'com.happy3w.autobuy'
 version '1.0-SNAPSHOT'
 
 buildscript {
     ext {
-        springBootVersion = '1.4.0.M1'
+        springBootVersion = '1.4.0.M2'
     }
     repositories {
         mavenCentral()
-        maven { url "http://repository.jboss.org/maven2" }
-        maven { url "http://www.mvnsearch.org/maven2" }
-        maven { url "http://www.ibiblio.org/maven2" }
-        maven { url "http://mirrors.ibiblio.org/pub/mirrors/maven2" }
-        maven { url "http://repo.springsource.org/libs-milestone-local" }
-
+//        maven { url "http://repo1.maven.org/maven2" }
+//        maven { url "http://localhost:8081/nexus/content/repositories/happy3w/" }
+//        maven { url "http://repository.jboss.org/maven2" }
+//        maven { url "http://www.mvnsearch.org/maven2" }
+//        maven { url "http://www.ibiblio.org/maven2" }
+//        maven { url "http://mirrors.ibiblio.org/pub/mirrors/maven2" }
+//        maven { url "http://repo.springsource.org/libs-milestone-local" }
+//
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
     }
@@ -38,14 +40,17 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    maven { url "http://repository.jboss.org/maven2" }
-    //maven { url "http://www.mvnsearch.org/maven2" }
-    maven { url "http://www.ibiblio.org/maven2" }
-    maven { url "http://mirrors.ibiblio.org/pub/mirrors/maven2" }
-    maven { url "http://repo.springsource.org/libs-milestone-local" }
-
+//    maven { url "http://repo1.maven.org/maven2" }
+//    maven { url "http://localhost:8081/nexus/content/repositories/happy3w/" }
+//    maven { url "http://repository.jboss.org/maven2" }
+//    maven { url "http://www.mvnsearch.org/maven2" }
+//    maven { url "http://www.ibiblio.org/maven2" }
+//    maven { url "http://mirrors.ibiblio.org/pub/mirrors/maven2" }
+//    maven { url "http://repo.springsource.org/libs-milestone-local" }
+//
     maven { url "https://repo.spring.io/snapshot" }
     maven { url "https://repo.spring.io/milestone" }
+//        maven { url "http://localhost:8081/nexus/content/repositories/happy3w/" }
 }
 
 
@@ -61,7 +66,7 @@ dependencies {
 //    compile files('libs/selenium-java-2.53.0.jar', 'libs/guava-19.0.jar')
 //    compile('org.seleniumhq.selenium:selenium-remote-driver:2.53.0')
     //compile files('lib/commons-fileupload.jar')
-    compile('com.goodle.guava:guava:19.0')
+    compile('com.google.guava:guava:19.0')
 
 compile('aopalliance:aopalliance:1.0')
 compile('cglib:cglib-nodep:2.1_3')
