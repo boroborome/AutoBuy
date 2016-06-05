@@ -54,8 +54,10 @@ public class AutoBuyProcess implements Runnable {
         for (; time >= 0; --time) {
             // get verify image
             BufferedImage fullImage = snapshot((TakesScreenshot) wd);
-            Rectangle verifyRect = getVerifyRect(fullImage);
-            BufferedImage verifyImage = fullImage.getSubimage(verifyRect.getX(), verifyRect.getY(), verifyRect.getWidth(), verifyRect.getHeight());
+//            Rectangle verifyRect = getVerifyRect(fullImage);
+            Point location = elementVerifyImg.getLocation();
+            Dimension size = elementVerifyImg.getSize();
+            BufferedImage verifyImage = fullImage.getSubimage(location.getX(), location.getY(), size.getWidth(), size.getHeight());
 
             // translate to asnii
             String verifyCode = translateImage(verifyImage);
@@ -120,7 +122,7 @@ public class AutoBuyProcess implements Runnable {
             String chromeDriver = System.getProperty("webdriver.chrome.driver");
             if (chromeDriver == null || chromeDriver.isEmpty()) {
                 chromeDriver = (System.getProperties().get("os.name").toString().toLowerCase().contains("win")
-                        ? "chromedrive.exe" : "chromedriver");
+                        ? "chromedriver.exe" : "chromedriver");
                 File fileDriver = new File(chromeDriver);
                 chromeDriver = fileDriver.getAbsolutePath();
                 System.setProperty("webdriver.chrome.driver", chromeDriver);

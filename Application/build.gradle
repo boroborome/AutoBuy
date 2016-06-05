@@ -3,7 +3,7 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     ext {
-        springBootVersion = '1.4.0.M2'
+        springBootVersion = '1.4.0.M1'
     }
     repositories {
         mavenCentral()
@@ -30,6 +30,10 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
 apply plugin: 'jetty'
+apply plugin: 'application'
+
+applicationDefaultJvmArgs = ["-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8878"]
+
 
 jar {
     baseName = 'autobuy.app'

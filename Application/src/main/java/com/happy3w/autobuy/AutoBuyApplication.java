@@ -30,8 +30,8 @@ import java.io.File;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.happy3w.autobuy"})
-@EnableConfigurationProperties(AutoBuyApplication.TomcatSslConnectorProperties.class)
-@PropertySource("classpath:/config/tomcat.https.properties")
+//@EnableConfigurationProperties(AutoBuyApplication.TomcatSslConnectorProperties.class)
+//@PropertySource("classpath:/config/tomcat.https.properties")
 public class AutoBuyApplication {
 
     private DataSource ds;
@@ -82,7 +82,7 @@ public class AutoBuyApplication {
     }
 
 
-    @ConfigurationProperties(prefix = "custom.tomcat.https")
+    //@ConfigurationProperties(prefix = "custom.tomcat.https")
     public static class TomcatSslConnectorProperties {
         private Integer port;
         private Boolean ssl = true;
@@ -160,7 +160,7 @@ public class AutoBuyApplication {
         }
     }
 
-    @Bean
+//    @Bean
     public EmbeddedServletContainerFactory servletContainer(TomcatSslConnectorProperties properties) {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
         tomcat.addAdditionalTomcatConnectors(createSslConnector(properties));
