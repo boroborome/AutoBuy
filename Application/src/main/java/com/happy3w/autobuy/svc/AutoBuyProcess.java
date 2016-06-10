@@ -1,31 +1,47 @@
 package com.happy3w.autobuy.svc;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.io.AbstractResource;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
-import java.awt.image.BufferedImage;
-import java.io.*;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestTemplate;
+
+import com.happy3w.autobuy.svc.upload.UploadContext;
+import com.happy3w.autobuy.svc.upload.UploadUtil;
 
 /**
  * Created by ysgao on 5/16/16.
  */
 public class AutoBuyProcess implements Runnable {
-    private final Logger logger = LoggerFactory.getLogger(AutoBuyProcess.class);
+    private static final Logger logger = LoggerFactory.getLogger(AutoBuyProcess.class);
+	private String webServerUrl;
     private final String account;
     private final String password;
 
-    public AutoBuyProcess(String account, String password) {
+    public AutoBuyProcess(String account, String password, String webServerUrl) {
         this.account = account;
         this.password = password;
+        this.webServerUrl = webServerUrl;
     }
 
     private ChromeDriver webDriver;
@@ -95,16 +111,11 @@ public class AutoBuyProcess implements Runnable {
         return restTemplate.getForObject("http://www.happy3w.com/autobuy/readVerify.php", String.class);
     }
 
-    private static void sendImageToServer(BufferedImage verifyImage) throws IOException {
-        RestTemplate restTemplate = new RestTemplate();
-//        restTemplate.setRequestFactory(new HttpsClientRequestFactory(null, null));
-
-        AbstractResource resource = new InputStreamResource(image2InputStream(verifyImage));
-        MultiValueMap<String, Object> param = new LinkedMultiValueMap<String, Object>();
-        param.add("jarFile", resource);
-        param.add("fileName", "verifyCode.jpg");
-
-        restTemplate.postForObject("http://www.happy3w.com/autobuy/upload.php", param, String.class);
+    private void sendImageToServer(BufferedImage verifyImage) throws IOException {
+        Map<String, String> fileMap = new HashMap<String, String>();
+		fileMap.put("file", "verifycode.jpg");
+		String ret = UploadUtil.formUpload(UploadContext.getInstance().getUploadUrl(this.webServerUrl), null,fileMap,image2InputStream(verifyImage));
+		this.logger.debug(ret);
     }
 
     private static InputStream image2InputStream(BufferedImage image) throws IOException {

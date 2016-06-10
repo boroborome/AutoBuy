@@ -31,6 +31,8 @@ public class DataConfig {
 
     public String getYyfaxPassword() { return env.getProperty("yyfax.password");}
 
+    public String getWebServerUrl() { return env.getProperty("webServer.url");}
+    
     public int getPageSize() {
         String pageSize = env.getProperty("PreselectSettings.pageSize");
         if (pageSize == null || pageSize.isEmpty()) {

@@ -21,7 +21,7 @@ public class AutoBuySvc {
 
     public void buy() {
         if (autobuyThread == null || !autobuyThread.isAlive()) {
-            autoBuyProcess = new AutoBuyProcess(dataConfig.getYyfaxAccount(), dataConfig.getYyfaxPassword());
+            autoBuyProcess = new AutoBuyProcess(dataConfig.getYyfaxAccount(), dataConfig.getYyfaxPassword(), dataConfig.getWebServerUrl());
             autobuyThread = new Thread(autoBuyProcess, "AutoBuyThread") {
                 @Override
                 public void run() {
