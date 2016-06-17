@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
 
 import com.happy3w.autobuy.svc.upload.UploadContext;
-import com.happy3w.autobuy.svc.upload.UploadUtil;
+import com.happy3w.autobuy.util.RequestUtil;
 
 /**
  * Created by ysgao on 5/16/16.
@@ -114,7 +114,7 @@ public class AutoBuyProcess implements Runnable {
     private void sendImageToServer(BufferedImage verifyImage) throws IOException {
         Map<String, String> fileMap = new HashMap<String, String>();
 		fileMap.put("file", "verifycode.jpg");
-		String ret = UploadUtil.formUpload(UploadContext.getInstance().getUploadUrl(this.webServerUrl), null,fileMap,image2InputStream(verifyImage));
+		String ret = RequestUtil.formUpload(UploadContext.getInstance().getUploadUrl(this.webServerUrl), null,fileMap,image2InputStream(verifyImage));
 		this.logger.debug(ret);
     }
 
