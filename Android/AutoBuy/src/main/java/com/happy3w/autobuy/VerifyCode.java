@@ -16,8 +16,10 @@ public class VerifyCode {
         long code = 0;
         try {
             ServerContext srv = new ServerContext();
-            String result = RequestUtil.sendPost(srv.getVerifyCodeIsNewUrl(), null);
-            code = Long.parseLong(result);
+            String result = HttpUtil.sendPost(srv.getVerifyCodeIsNewUrl(), null);
+            if(!result.isEmpty()&&!result.trim().isEmpty()) {
+                code = Long.parseLong(result);
+            }
         } catch (Exception e) {
             Log.e("VerifyCode", e.getMessage(), e);
         }
@@ -27,7 +29,7 @@ public class VerifyCode {
     public Bitmap getImg() {
         try {
             ServerContext srv = new ServerContext();
-            InputStream inputStream = RequestUtil.getImageViewInputStream(srv.getVerifyCodeImgUrl());
+            InputStream inputStream = HttpUtil.getImageViewInputStream(srv.getVerifyCodeImgUrl());
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             return bitmap;
         } catch (Exception e) {
@@ -37,7 +39,7 @@ public class VerifyCode {
     }
 
     public String sendVerifyCode(String verifyCode) {
-        String result = RequestUtil.sendPost(server.getVerifyCodeIdentify(), "verifycode=" + verifyCode);
+        String result = HttpUtil.sendPost(server.getVerifyCodeIdentify(), "verifycode=" + verifyCode);
         return result;
     }
 }

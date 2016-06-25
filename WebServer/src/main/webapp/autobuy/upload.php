@@ -1,5 +1,10 @@
 <?php
+/*
+master上传本地验证码图片到中转站。
+*/
+include 'clearcache.php';
 $dir="upload/";
+$resul="upload/verifycode.txt";
 if ((($_FILES["file"]["type"] == "image/gif")
 || ($_FILES["file"]["type"] == "image/jpeg")
 || ($_FILES["file"]["type"] == "image/pjpeg"))
@@ -33,6 +38,9 @@ if ((($_FILES["file"]["type"] == "image/gif")
       }
       move_uploaded_file($_FILES["file"]["tmp_name"],
       $fileName);
+      if(file_exists($resul)){
+        unlink($resul);
+      }
       echo "Stored in:".$fileName;
     }
   }

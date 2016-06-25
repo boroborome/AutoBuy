@@ -1,4 +1,8 @@
 <?php
+/*
+检测中转服务器的验证码是否为最新的（5分钟内）。
+*/
+include 'clearcache.php';
 $verifycode="upload/verifycode.jpg";
 echo isnew();
 function isnew(){

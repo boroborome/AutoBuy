@@ -1,0 +1,121 @@
+/**
+ * 
+ */
+package com.happy3w.autobuy.svc;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.springframework.web.client.RestTemplate;
+
+import com.happy3w.autobuy.util.HttpUtil;
+import com.happy3w.autobuy.util.LogUtil;
+import com.happy3w.autobuy.util.ThreadUtil;
+
+/**
+ *处理验证码相关事务。
+ * @version 2016年6月25日 下午12:30:23
+ * @author Happy3W cherry
+ *
+ */
+public class VerifyCodeManager {
+	private String httpUrl;
+	
+	public String getHttpUrl() {
+		return httpUrl;
+	}
+
+	public void setHttpUrl(String httpUrl) {
+		this.httpUrl = httpUrl;
+	}
+
+	public String getVerifyCode(WebDriver wd) {
+        WebElement elementVerifyImg = wd.findElement(By.xpath("//*[@id=\"_verifyImg\"]"));
+        int time = 5;
+        for (; time >= 0; --time) {
+            // get verify image
+            BufferedImage fullImage = snapshot((TakesScreenshot) wd);
+//            Rectangle verifyRect = getVerifyRect(fullImage);
+            Point location = elementVerifyImg.getLocation();
+            Dimension size = elementVerifyImg.getSize();
+            BufferedImage verifyImage = fullImage.getSubimage(location.getX(), location.getY(), size.getWidth(), size.getHeight());
+
+            // translate to asnii
+            String verifyCode = translateImage(verifyImage);
+
+            if (verifyCode != null && !verifyCode.isEmpty()) {
+                return verifyCode;
+            }
+            elementVerifyImg.click();
+            ThreadUtil.sleep(2000);
+        }
+
+        throw new TimeoutException("Can't get verify code after 5 times trying.");
+    }
+
+    private String translateImage(BufferedImage verifyImage) {
+        try {
+            sendImageToServer(verifyImage);
+        } catch (IOException e) {
+            LogUtil.getLogger().error(e.getMessage(), e);
+            return null;
+        }
+
+        for (int times = 10; times >= 0; --times) {
+            String verifyCode = readVerifyFromServer();
+            if (verifyCode != null && !verifyCode.isEmpty()) {
+                return verifyCode;
+            }
+            ThreadUtil.sleep(5000);
+        }
+        return null;
+    }
+
+    private String readVerifyFromServer() {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(TransferUrlManager.getVerifyCodeResultUrl(httpUrl), String.class);
+    }
+
+    private void sendImageToServer(BufferedImage verifyImage) throws IOException {
+        Map<String, String> fileMap = new HashMap<String, String>();
+		fileMap.put("file", "verifycode.jpg");
+		String ret = HttpUtil.formUpload(TransferUrlManager.getInstance().getUploadUrl(this.httpUrl), null,fileMap,image2InputStream(verifyImage));
+		LogUtil.getLogger().debug(ret);
+    }
+    private static InputStream image2InputStream(BufferedImage image) throws IOException {
+        ByteArrayOutputStream bs =new ByteArrayOutputStream();
+
+        ImageOutputStream imOut =ImageIO.createImageOutputStream(bs);
+
+        ImageIO.write(image,"jpg",imOut); //scaledImage1为BufferedImage，jpg为图像的类型
+
+        return new ByteArrayInputStream(bs.toByteArray());
+    }
+
+    private BufferedImage snapshot(TakesScreenshot drivername) {
+        byte[] imageBytes = drivername.getScreenshotAs(OutputType.BYTES);
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new ByteArrayInputStream(imageBytes));
+        } catch (IOException e) {
+            LogUtil.getLogger().error(e.getMessage(), e);
+        }
+        return image;
+    }
+}

@@ -1,10 +1,23 @@
 <?php
-$result="upload/result.txt";
-echo read()."successful";
-function read(){
-	$myfile = fopen($GLOBALS['result'], "r") or die("Unable to open file!");
-	$txt = fread($myfile,filesize($GLOBALS['result']));
-	fclose($myfile);
+/*
+master从中转站读取验证码识别结果。
+*/
+$result="upload/verifycode.txt";
+echo save();
+function save(){
+	if(!file_exists($GLOBALS['result'])){
+		$txt="";
+	}
+	else
+	{
+		$txt =file_get_contents($GLOBALS['result']);
+		unlink($GLOBALS['result']);
+		$imageFile = "upload/verifycode.jpg";
+		if(file_exists($imageFile))
+		{
+			unlink($imageFile);
+		}
+	}
 	return $txt;
 }
 ?>

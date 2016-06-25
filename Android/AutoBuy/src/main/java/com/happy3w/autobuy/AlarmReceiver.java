@@ -12,14 +12,12 @@ import android.widget.Toast;
  */
 public class AlarmReceiver extends BroadcastReceiver {
     private  static String TAG="AlarmReceiver";
-    MonitorServiceConnection  monitorConnect =new MonitorServiceConnection();
     @Override
     public void onReceive(Context context, Intent intent) {
-//       boolean result=getIsNewFlag(context);
-//        intent.putExtra("new",result);
-        Log.i(TAG,"received.");
+      Log.i(TAG,"received.");
         Intent intentService = new Intent(context, MonitorService.class);
         context.startService(intentService);
+      //  Toast.makeText(context, "repeating alarm",Toast.LENGTH_LONG).show();
     }
 
 }

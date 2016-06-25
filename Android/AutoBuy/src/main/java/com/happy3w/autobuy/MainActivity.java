@@ -1,5 +1,7 @@
 package com.happy3w.autobuy;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +11,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonStop;
     Button buttonGet;
     Button buttonSend;
+    Button btnTime;
     MonitorServiceConnection  monitorConnect =new MonitorServiceConnection();
 
     @Override
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         buttonStop = (Button) findViewById(R.id.buttonStop);
         buttonGet = (Button) findViewById(R.id.buttonGet);
         buttonSend = (Button) findViewById(R.id.buttonSend);
+        btnTime=(Button)findViewById(R.id.btnTime);
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,10 +71,11 @@ public class MainActivity extends AppCompatActivity {
         });
         addOnClickListenerToButtonGet();
         addOnClickListenerToButtonSend();
-
+        this.onClick_Time();
         this.registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+                Log.i(MainActivity.class.getName(),"BroadcastReceiver on receive.");
                 if (!MainActivity.this.hasWindowFocus()) {
                     return;
                 }
@@ -151,5 +157,25 @@ public class MainActivity extends AppCompatActivity {
         Log.i(this.getClass().getName(), "stop service");
         unbindService(monitorConnect);
         Log.i(this.getClass().getName(), "unbind service");
+    }
+
+    private void onClick_Time()
+    {
+        btnTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AlarmReceiver.class);
+                intent.setAction("repeating");
+                PendingIntent sender = PendingIntent
+                        .getBroadcast(MainActivity.this, 0, intent, 0);
+                //开始时间
+                long firstime = SystemClock.elapsedRealtime();
+
+                AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+                //5秒一个周期，不停的发送广播
+                am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 2*60 * 1000, sender);
+            }
+        });
+
     }
 }

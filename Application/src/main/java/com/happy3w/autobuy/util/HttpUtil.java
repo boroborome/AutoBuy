@@ -20,7 +20,10 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * @author Administrator
+ *http发送请求常用工具。
+ * @version 2016年6月25日 下午3:32:34
+ * @author Happy3W Cherry
+ *
  */
 public class HttpUtil {
     public static String sendGet(String url, String param) {
@@ -79,7 +82,7 @@ public class HttpUtil {
     public static String formUpload(String urlStr, Map<String, String> textMap, Map<String, String> fileMap, InputStream fileStream) {
         String res = "";
         HttpURLConnection conn = null;
-        String BOUNDARY = "---------------------------123821742118716"; //boundary标识requestͷ���ϴ��ļ����ݵķָ���
+        String BOUNDARY = "---------------------------"; //boundary标识requestͷ���ϴ��ļ����ݵķָ���
         try {
             URL url = new URL(urlStr);
             conn = (HttpURLConnection) url.openConnection();
