@@ -11,9 +11,12 @@ package com.happy3w.autobuy.util;
  */
 public class ThreadUtil {
 
-    public static void sleep(int second) {
+    /**线程挂起毫秒。
+     * @param millions 毫秒。
+     */
+    public static void sleep(long millions) {
         try {
-            Thread.sleep(second);
+            Thread.sleep(millions);
         } catch (InterruptedException e) {
             LogUtil.getLogger().error(e.getMessage(), e);
         }

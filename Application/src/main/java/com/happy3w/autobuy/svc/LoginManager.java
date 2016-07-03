@@ -22,10 +22,12 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
 import com.happy3w.autobuy.util.HttpUtil;
 import com.happy3w.autobuy.util.ThreadUtil;
+import com.happy3w.autobuy.util.WebDriverUtil;
 
 /**
  * login to a http url
@@ -36,8 +38,8 @@ import com.happy3w.autobuy.util.ThreadUtil;
 public class LoginManager {
 	//访问web的驱动。
 	private WebDriver webDriver;
-	
 	private String httpUrl;
+	private VerifyCodeManager vc;
 	public WebDriver getWebDriver() {
 		return webDriver;
 	}
@@ -56,23 +58,42 @@ public class LoginManager {
 		this.httpUrl = httpUrl;
 	}
 
+	public VerifyCodeManager getVc() {
+		return vc;
+	}
+
+
+	public void setVc(VerifyCodeManager vc) {
+		this.vc = vc;
+	}
+
+
 	public boolean login(String account,String password)
 	{	
 		boolean result=false;
-		webDriver.get("https://www.yyfax.com/user/login.html");
-        ThreadUtil.sleep(2000);
+        WebDriverUtil.get(webDriver, "https://www.yyfax.com/user/login.html", "我的友金所", 5000);
         WebElement elementName = webDriver.findElement(By.xpath("//*[@id=\"accountName\"]"));
         elementName.sendKeys(account);
         WebElement elementPassword = webDriver.findElement(By.xpath("//*[@id=\"password1\"]"));
         elementPassword.sendKeys(password);
         WebElement elementVerifyCode = webDriver.findElement(By.xpath("//*[@id=\"verifyCode\"]"));
-        VerifyCodeManager vc=new VerifyCodeManager();
         vc.setHttpUrl(this.httpUrl);
         elementVerifyCode.sendKeys(vc.getVerifyCode(webDriver));
         WebElement elementLoginButton = webDriver.findElement(By.xpath("//*[@id=\"login\"]"));
         elementLoginButton.click();
+        result=true;
 		return result;
 	}
-
+	public boolean loginout()
+	{
+		WebDriverUtil.get(webDriver, "https://www.yyfax.com/user/logout.htm", null, 500);
+		return true;
+	}
+	public void signature()
+	{
+		WebDriverUtil.get(webDriver, "https://www.yyfax.com/user/", "", 500);
+		WebElement signature = webDriver.findElement(By.xpath("/html/body/div[3]/div[2]/div[4]/div/div[2]/a"));
+		signature.click();
+	}
 	 
 }

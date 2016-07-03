@@ -28,12 +28,6 @@
             android:text="Stop"
             android:id="@+id/buttonStop" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Time"
-            android:id="@+id/btnTime" />
-
     </LinearLayout>
     <Button
         android:layout_width="wrap_content"
@@ -51,7 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtVerifyCode"
-        android:background="#79bcfa" />
+        android:background="#79bcfa"
+        android:imeOptions="actionDone"/>
 
     <Button
         android:layout_width="wrap_content"

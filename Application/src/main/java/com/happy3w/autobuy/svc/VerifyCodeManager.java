@@ -29,14 +29,15 @@ import com.happy3w.autobuy.util.LogUtil;
 import com.happy3w.autobuy.util.ThreadUtil;
 
 /**
- *处理验证码相关事务。
+ * 处理验证码相关事务。
+ * 
  * @version 2016年6月25日 下午12:30:23
  * @author Happy3W cherry
  *
  */
 public class VerifyCodeManager {
 	private String httpUrl;
-	
+
 	public String getHttpUrl() {
 		return httpUrl;
 	}
@@ -46,76 +47,81 @@ public class VerifyCodeManager {
 	}
 
 	public String getVerifyCode(WebDriver wd) {
-        WebElement elementVerifyImg = wd.findElement(By.xpath("//*[@id=\"_verifyImg\"]"));
-        int time = 5;
-        for (; time >= 0; --time) {
-            // get verify image
-            BufferedImage fullImage = snapshot((TakesScreenshot) wd);
-//            Rectangle verifyRect = getVerifyRect(fullImage);
-            Point location = elementVerifyImg.getLocation();
-            Dimension size = elementVerifyImg.getSize();
-            BufferedImage verifyImage = fullImage.getSubimage(location.getX(), location.getY(), size.getWidth(), size.getHeight());
+		WebElement elementVerifyImg = wd.findElement(By.xpath("//*[@id=\"_verifyImg\"]"));
+		int time = 5;
+		for (; time >= 0; --time) {
+			// get verify image
+			BufferedImage fullImage = snapshot((TakesScreenshot) wd);
+			// Rectangle verifyRect = getVerifyRect(fullImage);
+			Point location = elementVerifyImg.getLocation();
+			Dimension size = elementVerifyImg.getSize();
+			BufferedImage verifyImage = fullImage.getSubimage(location.getX(), location.getY(), size.getWidth(),
+					size.getHeight());
 
-            // translate to asnii
-            String verifyCode = translateImage(verifyImage);
+			// translate to asnii
+			String verifyCode = translateImage(verifyImage);
 
-            if (verifyCode != null && !verifyCode.isEmpty()) {
-                return verifyCode;
-            }
-            elementVerifyImg.click();
-            ThreadUtil.sleep(2000);
-        }
+			if (verifyCode != null && !verifyCode.isEmpty()) {
+				return verifyCode;
+			}
+			elementVerifyImg.click();
+			ThreadUtil.sleep(2000);
+		}
 
-        throw new TimeoutException("Can't get verify code after 5 times trying.");
-    }
+		throw new TimeoutException("Can't get verify code after 5 times trying.");
+	}
 
-    private String translateImage(BufferedImage verifyImage) {
-        try {
-            sendImageToServer(verifyImage);
-        } catch (IOException e) {
-            LogUtil.getLogger().error(e.getMessage(), e);
-            return null;
-        }
+	private String translateImage(BufferedImage verifyImage) {
+		try {
+			sendImageToServer(verifyImage);
+		} catch (IOException e) {
+			LogUtil.getLogger().error(e.getMessage(), e);
+			return null;
+		}
 
-        for (int times = 10; times >= 0; --times) {
-            String verifyCode = readVerifyFromServer();
-            if (verifyCode != null && !verifyCode.isEmpty()) {
-                return verifyCode;
-            }
-            ThreadUtil.sleep(5000);
-        }
-        return null;
-    }
+		return readVerifyFromServer(5*60*1000);
+	}
 
-    private String readVerifyFromServer() {
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(TransferUrlManager.getVerifyCodeResultUrl(httpUrl), String.class);
-    }
+	public String readVerifyFromServer(int timeout) {
+		String verifyCode = null;
+		int unit =2000;
+		for (int times = timeout/unit; times >= 0; --times) {
+			RestTemplate restTemplate = new RestTemplate();
+			verifyCode = restTemplate.getForObject(TransferUrlManager.getVerifyCodeResultUrl(httpUrl), String.class);
+			if (verifyCode != null && !verifyCode.isEmpty()) {
+				break;
+			}
+			ThreadUtil.sleep(unit);
+		}
+		return verifyCode;
+	}
 
-    private void sendImageToServer(BufferedImage verifyImage) throws IOException {
-        Map<String, String> fileMap = new HashMap<String, String>();
+	private void sendImageToServer(BufferedImage verifyImage) throws IOException {
+		Map<String, String> fileMap = new HashMap<String, String>();
 		fileMap.put("file", "verifycode.jpg");
-		String ret = HttpUtil.formUpload(TransferUrlManager.getInstance().getUploadUrl(this.httpUrl), null,fileMap,image2InputStream(verifyImage));
+		String ret = HttpUtil.formUpload(TransferUrlManager.getInstance().getUploadUrl(this.httpUrl), null, fileMap,
+				image2InputStream(verifyImage));
 		LogUtil.getLogger().debug(ret);
-    }
-    private static InputStream image2InputStream(BufferedImage image) throws IOException {
-        ByteArrayOutputStream bs =new ByteArrayOutputStream();
+	}
 
-        ImageOutputStream imOut =ImageIO.createImageOutputStream(bs);
+	private static InputStream image2InputStream(BufferedImage image) throws IOException {
+		ByteArrayOutputStream bs = new ByteArrayOutputStream();
 
-        ImageIO.write(image,"jpg",imOut); //scaledImage1为BufferedImage，jpg为图像的类型
+		ImageOutputStream imOut = ImageIO.createImageOutputStream(bs);
 
-        return new ByteArrayInputStream(bs.toByteArray());
-    }
+		ImageIO.write(image, "jpg", imOut); // scaledImage1为BufferedImage，jpg为图像的类型
 
-    private BufferedImage snapshot(TakesScreenshot drivername) {
-        byte[] imageBytes = drivername.getScreenshotAs(OutputType.BYTES);
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(new ByteArrayInputStream(imageBytes));
-        } catch (IOException e) {
-            LogUtil.getLogger().error(e.getMessage(), e);
-        }
-        return image;
-    }
+		return new ByteArrayInputStream(bs.toByteArray());
+	}
+
+	private BufferedImage snapshot(TakesScreenshot drivername) {
+		byte[] imageBytes = drivername.getScreenshotAs(OutputType.BYTES);
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new ByteArrayInputStream(imageBytes));
+		} catch (IOException e) {
+			LogUtil.getLogger().error(e.getMessage(), e);
+		}
+		return image;
+	}
 }

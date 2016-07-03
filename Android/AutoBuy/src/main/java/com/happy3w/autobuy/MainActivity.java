@@ -1,43 +1,30 @@
 package com.happy3w.autobuy;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.os.SystemClock;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     Button buttonStart;
     Button buttonStop;
     Button buttonGet;
     Button buttonSend;
-    Button btnTime;
-    MonitorServiceConnection  monitorConnect =new MonitorServiceConnection();
+    EditText txtVerifyCode;
+    MonitorServiceConnection monitorConnect = new MonitorServiceConnection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +37,19 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         buttonStart = (Button) findViewById(R.id.buttonStart);
+        btnStart_OnClickListener();
         buttonStop = (Button) findViewById(R.id.buttonStop);
+        btnStop_OnClickListener();
         buttonGet = (Button) findViewById(R.id.buttonGet);
+        btnGet_OnClickListener();
         buttonSend = (Button) findViewById(R.id.buttonSend);
-        btnTime=(Button)findViewById(R.id.btnTime);
+        btnSend_OnClickListener();
+        txtVerifyCode = (EditText) findViewById(R.id.txtVerifyCode);
+        txtVerifyCode_OnKeyListener();
+        registerReceiver();
+    }
 
+    private void btnStart_OnClickListener() {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,20 +57,23 @@ public class MainActivity extends AppCompatActivity {
                 connectService();
             }
         });
+    }
+    private void btnStop_OnClickListener()
+    {
         buttonStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(this.getClass().getName(), "onClick: stoping service");
-               disconnectService();
+                disconnectService();
             }
         });
-        addOnClickListenerToButtonGet();
-        addOnClickListenerToButtonSend();
-        this.onClick_Time();
+    }
+    private void registerReceiver()
+    {
         this.registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.i(MainActivity.class.getName(),"BroadcastReceiver on receive.");
+                Log.i(MainActivity.class.getName(), "BroadcastReceiver on receive.");
                 if (!MainActivity.this.hasWindowFocus()) {
                     return;
                 }
@@ -89,20 +87,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }, new IntentFilter(MonitorService.ActionVerifyCodeNew));
     }
-
-    private void addOnClickListenerToButtonGet() {
+    private void btnGet_OnClickListener() {
         buttonGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"onClick: get verifycode from service", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "onClick: get verifycode from service", Toast.LENGTH_LONG).show();
                 Log.i(this.getClass().getName(), "onClick: get verifycode from service");
                 MonitorService service = getMonitorService();
                 if (service == null) {
-                    Toast.makeText(MainActivity.this,"onClick: get service Not connected", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "onClick: get service Not connected", Toast.LENGTH_LONG).show();
                     return;
                 }
                 boolean isNew = service.isNew();
                 if (isNew) {
+                    txtVerifyCode.setText("");
                     service.setIsKnown(true);
 
                     Toast.makeText(MainActivity.this, "has new verify code.", Toast.LENGTH_LONG).show();
@@ -112,27 +110,42 @@ public class MainActivity extends AppCompatActivity {
                     img.setImageBitmap(bitmap);
                     buttonGet.setBackgroundColor(Color.GRAY);
                     service.setNew(false);
-                }
-                else
-                {
-                    Toast.makeText(MainActivity.this,"not any new verify code.",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "not any new verify code.", Toast.LENGTH_LONG).show();
                 }
 
             }
         });
     }
 
-    private void addOnClickListenerToButtonSend() {
+    private void btnSend_OnClickListener() {
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(this.getClass().getName(), "onClick: send verifycode to service");
-                EditText txt = (EditText) findViewById(R.id.txtVerifyCode);
-                VerifyCode vc = new VerifyCode();
-                String result = vc.sendVerifyCode(txt.getText().toString());
-                Toast.makeText(MainActivity.this,result, Toast.LENGTH_LONG).show();
+                sendVerifyCode();
             }
         });
+    }
+
+    private void txtVerifyCode_OnKeyListener() {
+        txtVerifyCode.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (KeyEvent.KEYCODE_ENTER == keyCode) {
+                    sendVerifyCode();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void sendVerifyCode() {
+        Log.i(this.getClass().getName(), "onClick: send verifycode to service");
+        VerifyCode vc = new VerifyCode();
+        String result = vc.sendVerifyCode(txtVerifyCode.getText().toString());
+        Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
     }
 
     private MonitorService getMonitorService() {
@@ -142,40 +155,19 @@ public class MainActivity extends AppCompatActivity {
         return monitorConnect.getMonitorService();
     }
 
-    private void connectService()
-    {
+    private void connectService() {
         Intent intent = new Intent(MainActivity.this, MonitorService.class);
         startService(intent);
         Log.i(this.getClass().getName(), "start service");
         bindService(intent, monitorConnect, BIND_AUTO_CREATE);
         Log.i(this.getClass().getName(), "bind service");
     }
-    private void disconnectService()
-    {
+
+    private void disconnectService() {
         Intent intent = new Intent(MainActivity.this, MonitorService.class);
         stopService(intent);
         Log.i(this.getClass().getName(), "stop service");
         unbindService(monitorConnect);
         Log.i(this.getClass().getName(), "unbind service");
-    }
-
-    private void onClick_Time()
-    {
-        btnTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AlarmReceiver.class);
-                intent.setAction("repeating");
-                PendingIntent sender = PendingIntent
-                        .getBroadcast(MainActivity.this, 0, intent, 0);
-                //开始时间
-                long firstime = SystemClock.elapsedRealtime();
-
-                AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                //5秒一个周期，不停的发送广播
-                am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 2*60 * 1000, sender);
-            }
-        });
-
     }
 }

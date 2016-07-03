@@ -2,6 +2,7 @@
 /*
 master从中转站读取验证码识别结果。
 */
+include 'clearcache.php';
 $result="upload/verifycode.txt";
 echo save();
 function save(){
