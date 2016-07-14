@@ -68,7 +68,7 @@ public class ProductManager {
 	 * 打开可购买产品列表。
 	 */
 	private void openProduct() {
-		WebDriverUtil.get(webDriver, "https://www.yyfax.com/financing/yxlc/yxlb.html", "", 500);
+		WebDriverUtil.get(webDriver, "https://www.yyfax.com/financing/yxlc/yxlb.html", "", 2000);
 		for (int i = 2; i < 10; i++) {
 			String path = MessageFormat.format("/html/body/div[2]/div/div[2]/div[2]/table/tbody/tr[{0}]", i);
 			WebElement row = webDriver.findElement(By.xpath(path));
