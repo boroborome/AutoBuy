@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy;
+package com.happy3w.autobuy.util;
 
 import org.junit.Assert;
 import org.junit.Test;

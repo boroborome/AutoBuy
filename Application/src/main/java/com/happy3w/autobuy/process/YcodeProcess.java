@@ -7,8 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.happy3w.autobuy.model.Order;
 import com.happy3w.autobuy.util.WebDriverUtil;
-import com.happy3w.autobuy.util.config.Command;
 
 /**
  * 获取Ycode优惠吗。
@@ -20,7 +20,7 @@ import com.happy3w.autobuy.util.config.Command;
 public class YcodeProcess {
 	WebDriver webDriver;
 	private LoginProcess loginManager;
-	private Command command;
+	private Order order;
 
 	public WebDriver getWebDriver() {
 		return webDriver;
