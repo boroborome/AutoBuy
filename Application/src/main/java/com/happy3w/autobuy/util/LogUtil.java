@@ -6,7 +6,7 @@ package com.happy3w.autobuy.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.happy3w.autobuy.svc.AutoBuyProcess;
+import com.happy3w.autobuy.process.AutoBuyExecutor;
 
 /**
  *存储环境信息。如日志等。
@@ -15,7 +15,7 @@ import com.happy3w.autobuy.svc.AutoBuyProcess;
  *
  */
 public class LogUtil{
-	private static final Logger logger = LoggerFactory.getLogger(AutoBuyProcess.class);
+	private static final Logger logger = LoggerFactory.getLogger(AutoBuyExecutor.class);
 
 	public static Logger getLogger() {
 		return logger;

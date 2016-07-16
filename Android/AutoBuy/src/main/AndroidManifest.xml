@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.happy3w.autobuy">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,11 +31,10 @@
         <service
             android:name=".MonitorService"
             android:enabled="true"
-            android:exported="true">
-        </service>
-        <receiver android:name=".AlarmReceiver">
-        </receiver>
+            android:exported="true" />
+
+        <receiver android:name=".AlarmReceiver" />
+
     </application>
-    <uses-permission android:name="android.permission.INTERNET"  >
-    </uses-permission>
+
 </manifest>

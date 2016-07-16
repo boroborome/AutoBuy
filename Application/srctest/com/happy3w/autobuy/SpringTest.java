@@ -6,7 +6,7 @@ package com.happy3w.autobuy;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.happy3w.autobuy.svc.LoginManager;
+import com.happy3w.autobuy.process.LoginProcess;
 import com.happy3w.autobuy.util.SpringUtil;
 import com.happy3w.autobuy.util.config.Command;
 

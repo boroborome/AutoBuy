@@ -1,6 +1,7 @@
 package com.happy3w.autobuy.ctrl;
 
 import com.happy3w.autobuy.svc.AutoBuySvc;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/svc/autobuy")
 public class AutoBuyCtrl {
-    private final Logger logger = LoggerFactory.getLogger(AutoBuyCtrl.class);
 
     @Autowired
     private AutoBuySvc autoBuySvc;
@@ -23,7 +23,7 @@ public class AutoBuyCtrl {
     @ResponseBody
     @RequestMapping(value = "start", method = RequestMethod.POST)
     public String start() {
-        autoBuySvc.buy();
+    	autoBuySvc.start();
         return "Hello";
     }
 
