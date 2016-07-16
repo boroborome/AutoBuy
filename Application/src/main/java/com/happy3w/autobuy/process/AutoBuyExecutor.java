@@ -23,7 +23,7 @@ public class AutoBuyExecutor implements Runnable {
 	@Override
 	public void run() {
 		process();
-		OrderManager manager = new OrderManager();
+		OrderManager manager = new OrderManager(webServerUrl);
 		manager.update(order);
 		Context.getInstance().getOrders().remove(order.getContent().getOrderid());
 	}

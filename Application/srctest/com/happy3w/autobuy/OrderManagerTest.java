@@ -3,8 +3,6 @@
  */
 package com.happy3w.autobuy;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,16 +20,16 @@ public class OrderManagerTest {
 	private String transfer="http://192.168.3.7:8190/autobuy/";
 	@Test
 	public void testGetOrders() {
-		OrderManager mng=new OrderManager();
-		mng.setService(transfer);
+		OrderManager mng=new OrderManager(transfer);
+//		mng.setService(transfer);
 		PurchaseOrder[] orders=mng.getOrders();
 		Assert.assertNotNull(orders);
 	}
 	@Test
 	public void testUpdateOrder()
 	{
-		OrderManager mng=new OrderManager();
-		mng.setService(transfer);
+		OrderManager mng=new OrderManager(transfer);
+//		mng.setService(transfer);
 		Order order = new Order();
 		PurchaseOrder po = new PurchaseOrder();
 		po.setOrderid("14");

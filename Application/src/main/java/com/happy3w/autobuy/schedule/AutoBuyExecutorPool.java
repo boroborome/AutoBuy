@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.happy3w.autobuy.schedule;
 
 import java.util.concurrent.ArrayBlockingQueue;
@@ -9,8 +6,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import org.springframework.stereotype.Component;
 
 import com.happy3w.autobuy.model.Order;
 import com.happy3w.autobuy.process.AutoBuyExecutor;

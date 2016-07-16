@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.happy3w.autobuy.model.Order;
-import com.happy3w.autobuy.transfer.TransferMonitor;
 import com.happy3w.autobuy.util.config.DataConfig;
 
 /**
@@ -26,7 +25,7 @@ public class Context {
 		return instance;
 	}
 	private DataConfig dataConfig;
-	private TransferMonitor transfer =new TransferMonitor();
+	private OrderMonitor transfer =new OrderMonitor();
 	private AutoBuyScheduler buyscheduler = new AutoBuyScheduler();
 	private AutoBuyExecutorPool buyExecutorPool = new AutoBuyExecutorPool();
 	private ConcurrentHashMap<String,Order> orders = new ConcurrentHashMap<String,Order>();
@@ -35,7 +34,7 @@ public class Context {
 		return dataConfig;
 	}
 
-	public TransferMonitor getTransfer() {
+	public OrderMonitor getTransfer() {
 		return transfer;
 	}
 

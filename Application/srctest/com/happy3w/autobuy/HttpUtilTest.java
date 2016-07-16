@@ -3,8 +3,6 @@
  */
 package com.happy3w.autobuy;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 

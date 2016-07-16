@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.happy3w.autobuy.util.ThreadUtil;
 import com.happy3w.autobuy.util.WebDriverUtil;
 import com.happy3w.autobuy.util.config.Command;
 

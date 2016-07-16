@@ -6,8 +6,6 @@ package com.happy3w.autobuy.transfer;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.happy3w.autobuy.model.Order;
 import com.happy3w.autobuy.model.PurchaseOrder;
@@ -22,11 +20,7 @@ import com.happy3w.autobuy.util.HttpUtil;
 public class OrderManager {
 	private String service;
 
-	public String getService() {
-		return service;
-	}
-
-	public void setService(String service) {
+	public OrderManager(String service) {
 		this.service = service;
 	}
 

@@ -16,15 +16,18 @@ import com.happy3w.autobuy.model.Order;
  */
 public class AutoBuyScheduler {
 	private Timer timer=new Timer();
-	private Order order;
 	public void schedule(Order order)
 	{
-		this.order=order;
 		Context.getInstance().getOrders().put(order.getContent().getOrderid(), order);
-		timer.schedule(new TimerTsk(), order.getContent().getBuytime());
+		timer.schedule(new OrderTimerTask(order), order.getContent().getBuytime());
 	}
-	public class TimerTsk extends TimerTask{
+	public class OrderTimerTask extends TimerTask{
 
+		private Order order;
+		
+		public OrderTimerTask(Order order) {
+			this.order = order;
+		}
 		@Override
 		public void run() {
 			Context.getInstance().getBuyExecutorPool().execute(order);
