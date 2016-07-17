@@ -3,6 +3,7 @@
  */
 package com.happy3w.autobuy.transfer;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -23,19 +24,19 @@ public class OrderManager {
 	public OrderManager(String service) {
 		this.service = service;
 	}
-
-	public PurchaseOrder[] getOrders()
-	{
-		String result = HttpUtil.sendPost(TransferUrl.getOrderQryUrl(this.service), null);
+	public PurchaseOrder[] getOrders4Buy() {
+		String result = HttpUtil.sendPost(TransferUrl.getBuyUrl(this.service), null);
 		Gson gson = new Gson();
-		List<PurchaseOrder> orders=gson.fromJson(result, new TypeToken<List<PurchaseOrder>>(){}.getType());
-		if(null==orders){
+		List<PurchaseOrder> orders = gson.fromJson(result, new TypeToken<List<PurchaseOrder>>() {
+		}.getType());
+		if (null == orders) {
 			return new PurchaseOrder[0];
 		}
 		return orders.toArray(new PurchaseOrder[0]);
 	}
 
-	public String update(Order order) {
-		return HttpUtil.sendPost(TransferUrl.getOrdeFinishUrl(this.service), "orderid="+order.getContent().getOrderid());
+	public String finish(Order order) {
+		return HttpUtil.sendPost(TransferUrl.getOrdeFinishUrl(this.service),
+				"orderid=" + order.getContent().getOrderid());
 	}
 }
