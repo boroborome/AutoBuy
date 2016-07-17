@@ -19,22 +19,20 @@ import com.happy3w.autobuy.transfer.OrderManager;
 public class OrderManagerTest {
 	private String transfer="http://192.168.3.7:8190/autobuy/";
 	@Test
-	public void testGetOrders() {
+	public void testBuyOrders() {
 		OrderManager mng=new OrderManager(transfer);
-//		mng.setService(transfer);
-		PurchaseOrder[] orders=mng.getOrders();
+		PurchaseOrder[] orders=mng.getOrders4Buy();
 		Assert.assertNotNull(orders);
 	}
 	@Test
-	public void testUpdateOrder()
+	public void testFinishOrder()
 	{
 		OrderManager mng=new OrderManager(transfer);
-//		mng.setService(transfer);
 		Order order = new Order();
 		PurchaseOrder po = new PurchaseOrder();
 		po.setOrderid("14");
 		order.setContent(po);
-		String result=mng.update(order);
+		String result=mng.finish(order);
 		Assert.assertTrue(result.contains("ok"));
 	}
 }

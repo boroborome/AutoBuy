@@ -24,7 +24,7 @@ public class AutoBuyExecutor implements Runnable {
 	public void run() {
 		process();
 		OrderManager manager = new OrderManager(webServerUrl);
-		manager.update(order);
+		manager.finish(order);
 		Context.getInstance().getOrders().remove(order.getContent().getOrderid());
 	}
 	private void process()

@@ -15,10 +15,11 @@
 		  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>WEB-INF/db-config.properties</value>
+				<value>file:src/main/webapp/WEB-INF/db-config.properties</value>
 			</list>
 		</property>
 	</bean>
+	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${db.driverClassName}"/>
         <property name="url" value="${db.url}"/>

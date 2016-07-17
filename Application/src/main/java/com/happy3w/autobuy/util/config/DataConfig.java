@@ -2,12 +2,16 @@ package com.happy3w.autobuy.util.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
 public class DataConfig {
     @Autowired
     Environment env;
+	public void setEnv(Environment env) {
+		this.env = env;
+	}
 
-    public String getDbUrl() {
+	public String getDbUrl() {
         return env.getProperty("db.url");
     }
 
