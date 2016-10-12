@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.happy3w.autobuy.model.Order;
 import com.happy3w.autobuy.schedule.Context;
-import com.happy3w.autobuy.transfer.OrderManager;
+import com.happy3w.autobuy.transfer.TransferProxy;
 import com.happy3w.autobuy.util.WebDriverUtil;
 
 /**
@@ -23,12 +23,12 @@ public class AutoBuyExecutor implements Runnable {
 	@Override
 	public void run() {
 		process();
-		OrderManager manager = new OrderManager(webServerUrl);
+		TransferProxy manager = new TransferProxy();
 		manager.finish(order);
 		Context.getInstance().getOrders().remove(order.getContent().getOrderid());
 	}
-	private void process()
-	{
+
+	private void process() {
 		WebDriver wd = WebDriverUtil.getWebDriver();
 		// 构造login。
 		LoginProcess login = new LoginProcess();
@@ -68,6 +68,6 @@ public class AutoBuyExecutor implements Runnable {
 		if (logined) {
 			login.signature();
 		}
-		
+
 	}
 }

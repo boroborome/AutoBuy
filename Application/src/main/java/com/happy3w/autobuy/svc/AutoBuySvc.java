@@ -3,22 +3,40 @@ package com.happy3w.autobuy.svc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.happy3w.autobuy.schedule.Context;
-import com.happy3w.autobuy.util.config.DataConfig;
+import com.happy3w.autobuy.config.SysConfig;
 
 /**
- * Created by ysgao on 5/15/16.
+ * 自动购买服务。
+ * 
+ * @version 2016年9月8日 上午10:44:55
+ * @author Happy3W Cherry
+ *
  */
-@Component
+@Service
 public class AutoBuySvc {
 	private final Logger logger = LoggerFactory.getLogger(AutoBuySvc.class);
+	private IOrderProvider provider;
+	private IOrderConsumer executor;
+	private SysConfig config;
+	private boolean started;
+
 	@Autowired
-    private DataConfig dataConfig;
+	public AutoBuySvc(IOrderProvider provider, IOrderConsumer executor, SysConfig config) {
+		this.provider = provider;
+		this.executor = executor;
+		this.config = config;
+	}
 
 	public void start() {
-		Context.getInstance().init(dataConfig);
-		Context.getInstance().getTransfer().schedule();
+		provider.start();
+		executor.start();
+		started = provider.isStarted() && executor.isStarted();
+
+	}
+
+	public boolean isStarted() {
+		return started;
 	}
 }

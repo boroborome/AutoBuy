@@ -9,10 +9,10 @@ function insert(){
     $buytime = $order->buytime;
     $pro=$order->product;
     $amount=$order->amount;
-    $status=0;
+    $enum = new OrderStatus();
+    $status=$enum->INIT;
     $stmt->bind_param("sssi",$pro,$amount,$buytime,$status);
     $stmt->execute();
-    echo "ok:isert to database.";
-    $db->close($dbc);
+    return true;
 }
 ?>

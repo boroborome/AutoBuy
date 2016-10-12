@@ -7,10 +7,10 @@ import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import com.happy3w.autobuy.config.SysConfig;
+import com.happy3w.autobuy.down.process.AutoBuyExecutor;
 import com.happy3w.autobuy.model.Order;
-import com.happy3w.autobuy.process.AutoBuyExecutor;
 import com.happy3w.autobuy.util.LogUtil;
-import com.happy3w.autobuy.util.config.DataConfig;
 
 /**
  * 自动购买线程池。
@@ -25,11 +25,11 @@ public class AutoBuyExecutorPool {
 	BlockingQueue<Runnable> queue;
 	
 	public void init() {
-		DataConfig config = Context.getInstance().getDataConfig();
+		SysConfig config = Context.getInstance().getDataConfig();
 		RejectedHandler rejectedHandler = new RejectedHandler();
-		queue = new ArrayBlockingQueue<Runnable>(config.getThread().getMaxSize(), true);
-		pool = new ThreadPoolExecutor(config.getThread().getCoreSize(), config.getThread().getMaxSize(),
-				config.getThread().getKeepTime(), TimeUnit.MILLISECONDS, queue, Executors.defaultThreadFactory(),
+		queue = new ArrayBlockingQueue<Runnable>(config.getThreadConfig().getMaxSize(), true);
+		pool = new ThreadPoolExecutor(config.getThreadConfig().getCoreSize(), config.getThreadConfig().getMaxSize(),
+				config.getThreadConfig().getKeepTime(), TimeUnit.MILLISECONDS, queue, Executors.defaultThreadFactory(),
 				rejectedHandler);
 	}
 

@@ -1,5 +1,7 @@
 package com.happy3w.autobuy.srv;
 
+import android.util.Log;
+
 import com.happy3w.autobuy.model.PurchaseOrder;
 import com.happy3w.autobuy.util.HttpUtil;
 
@@ -33,6 +35,7 @@ public class OrderManager {
         }
         String url=server.getServiceUrl()+page;
         String result=HttpUtil.sendPost(url,"order="+obj.toString());
+        Log.i(OrderManager.class.getName(),result);
         return result;
     }
 }

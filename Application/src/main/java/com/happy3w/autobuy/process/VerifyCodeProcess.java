@@ -22,6 +22,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.happy3w.autobuy.transfer.TransferUrl;
@@ -36,8 +38,22 @@ import com.happy3w.autobuy.util.ThreadUtil;
  * @author Happy3W cherry
  *
  */
+@Component
 public class VerifyCodeProcess {
+	@Autowired
+	private HttpUtil http;
+	@Autowired
 	private String httpUrl;
+	@Autowired
+	private TransferUrl transfer;
+
+	public HttpUtil getHttp() {
+		return http;
+	}
+
+	public void setHttp(HttpUtil http) {
+		this.http = http;
+	}
 
 	public String getHttpUrl() {
 		return httpUrl;
@@ -45,6 +61,19 @@ public class VerifyCodeProcess {
 
 	public void setHttpUrl(String httpUrl) {
 		this.httpUrl = httpUrl;
+	}
+
+	public TransferUrl getTransfer() {
+		return transfer;
+	}
+
+	public void setTransfer(TransferUrl transfer) {
+		this.transfer = transfer;
+	}
+
+	public VerifyCodeProcess() {
+		http = new HttpUtil();
+		transfer = new TransferUrl();
 	}
 
 	public String getVerifyCode(WebDriver wd) {
@@ -80,15 +109,15 @@ public class VerifyCodeProcess {
 			return null;
 		}
 
-		return readVerifyFromServer(5*60*1000);
+		return readVerifyFromServer(5 * 60 * 1000);
 	}
 
 	public String readVerifyFromServer(int timeout) {
 		String verifyCode = null;
-		int unit =2000;
-		for (int times = timeout/unit; times >= 0; --times) {
+		int unit = 2000;
+		for (int times = timeout / unit; times >= 0; --times) {
 			RestTemplate restTemplate = new RestTemplate();
-			verifyCode = restTemplate.getForObject(TransferUrl.getVerifyCodeResultUrl(httpUrl), String.class);
+			verifyCode = restTemplate.getForObject(transfer.getVerifyCodeResultUrl(httpUrl), String.class);
 			if (verifyCode != null && !verifyCode.isEmpty()) {
 				break;
 			}
@@ -100,7 +129,7 @@ public class VerifyCodeProcess {
 	private void sendImageToServer(BufferedImage verifyImage) throws IOException {
 		Map<String, String> fileMap = new HashMap<String, String>();
 		fileMap.put("file", "verifycode.jpg");
-		String ret = HttpUtil.formUpload(TransferUrl.getInstance().getUploadUrl(this.httpUrl), null, fileMap,
+		String ret = http.formUpload(TransferUrl.getInstance().getUploadUrl(this.httpUrl), null, fileMap,
 				image2InputStream(verifyImage));
 		LogUtil.getLogger().debug(ret);
 	}

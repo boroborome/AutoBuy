@@ -109,6 +109,7 @@ dependencies {
     testCompile('com.fasterxml.jackson.core:jackson-databind')
     //testCompile('org.powermock:powermock-api-easymock:')
     testCompile('easymock:easymock:2.0')
+    testCompile('org.mockito:mockito-core:2.0.86-beta')
 }
 
 

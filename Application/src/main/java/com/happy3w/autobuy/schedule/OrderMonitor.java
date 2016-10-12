@@ -7,10 +7,10 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.happy3w.autobuy.config.SysConfig;
 import com.happy3w.autobuy.model.Order;
 import com.happy3w.autobuy.model.PurchaseOrder;
-import com.happy3w.autobuy.transfer.OrderManager;
-import com.happy3w.autobuy.util.config.DataConfig;
+import com.happy3w.autobuy.transfer.TransferProxy;
 
 /**
  * 监控中转站订单情况。
@@ -30,9 +30,9 @@ public class OrderMonitor {
 
 		@Override
 		public void run() {
-			DataConfig dataConfig = Context.getInstance().getDataConfig();
-			OrderManager manager = new OrderManager(dataConfig.getWebServerUrl());
-			PurchaseOrder[] pos = manager.getOrders4Buy();
+			SysConfig dataConfig = Context.getInstance().getDataConfig();
+			TransferProxy manager = new TransferProxy();
+			PurchaseOrder[] pos = manager.download(dataConfig.getWebServerUrl());
 			if (Context.getInstance().getOrders().size() >= dataConfig.getOrderSize()) {
 				return;
 			}

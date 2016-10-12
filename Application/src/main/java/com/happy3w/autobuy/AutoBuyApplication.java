@@ -1,6 +1,10 @@
 package com.happy3w.autobuy;
 
-import com.happy3w.autobuy.util.config.DataConfig;
+import java.io.File;
+
+import javax.servlet.MultipartConfigElement;
+import javax.sql.DataSource;
+
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -8,12 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.MultipartConfigFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -21,161 +22,159 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import javax.servlet.MultipartConfigElement;
-import javax.sql.DataSource;
-import java.io.File;
+import com.happy3w.autobuy.config.SysConfig;
 
 /**
  * Created by ysgao on 5/14/16.
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.happy3w.autobuy"})
-//@EnableConfigurationProperties(AutoBuyApplication.TomcatSslConnectorProperties.class)
-//@PropertySource("classpath:/config/tomcat.https.properties")
+@ComponentScan(basePackages = { "com.happy3w.autobuy" })
+// @EnableConfigurationProperties(AutoBuyApplication.TomcatSslConnectorProperties.class)
+// @PropertySource("classpath:/config/tomcat.https.properties")
 public class AutoBuyApplication {
 
-    private DataSource ds;
-    @Autowired
-    DataConfig dataConfig;
-    @Bean
-    public DataSource dataSource() {
-        if (ds == null) {
-            DriverManagerDataSource dataSource = new DriverManagerDataSource();
-            dataSource.setDriverClassName(dataConfig.getDbDriver());
-            dataSource.setUrl(dataConfig.getDbUrl());
-            dataSource.setUsername(dataConfig.getDbUser());
-            dataSource.setPassword(dataConfig.getDbPwd());
-            ds = dataSource;
-        }
+	private DataSource ds;
+	@Autowired
+	SysConfig dataConfig;
 
-        return ds;
-    }
-    @Bean
-    public WebMvcConfigurer crossSiteConfigurer() {
-        return new WebMvcConfigurerAdapter() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*");
-            }
-        };
-    }
+	@Bean
+	public DataSource dataSource() {
+		if (ds == null) {
+			DriverManagerDataSource dataSource = new DriverManagerDataSource();
+			dataSource.setDriverClassName(dataConfig.getDB().getDbDriver());
+			dataSource.setUrl(dataConfig.getDB().getDbUrl());
+			dataSource.setUsername(dataConfig.getDB().getDbUser());
+			dataSource.setPassword(dataConfig.getDB().getDbPwd());
+			ds = dataSource;
+		}
 
-    @Bean
-    public MultipartConfigElement multipartConfigElement() {
-        MultipartConfigFactory factory = new MultipartConfigFactory();
-//		factory.setMaxFileSize("128KB");
-//		factory.setMaxRequestSize("128KB");
-        return factory.createMultipartConfig();
-    }
+		return ds;
+	}
 
-    @Bean
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
-    }
+	@Bean
+	public WebMvcConfigurer crossSiteConfigurer() {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("*");
+			}
+		};
+	}
 
-    @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
-        ms.setBasename("messages.messages");
-        ms.setDefaultEncoding("utf-8");
-        return ms;
-    }
+	@Bean
+	public MultipartConfigElement multipartConfigElement() {
+		MultipartConfigFactory factory = new MultipartConfigFactory();
+		// factory.setMaxFileSize("128KB");
+		// factory.setMaxRequestSize("128KB");
+		return factory.createMultipartConfig();
+	}
 
+	@Bean
+	public JdbcTemplate jdbcTemplate() {
+		return new JdbcTemplate(dataSource());
+	}
 
-    //@ConfigurationProperties(prefix = "custom.tomcat.https")
-    public static class TomcatSslConnectorProperties {
-        private Integer port;
-        private Boolean ssl = true;
-        private Boolean secure = true;
-        private String scheme = "https";
-        private File keystore;
-        private String keystorePassword;
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
+		ms.setBasename("messages.messages");
+		ms.setDefaultEncoding("utf-8");
+		return ms;
+	}
 
-        public void configureConnector(Connector connector) {
-            if (port != null) {
-                connector.setPort(port);
-            }
-            if (secure != null) {
-                connector.setSecure(secure);
-            }
-            if (scheme != null) {
-                connector.setScheme(scheme);
-            }
-            if (ssl != null) {
-                connector.setProperty("SSLEnabled", ssl.toString());
-            }
-            if (keystore != null) {
-                String keystoreFile = keystore.exists() ? keystore.getAbsolutePath() : keystore.toString();
-                connector.setProperty("keystoreFile", keystoreFile);
-                connector.setProperty("keystorePass", keystorePassword);
-            }
-        }
+	// @ConfigurationProperties(prefix = "custom.tomcat.https")
+	public static class TomcatSslConnectorProperties {
+		private Integer port;
+		private Boolean ssl = true;
+		private Boolean secure = true;
+		private String scheme = "https";
+		private File keystore;
+		private String keystorePassword;
 
-        public Integer getPort() {
-            return port;
-        }
+		public void configureConnector(Connector connector) {
+			if (port != null) {
+				connector.setPort(port);
+			}
+			if (secure != null) {
+				connector.setSecure(secure);
+			}
+			if (scheme != null) {
+				connector.setScheme(scheme);
+			}
+			if (ssl != null) {
+				connector.setProperty("SSLEnabled", ssl.toString());
+			}
+			if (keystore != null) {
+				String keystoreFile = keystore.exists() ? keystore.getAbsolutePath() : keystore.toString();
+				connector.setProperty("keystoreFile", keystoreFile);
+				connector.setProperty("keystorePass", keystorePassword);
+			}
+		}
 
-        public void setPort(Integer port) {
-            this.port = port;
-        }
+		public Integer getPort() {
+			return port;
+		}
 
-        public Boolean getSsl() {
-            return ssl;
-        }
+		public void setPort(Integer port) {
+			this.port = port;
+		}
 
-        public void setSsl(Boolean ssl) {
-            this.ssl = ssl;
-        }
+		public Boolean getSsl() {
+			return ssl;
+		}
 
-        public Boolean getSecure() {
-            return secure;
-        }
+		public void setSsl(Boolean ssl) {
+			this.ssl = ssl;
+		}
 
-        public void setSecure(Boolean secure) {
-            this.secure = secure;
-        }
+		public Boolean getSecure() {
+			return secure;
+		}
 
-        public String getScheme() {
-            return scheme;
-        }
+		public void setSecure(Boolean secure) {
+			this.secure = secure;
+		}
 
-        public void setScheme(String scheme) {
-            this.scheme = scheme;
-        }
+		public String getScheme() {
+			return scheme;
+		}
 
-        public File getKeystore() {
-            return keystore;
-        }
+		public void setScheme(String scheme) {
+			this.scheme = scheme;
+		}
 
-        public void setKeystore(File keystore) {
-            this.keystore = keystore;
-        }
+		public File getKeystore() {
+			return keystore;
+		}
 
-        public String getKeystorePassword() {
-            return keystorePassword;
-        }
+		public void setKeystore(File keystore) {
+			this.keystore = keystore;
+		}
 
-        public void setKeystorePassword(String keystorePassword) {
-            this.keystorePassword = keystorePassword;
-        }
-    }
+		public String getKeystorePassword() {
+			return keystorePassword;
+		}
 
-//    @Bean
-    public EmbeddedServletContainerFactory servletContainer(TomcatSslConnectorProperties properties) {
-        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
-        tomcat.addAdditionalTomcatConnectors(createSslConnector(properties));
-        return tomcat;
-    }
+		public void setKeystorePassword(String keystorePassword) {
+			this.keystorePassword = keystorePassword;
+		}
+	}
 
-    private Connector createSslConnector(TomcatSslConnectorProperties properties) {
-        Connector connector = new Connector();
-        properties.configureConnector(connector);
-        return connector;
-    }
+	// @Bean
+	public EmbeddedServletContainerFactory servletContainer(TomcatSslConnectorProperties properties) {
+		TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
+		tomcat.addAdditionalTomcatConnectors(createSslConnector(properties));
+		return tomcat;
+	}
 
+	private Connector createSslConnector(TomcatSslConnectorProperties properties) {
+		Connector connector = new Connector();
+		properties.configureConnector(connector);
+		return connector;
+	}
 
-    public static void main(String[] args) {
-        SpringApplication.run(AutoBuyApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(AutoBuyApplication.class, args);
+	}
 
 }

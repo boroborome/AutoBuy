@@ -3,7 +3,7 @@
  */
 package com.happy3w.autobuy.model;
 
-import com.happy3w.autobuy.util.config.DataConfig;
+import com.happy3w.autobuy.config.SysConfig;
 
 /**
  * 处理指令。
@@ -15,16 +15,16 @@ public class Order {
 	/**
 	 * 指令执行站点。
 	 */
-	private DataConfig site;
+	private SysConfig site;
 	/**
 	 * 指令内容。
 	 */
 	private PurchaseOrder content;
 
-	public DataConfig getSite() {
+	public SysConfig getSite() {
 		return site;
 	}
-	public void setSite(DataConfig site) {
+	public void setSite(SysConfig site) {
 		this.site = site;
 	}
 	public PurchaseOrder getContent() {
