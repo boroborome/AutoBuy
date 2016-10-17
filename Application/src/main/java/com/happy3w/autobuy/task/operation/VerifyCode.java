@@ -37,24 +37,23 @@ import com.happy3w.autobuy.util.ThreadUtil;
  *
  */
 public class VerifyCode implements IHandler {
+	public static final String RETURNNAME="verifycode";
 	private int unit = 1000;
 	private TransferUrl transfer;
 	private HttpUtil http;
 	private String xpath;
-	private String returnName;
 	private SysConfig config;
 
-	public VerifyCode(SysConfig config, TransferUrl transfer, HttpUtil http, String xpath, String returnName) {
+	public VerifyCode(SysConfig config, TransferUrl transfer, HttpUtil http, String xpath) {
 		this.config = config;
 		this.transfer = transfer;
 		this.http = http;
 		this.xpath = xpath;
-		this.returnName = returnName;
 	}
 
 	@Override
 	public Result[] handle(WebDriver driver, Param param) {
-		Result result = new Result(returnName, getImgResult(driver));
+		Result result = new Result(RETURNNAME, getImgResult(driver));
 		return new Result[] { result };
 
 	}

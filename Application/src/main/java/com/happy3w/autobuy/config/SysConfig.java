@@ -76,7 +76,7 @@ public class SysConfig {
 	 * @return
 	 */
 	public int getTransferRetryTimes() {
-		return Integer.valueOf(env.getProperty("transfer.retryTimes"));
+		return Integer.valueOf(env.getProperty("transfer.retrytimes"));
 	}
 
 	/**
@@ -87,5 +87,13 @@ public class SysConfig {
 	public long getTimeout() {
 		// TODO Auto-generated method stub
 		return Long.valueOf(env.getProperty("timeout"));
+	}
+	/**
+	 * @return
+	 * 步骤之间间隔时长。
+	 */
+	public long getStepSpan()
+	{
+		return 2*1000;
 	}
 }

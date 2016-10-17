@@ -48,4 +48,15 @@ public class Param {
 			mapParam.put(result.getName(), result.getResult());
 		}
 	}
+
+	/**
+	 * 存储结果。
+	 * @param results
+	 */
+	public void put(Result result) {
+		if (null == result) {
+			return;
+		}
+		mapParam.put(result.getName(), result.getResult());
+	}
 }
