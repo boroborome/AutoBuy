@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.happy3w.autobuy.exe.events.EventRegister;
+import com.happy3w.autobuy.task.operation.HandlerRegister;
 
 /**
  *
@@ -25,7 +25,7 @@ public class StepRegister {
 
 	private Map<String, List<IStepRunner>> steps = new HashMap<String, List<IStepRunner>>();
 	private Map<String, List<String>> mapStep = new HashMap<String, List<String>>();
-	private EventRegister eventReg;
+	private HandlerRegister eventReg;
 
 	public StepRegister() {
 		List<String> events = new ArrayList<String>();

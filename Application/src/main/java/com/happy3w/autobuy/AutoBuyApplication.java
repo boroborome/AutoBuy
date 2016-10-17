@@ -3,9 +3,9 @@ package com.happy3w.autobuy;
 import java.io.File;
 
 import javax.servlet.MultipartConfigElement;
-import javax.sql.DataSource;
 
 import org.apache.catalina.connector.Connector;
+import org.apache.poi.poifs.nio.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.happy3w.autobuy.AutoBuyApplication.TomcatSslConnectorProperties;
 import com.happy3w.autobuy.config.SysConfig;
 
 /**
@@ -33,12 +34,12 @@ import com.happy3w.autobuy.config.SysConfig;
 // @PropertySource("classpath:/config/tomcat.https.properties")
 public class AutoBuyApplication {
 
-	private DataSource ds;
+	private DriverManagerDataSource ds;
 	@Autowired
 	SysConfig dataConfig;
 
 	@Bean
-	public DataSource dataSource() {
+	public DriverManagerDataSource dataSource() {
 		if (ds == null) {
 			DriverManagerDataSource dataSource = new DriverManagerDataSource();
 			dataSource.setDriverClassName(dataConfig.getDB().getDbDriver());

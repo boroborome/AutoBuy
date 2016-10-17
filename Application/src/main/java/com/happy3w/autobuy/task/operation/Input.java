@@ -1,40 +1,37 @@
 /**
  * 
  */
-package com.happy3w.autobuy.exe.events;
+package com.happy3w.autobuy.task.operation;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- *
+ * 输入内容。
  * @version 2016年9月9日 下午1:24:47
  * @author Happy3W Cherry
  *
  */
-public class Event_InputVal implements IEvent {
+public class Input implements IHandler {
 
-	private String text;
 	private String xpath;
 	private String paramName;
 
 	/**
-	 * @param driver
-	 *            驱动器。
 	 * @param xpath
 	 *            输入框xpath。
 	 * @param paramName
 	 * @param text
 	 *            要输入的值。
 	 */
-	public Event_InputVal(String xpath, String paramName) {
+	public Input(String xpath, String paramName) {
 		this.xpath = xpath;
 		this.paramName = paramName;
 	}
 
 	@Override
-	public EventResult[] handle(WebDriver driver, EventParam param) {
+	public Result[] handle(WebDriver driver, Param param) {
 		WebElement elementName = driver.findElement(By.xpath(xpath));
 		elementName.sendKeys(param.getValue(paramName));
 		return null;

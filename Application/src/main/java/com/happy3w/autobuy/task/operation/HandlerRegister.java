@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.exe.events;
+package com.happy3w.autobuy.task.operation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,15 +23,15 @@ import com.happy3w.autobuy.util.HttpUtil;
  * @author Happy3W Cherry
  *
  */
-public class EventRegister {
-	private Map<String, List<IEvent>> mapEvent = new HashMap<String, List<IEvent>>();
+public class HandlerRegister {
+	private Map<String, List<IHandler>> mapEvent = new HashMap<String, List<IHandler>>();
 	private long timeout = 500;
 	private HttpUtil http;
 	private TransferUrl transfer;
 	private SysConfig config;
 
 	@Autowired
-	public EventRegister(HttpUtil http, TransferUrl transfer, SysConfig config) {
+	public HandlerRegister(HttpUtil http, TransferUrl transfer, SysConfig config) {
 		this.http = http;
 		this.transfer = transfer;
 		this.config = config;
@@ -39,17 +39,17 @@ public class EventRegister {
 	}
 
 	private void init() {
-		List<IEvent> events = new ArrayList<IEvent>();
+		List<IHandler> events = new ArrayList<IHandler>();
 		mapEvent.put(Steps.YY_LOGIN, events);
-		events.add(new Event_OpenPage("https://www.yyfax.com/user/login.html", "我的友金所", config.getTimeout()));
-		events.add(new Event_InputVal("//*[@id=\"accountName\"]", AtUser.USERID));
-		events.add(new Event_InputVal("//*[@id=\"password1\"]", AtUser.PASSWORD));
-		events.add(new Event_ReadImg(config, transfer, http, "//*[@id=\"_verifyImg\"]", EventParam.VERIFYCODE));
-		events.add(new Event_InputVal("//*[@id=\"verifyCode\"]", EventParam.VERIFYCODE));
+		events.add(new OpenPage("https://www.yyfax.com/user/login.html", "我的友金所", config.getTimeout()));
+		events.add(new Input("//*[@id=\"accountName\"]", AtUser.USERID));
+		events.add(new Input("//*[@id=\"password1\"]", AtUser.PASSWORD));
+		events.add(new VerifyCode(config, transfer, http, "//*[@id=\"_verifyImg\"]", Param.VERIFYCODE));
+		events.add(new Input("//*[@id=\"verifyCode\"]", Param.VERIFYCODE));
 	}
 
-	public IEvent[] getEvents(String action) {
-		return mapEvent.get(action).toArray(new IEvent[0]);
+	public IHandler[] getEvents(String action) {
+		return mapEvent.get(action).toArray(new IHandler[0]);
 	}
 
 }

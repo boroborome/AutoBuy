@@ -11,7 +11,7 @@ import com.happy3w.autobuy.model.PurchaseOrder;
  * @author Happy3W Cherry
  *
  */
-public interface IOrderConsumer {
+public interface IOrderConsumer extends IService{
 	/**
 	 * 调度待执行订单。
 	 * 

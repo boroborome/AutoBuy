@@ -7,6 +7,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.testng.annotations.Test;
 
+import com.happy3w.autobuy.driver.AtExeScheduleTask;
+import com.happy3w.autobuy.driver.AtExeThrdPool;
 import com.happy3w.autobuy.model.PurchaseOrder;
 
 import testkit.com.happy3w.autoby.BaseTest;

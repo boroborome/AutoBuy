@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.exe.events;
+package com.happy3w.autobuy.task.operation;
 
 /**
  * 事件操作返回结果。
@@ -10,11 +10,11 @@ package com.happy3w.autobuy.exe.events;
  * @author Happy3W Cherry
  *
  */
-public class EventResult {
+public class Result {
 	private String name;
 	private String result;
 
-	public EventResult(String name, String result) {
+	public Result(String name, String result) {
 		this.name = name;
 		this.result = result;
 	}

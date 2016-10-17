@@ -8,8 +8,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import com.happy3w.autobuy.config.SysConfig;
-import com.happy3w.autobuy.down.process.AutoBuyExecutor;
 import com.happy3w.autobuy.model.Order;
+import com.happy3w.autobuy.process.AutoBuyExecutor;
 import com.happy3w.autobuy.util.LogUtil;
 
 /**

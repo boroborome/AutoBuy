@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.exe;
+package com.happy3w.autobuy.driver;
 
 import com.happy3w.autobuy.model.PurchaseOrder;
 

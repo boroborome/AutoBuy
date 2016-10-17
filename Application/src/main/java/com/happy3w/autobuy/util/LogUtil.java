@@ -21,4 +21,9 @@ public class LogUtil {
 		}
 		return log;
 	}
+
+	public static Logger getLogger() {
+		// TODO Auto-generated method stub
+		return log;
+	}
 }

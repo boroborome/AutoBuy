@@ -29,45 +29,45 @@ public class AutoBuyExecutor implements Runnable {
 	}
 
 	private void process() {
-		WebDriver wd = WebDriverUtil.getWebDriver();
-		// 构造login。
-		LoginProcess login = new LoginProcess();
-		login.setWebDriver(wd);
-		login.setHttpUrl(webServerUrl);
-		VerifyCodeProcess vc = new VerifyCodeProcess();
-		vc.setHttpUrl(webServerUrl);
-		login.setVc(vc);
-		boolean logined = login.login(order.getSite().getYcodeAccount(), order.getSite().getYcodePassword());
-		// 获取ycode.
-		if (logined) {
-			YcodeProcess ycode = new YcodeProcess();
-			ycode.setWebDriver(wd);
-			ycode.setLoginManager(login);
-			order.getSite().setYcode(ycode.getYCode());
-		}
-		// 重新登录。
-		if (logined) {
-			if (!order.getSite().getYcodeAccount().equals(order.getSite().getYyfaxAccount())) {
-				login.loginout();
-				if (null != order.getSite().getYyfaxAccount()) {
-					logined = login.login(order.getSite().getYyfaxAccount(), order.getSite().getYyfaxPassword());
-				} else {
-					logined = false;
-				}
-			}
-		}
-		// 购买。
-		if (logined) {
-			BuyProcess product = new BuyProcess();
-			product.setVc(vc);
-			product.setWebDriver(wd);
-			product.setOrder(order);
-			product.buy();
-		}
-		// 签到。
-		if (logined) {
-			login.signature();
-		}
+//		WebDriver wd = WebDriverUtil.getWebDriver();
+//		// 构造login。
+//		LoginProcess login = new LoginProcess();
+//		login.setWebDriver(wd);
+//		login.setHttpUrl(webServerUrl);
+//		VerifyCodeProcess vc = new VerifyCodeProcess();
+//		vc.setHttpUrl(webServerUrl);
+//		login.setVc(vc);
+//		boolean logined = login.login(order.getSite().getYcodeAccount(), order.getSite().getYcodePassword());
+//		// 获取ycode.
+//		if (logined) {
+//			YcodeProcess ycode = new YcodeProcess();
+//			ycode.setWebDriver(wd);
+//			ycode.setLoginManager(login);
+//			order.getSite().setYcode(ycode.getYCode());
+//		}
+//		// 重新登录。
+//		if (logined) {
+//			if (!order.getSite().getYcodeAccount().equals(order.getSite().getYyfaxAccount())) {
+//				login.loginout();
+//				if (null != order.getSite().getYyfaxAccount()) {
+//					logined = login.login(order.getSite().getYyfaxAccount(), order.getSite().getYyfaxPassword());
+//				} else {
+//					logined = false;
+//				}
+//			}
+//		}
+//		// 购买。
+//		if (logined) {
+//			BuyProcess product = new BuyProcess();
+//			product.setVc(vc);
+//			product.setWebDriver(wd);
+//			product.setOrder(order);
+//			product.buy();
+//		}
+//		// 签到。
+//		if (logined) {
+//			login.signature();
+//		}
 
 	}
 }

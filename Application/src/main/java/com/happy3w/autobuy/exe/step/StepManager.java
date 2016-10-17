@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
-import com.happy3w.autobuy.exe.events.EventRegister;
 import com.happy3w.autobuy.model.PurchaseOrder;
+import com.happy3w.autobuy.task.operation.HandlerRegister;
 
 /**
  * 单步执行器维护类。
@@ -23,10 +23,10 @@ public class StepManager {
 	private WebDriver driver;
 	private UserRegister userRegister;
 	private StepRegister stepRegister;
-	private EventRegister eventRegister;
+	private HandlerRegister eventRegister;
 
 	public StepManager(WebDriver driver, UserRegister userRegister, StepRegister stepRegister,
-			EventRegister eventRegister) {
+			HandlerRegister eventRegister) {
 		this.driver = driver;
 		this.userRegister = userRegister;
 		this.stepRegister = stepRegister;

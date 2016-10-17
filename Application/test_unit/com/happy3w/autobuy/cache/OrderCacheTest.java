@@ -10,7 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.happy3w.autobuy.exe.AtExeSchedulor;
+import com.happy3w.autobuy.driver.AtExeSchedulor;
 import com.happy3w.autobuy.model.PurchaseOrder;
 
 import testkit.com.happy3w.autoby.BaseTest;

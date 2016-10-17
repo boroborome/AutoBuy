@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.exe;
+package com.happy3w.autobuy.driver;
 
 import java.util.Timer;
 
@@ -36,6 +36,16 @@ public class AtExeSchedulor implements IOrderConsumer {
 		for (PurchaseOrder order : orders) {
 			timer.schedule(new AtExeScheduleTask(pool, order), order.getBuytime());
 		}
+	}
+
+	public boolean isStarted() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean start() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.exe.events;
+package com.happy3w.autobuy.task.operation;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -31,12 +31,12 @@ import com.happy3w.autobuy.util.HttpUtil;
 import com.happy3w.autobuy.util.ThreadUtil;
 
 /**
- *
+ * 识别验证码。
  * @version 2016年9月9日 下午2:26:23
  * @author Happy3W Cherry
  *
  */
-public class Event_ReadImg implements IEvent {
+public class VerifyCode implements IHandler {
 	private int unit = 1000;
 	private TransferUrl transfer;
 	private HttpUtil http;
@@ -44,7 +44,7 @@ public class Event_ReadImg implements IEvent {
 	private String returnName;
 	private SysConfig config;
 
-	public Event_ReadImg(SysConfig config, TransferUrl transfer, HttpUtil http, String xpath, String returnName) {
+	public VerifyCode(SysConfig config, TransferUrl transfer, HttpUtil http, String xpath, String returnName) {
 		this.config = config;
 		this.transfer = transfer;
 		this.http = http;
@@ -53,9 +53,9 @@ public class Event_ReadImg implements IEvent {
 	}
 
 	@Override
-	public EventResult[] handle(WebDriver driver, EventParam param) {
-		EventResult result = new EventResult(returnName, getImgResult(driver));
-		return new EventResult[] { result };
+	public Result[] handle(WebDriver driver, Param param) {
+		Result result = new Result(returnName, getImgResult(driver));
+		return new Result[] { result };
 
 	}
 
@@ -81,6 +81,7 @@ public class Event_ReadImg implements IEvent {
 			if (imgResult != null && !imgResult.isEmpty()) {
 				return imgResult;
 			}
+			//如果没有读到，则刷新验证码。
 			elementVerifyImg.click();
 			ThreadUtil.sleep(unit);
 		}

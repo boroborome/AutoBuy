@@ -13,7 +13,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.happy3w.autobuy.exe.AtExeSchedulor;
+import com.happy3w.autobuy.driver.AtExeSchedulor;
 import com.happy3w.autobuy.model.PurchaseOrder;
 
 /**

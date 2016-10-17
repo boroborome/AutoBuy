@@ -77,35 +77,36 @@ public class VerifyCodeProcess {
 	}
 
 	public String getVerifyCode(WebDriver wd) {
-		WebElement elementVerifyImg = wd.findElement(By.xpath("//*[@id=\"_verifyImg\"]"));
-		int time = 5;
-		for (; time >= 0; --time) {
-			// get verify image
-			BufferedImage fullImage = snapshot((TakesScreenshot) wd);
-			// Rectangle verifyRect = getVerifyRect(fullImage);
-			Point location = elementVerifyImg.getLocation();
-			Dimension size = elementVerifyImg.getSize();
-			BufferedImage verifyImage = fullImage.getSubimage(location.getX(), location.getY(), size.getWidth(),
-					size.getHeight());
-
-			// translate to asnii
-			String verifyCode = translateImage(verifyImage);
-
-			if (verifyCode != null && !verifyCode.isEmpty()) {
-				return verifyCode;
-			}
-			elementVerifyImg.click();
-			ThreadUtil.sleep(2000);
-		}
-
-		throw new TimeoutException("Can't get verify code after 5 times trying.");
+		return null;
+//		WebElement elementVerifyImg = wd.findElement(By.xpath("//*[@id=\"_verifyImg\"]"));
+//		int time = 5;
+//		for (; time >= 0; --time) {
+//			// get verify image
+//			BufferedImage fullImage = snapshot((TakesScreenshot) wd);
+//			// Rectangle verifyRect = getVerifyRect(fullImage);
+//			Point location = elementVerifyImg.getLocation();
+//			Dimension size = elementVerifyImg.getSize();
+//			BufferedImage verifyImage = fullImage.getSubimage(location.getX(), location.getY(), size.getWidth(),
+//					size.getHeight());
+//
+//			// translate to asnii
+//			String verifyCode = translateImage(verifyImage);
+//
+//			if (verifyCode != null && !verifyCode.isEmpty()) {
+//				return verifyCode;
+//			}
+//			elementVerifyImg.click();
+//			ThreadUtil.sleep(2000);
+//		}
+//
+//		throw new TimeoutException("Can't get verify code after 5 times trying.");
 	}
 
 	private String translateImage(BufferedImage verifyImage) {
 		try {
 			sendImageToServer(verifyImage);
 		} catch (IOException e) {
-			LogUtil.getLogger().error(e.getMessage(), e);
+		//	LogUtil.getLogger().error(e.getMessage(), e);
 			return null;
 		}
 
@@ -114,24 +115,24 @@ public class VerifyCodeProcess {
 
 	public String readVerifyFromServer(int timeout) {
 		String verifyCode = null;
-		int unit = 2000;
-		for (int times = timeout / unit; times >= 0; --times) {
-			RestTemplate restTemplate = new RestTemplate();
-			verifyCode = restTemplate.getForObject(transfer.getVerifyCodeResultUrl(httpUrl), String.class);
-			if (verifyCode != null && !verifyCode.isEmpty()) {
-				break;
-			}
-			ThreadUtil.sleep(unit);
-		}
+//		int unit = 2000;
+//		for (int times = timeout / unit; times >= 0; --times) {
+//			RestTemplate restTemplate = new RestTemplate();
+//			verifyCode = restTemplate.getForObject(transfer.getVerifyCodeResultUrl(httpUrl), String.class);
+//			if (verifyCode != null && !verifyCode.isEmpty()) {
+//				break;
+//			}
+//			ThreadUtil.sleep(unit);
+//		}
 		return verifyCode;
 	}
 
 	private void sendImageToServer(BufferedImage verifyImage) throws IOException {
 		Map<String, String> fileMap = new HashMap<String, String>();
 		fileMap.put("file", "verifycode.jpg");
-		String ret = http.formUpload(TransferUrl.getInstance().getUploadUrl(this.httpUrl), null, fileMap,
-				image2InputStream(verifyImage));
-		LogUtil.getLogger().debug(ret);
+//		String ret = http.formUpload(TransferUrl.getInstance().getUploadUrl(this.httpUrl), null, fileMap,
+//				image2InputStream(verifyImage));
+		//LogUtil.getLogger().debug(ret);
 	}
 
 	private static InputStream image2InputStream(BufferedImage image) throws IOException {
@@ -150,7 +151,7 @@ public class VerifyCodeProcess {
 		try {
 			image = ImageIO.read(new ByteArrayInputStream(imageBytes));
 		} catch (IOException e) {
-			LogUtil.getLogger().error(e.getMessage(), e);
+			//LogUtil.getLogger().error(e.getMessage(), e);
 		}
 		return image;
 	}

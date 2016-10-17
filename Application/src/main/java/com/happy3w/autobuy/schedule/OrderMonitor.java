@@ -30,19 +30,19 @@ public class OrderMonitor {
 
 		@Override
 		public void run() {
-			SysConfig dataConfig = Context.getInstance().getDataConfig();
-			TransferProxy manager = new TransferProxy();
-			PurchaseOrder[] pos = manager.download(dataConfig.getWebServerUrl());
-			if (Context.getInstance().getOrders().size() >= dataConfig.getOrderSize()) {
-				return;
-			}
-			for (PurchaseOrder po : pos) {
-				Order order = new Order();
-				order.setSite(dataConfig);
-				order.setContent(po);
-				Context.getInstance().getBuyscheduler().schedule(order);
-				System.out.println(System.currentTimeMillis() + ":" + po.getProduct());
-			}
+//			SysConfig dataConfig = Context.getInstance().getDataConfig();
+//			TransferProxy manager = new TransferProxy();
+//			PurchaseOrder[] pos = manager.download(dataConfig.getWebServerUrl());
+//			if (Context.getInstance().getOrders().size() >= dataConfig.getOrderSize()) {
+//				return;
+//			}
+//			for (PurchaseOrder po : pos) {
+//				Order order = new Order();
+//				order.setSite(dataConfig);
+//				order.setContent(po);
+//				Context.getInstance().getBuyscheduler().schedule(order);
+//				System.out.println(System.currentTimeMillis() + ":" + po.getProduct());
+//			}
 		}
 
 	}

@@ -16,12 +16,12 @@ import org.springframework.core.env.Environment;
 import com.happy3w.autobuy.cache.OrderCache;
 import com.happy3w.autobuy.down.AtDownloadTask;
 import com.happy3w.autobuy.down.AtDownloader;
-import com.happy3w.autobuy.exe.AtExeSchedulor;
-import com.happy3w.autobuy.exe.AtExeThrdPool;
-import com.happy3w.autobuy.exe.events.EventRegister;
+import com.happy3w.autobuy.driver.AtExeSchedulor;
+import com.happy3w.autobuy.driver.AtExeThrdPool;
 import com.happy3w.autobuy.exe.step.StepManager;
 import com.happy3w.autobuy.exe.step.StepRegister;
 import com.happy3w.autobuy.exe.step.UserRegister;
+import com.happy3w.autobuy.task.operation.HandlerRegister;
 import com.happy3w.autobuy.transfer.TransferProxy;
 import com.happy3w.autobuy.transfer.TransferUrl;
 import com.happy3w.autobuy.util.HttpUtil;
@@ -133,8 +133,8 @@ public class AppConfig {
 	}
 
 	@Bean
-	public EventRegister getEventRegister() {
-		return new EventRegister(getHttp(), getTransferUrl(), getSysConfig());
+	public HandlerRegister getEventRegister() {
+		return new HandlerRegister(getHttp(), getTransferUrl(), getSysConfig());
 	}
 
 	@Bean

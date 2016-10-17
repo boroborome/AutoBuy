@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.exe.events;
+package com.happy3w.autobuy.task.operation;
 
 /**
  *
@@ -9,6 +9,6 @@ package com.happy3w.autobuy.exe.events;
  * @author Happy3W Cherry
  *
  */
-public class Event_GetValue {
+public class GetValue {
 
 }

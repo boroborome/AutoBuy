@@ -27,7 +27,7 @@ public class SysConfig {
 	}
 
 	/**
-	 * 数据库库相关配置。
+	 * 数据库相关配置。
 	 * 
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public class SysConfig {
 	}
 
 	/**
-	 * 从transfer服务器上获取返回结果是尝试次数。
+	 * 从transfer服务器上获取返回结果尝试次数。
 	 * 
 	 * @return
 	 */

@@ -34,6 +34,10 @@ public class TransferProxy {
 		this.transfer = transfer;
 	}
 
+	public TransferProxy() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 下载最新订单。
 	 * 

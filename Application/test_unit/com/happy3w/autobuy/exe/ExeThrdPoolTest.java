@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.happy3w.autobuy.config.SysConfig;
+import com.happy3w.autobuy.driver.AtExeThrdPool;
 import com.happy3w.autobuy.exe.step.StepManager;
 import com.happy3w.autobuy.model.PurchaseOrder;
 
