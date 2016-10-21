@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.operation;
+package com.happy3w.autobuy.task.action;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,21 @@ import com.happy3w.autobuy.model.PurchaseOrder;
 public class Param {
 	private Map<String, String> mapParam = new HashMap<String, String>();
 	public static String VERIFYCODE = "verifycode";
-
+	private PurchaseOrder order;
+	private AtUser user;
+	
+	public PurchaseOrder getOrder() {
+		return order;
+	}
+	public void setOrder(PurchaseOrder order) {
+		this.order = order;
+	}
+	public AtUser getUser() {
+		return user;
+	}
+	public void setUser(AtUser user) {
+		this.user = user;
+	}
 	public Param(PurchaseOrder order, AtUser user) {
 		mapParam.put(order.AMOUNT, String.valueOf(order.getAmount()));
 		mapParam.put(order.BUYTIME, order.BUYTIME);
@@ -26,6 +40,8 @@ public class Param {
 		mapParam.put(order.PRODUCT, order.getProduct());
 		mapParam.put(AtUser.PASSWORD, user.getPassword());
 		mapParam.put(AtUser.USERID, user.getUserId());
+		this.order=order;
+		this.user=user;
 	}
 	/**
 	 * 获取值。

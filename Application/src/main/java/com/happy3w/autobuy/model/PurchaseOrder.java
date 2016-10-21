@@ -6,10 +6,10 @@ import java.util.Date;
  * Created by Administrator on 2016/7/10.
  */
 public class PurchaseOrder {
-	public final String ORDERID="orderid";
-    public  final String  PRODUCT= "product";
-    public  final String AMOUNT="amount";
-    public  final String BUYTIME ="buytime";
+	public static final String ORDERID="orderid";
+    public static final String  PRODUCT= "product";
+    public static final String AMOUNT="amount";
+    public static final String BUYTIME ="buytime";
 	/**
 	 * 主键
 	 */
@@ -17,6 +17,7 @@ public class PurchaseOrder {
     private String product;
     private double amount;
     private Date buytime;
+    private String rate;
 
     public String getOrderid() {
 		return orderid;
@@ -49,4 +50,13 @@ public class PurchaseOrder {
     public void setBuytime(Date buytime) {
         this.buytime = buytime;
     }
+
+	public String getRate() {
+		return rate;
+	}
+
+	public void setRate(String rate) {
+		this.rate = rate;
+	}
+    
 }

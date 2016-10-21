@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.operation;
+package com.happy3w.autobuy.task.action;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +12,9 @@ import org.openqa.selenium.WebElement;
  * @version 2016年10月17日下午2:19:54
  * @author happy3w
  */
-public class Click implements IHandler{
+public class ClickElement implements IAction{
 	private String xpath;
-	public Click(String xpath)
+	public ClickElement(String xpath)
 	{
 		this.xpath=xpath;
 	}

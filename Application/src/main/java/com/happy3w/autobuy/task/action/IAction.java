@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.operation;
+package com.happy3w.autobuy.task.action;
 
 import org.openqa.selenium.WebDriver;
 
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
  * @author Happy3W Cherry
  *
  */
-public interface IHandler {
+public interface IAction {
 	/**
 	 * 处理事务。
 	 * @param driver 操作驱动。

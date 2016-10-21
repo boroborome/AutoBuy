@@ -9,7 +9,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.happy3w.autobuy.model.PurchaseOrder;
-import com.happy3w.autobuy.task.operation.HandlerRegister;
+import com.happy3w.autobuy.task.action.HandlerRegister;
 
 /**
  * 单步执行器维护类。

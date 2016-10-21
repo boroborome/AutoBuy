@@ -1,13 +1,14 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.operation;
+package com.happy3w.autobuy.task.action;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,19 +37,34 @@ import com.happy3w.autobuy.util.ThreadUtil;
  * @author Happy3W Cherry
  *
  */
-public class VerifyCode implements IHandler {
-	public static final String RETURNNAME="verifycode";
-	private int unit = 1000;
-	private TransferUrl transfer;
+public class VerifyImg implements IAction {
+	public static final String RETURNNAME="VerifyImg";
 	private HttpUtil http;
 	private String xpath;
 	private SysConfig config;
+	
+	/**
+	 * 识别图片上传位置。
+	 */
+	private String uploadUrl;
+	/**
+	 * 识别结果下载位置。
+	 */
+	private String downloadUrl;
 
-	public VerifyCode(SysConfig config, TransferUrl transfer, HttpUtil http, String xpath) {
+	/**
+	 * @param config 配置信息。
+	 * @param xpath 验证码图片位置。
+	 * @param http 服务器访问工具。
+	 * @param uploadUrl 识别图片上传位置。
+	 * @param downloadUrl 识别结果下载位置。
+	 */
+	public VerifyImg(SysConfig config, String xpath, HttpUtil http,String uploadUrl,String downloadUrl ) {
 		this.config = config;
-		this.transfer = transfer;
 		this.http = http;
 		this.xpath = xpath;
+		this.uploadUrl=uploadUrl;
+		this.downloadUrl=downloadUrl;
 	}
 
 	@Override
@@ -82,7 +98,7 @@ public class VerifyCode implements IHandler {
 			}
 			//如果没有读到，则刷新验证码。
 			elementVerifyImg.click();
-			ThreadUtil.sleep(unit);
+			ThreadUtil.sleep(config.getTimeout());
 		}
 
 		throw new TimeoutException("Can't get verify code after 5 times trying.");
@@ -113,7 +129,7 @@ public class VerifyCode implements IHandler {
 	private void sendImageToServer(BufferedImage verifyImage) throws IOException {
 		Map<String, String> fileMap = new HashMap<String, String>();
 		fileMap.put("file", "verifycode.jpg");
-		String ret = http.formUpload(transfer.getUploadUrl(), null, fileMap, image2InputStream(verifyImage));
+		http.formUpload(uploadUrl, null, fileMap, image2InputStream(verifyImage));
 	}
 
 	/**
@@ -160,11 +176,11 @@ public class VerifyCode implements IHandler {
 		String result = null;
 		for (int i = config.getTransferRetryTimes(); i >= 0; --i) {
 			RestTemplate restTemplate = new RestTemplate();
-			result = restTemplate.getForObject(transfer.getVerifyCodeResultUrl(), String.class);
+			result = restTemplate.getForObject(downloadUrl, String.class);
 			if (result != null && !result.isEmpty()) {
 				break;
 			}
-			ThreadUtil.sleep(unit);
+			ThreadUtil.sleep(config.getTimeout());
 		}
 		return result;
 	}

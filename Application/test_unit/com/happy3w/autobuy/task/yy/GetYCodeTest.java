@@ -5,59 +5,53 @@ package com.happy3w.autobuy.task.yy;
 
 import java.util.Calendar;
 
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.happy3w.autobuy.config.SysConfig;
 import com.happy3w.autobuy.model.AtUser;
 import com.happy3w.autobuy.model.PurchaseOrder;
-import com.happy3w.autobuy.task.action.ClickElement;
-import com.happy3w.autobuy.task.action.IAction;
-import com.happy3w.autobuy.task.action.Input;
-import com.happy3w.autobuy.task.action.OpenPage;
 import com.happy3w.autobuy.task.action.Param;
-import com.happy3w.autobuy.task.action.Result;
-import com.happy3w.autobuy.task.action.VerifyImg;
-import com.happy3w.autobuy.task.yy.YYLogin;
 import com.happy3w.autobuy.task.yy.action.YYVerifyImg;
-import com.happy3w.autobuy.transfer.TransferUrl;
 import com.happy3w.autobuy.util.HttpUtil;
-import com.happy3w.autobuy.util.WebDriverUtil;
 
 import driver.RemoteDriver;
 import testkit.com.happy3w.autoby.BaseTest;
 
 /**
- * 完成登录。
- * @version 2016年10月17日下午2:24:40
+ * @version 2016年10月21日上午11:39:34
  * @author happy3w
  */
-public class YYLoginTest extends BaseTest{
+public class GetYCodeTest extends BaseTest{
 	@Autowired
 	private SysConfig config;
+	private WebDriver driver;
+	private Param param;
+	private String srv="http://localhost:8190/autobuy/";
 	@Autowired
 	private HttpUtil http;
-	private String srv="http://localhost:8190/autobuy/";
-	private WebDriver driver;
 	@BeforeTest
 	public void beforeTest()
 	{
 		driver  =RemoteDriver.getInstance().getDriver();
-	}
-	@AfterTest
-	public void afterTest()
-	{
-		//driver.quit();
+		PurchaseOrder order  =new PurchaseOrder();
+		order.setAmount(100);
+		Calendar c = Calendar.getInstance();
+		c.set(2016, 10, 17);
+		order.setBuytime(c.getTime());
+		order.setOrderid("test01");
+		order.setProduct("YY-C");
+		AtUser user = new AtUser("chenjij@yonyou.com","yy2900");
+		param  =new Param(order,user);
 	}
 	@Test
-	public void testLogin()
+	public void testGet()
 	{
-		this.login();
+		login();
+		GetYCode ycode=new GetYCode(config);
+		ycode.handle(driver, param);
 	}
 	public void login()
 	{

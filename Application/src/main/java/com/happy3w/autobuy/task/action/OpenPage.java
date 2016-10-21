@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.operation;
+package com.happy3w.autobuy.task.action;
 
 import org.openqa.selenium.WebDriver;
 
@@ -13,7 +13,7 @@ import com.happy3w.autobuy.util.WebDriverUtil;
  * @author Happy3W Cherry
  *
  */
-public class OpenPage implements IHandler {
+public class OpenPage implements IAction {
 
 	private long timeout;
 	private String url;

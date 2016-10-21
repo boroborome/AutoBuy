@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.operation;
+package com.happy3w.autobuy.task.action;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
  * @author Happy3W Cherry
  *
  */
-public class Input implements IHandler {
+public class Input implements IAction {
 
 	private String xpath;
 	private String paramName;

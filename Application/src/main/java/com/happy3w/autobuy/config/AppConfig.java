@@ -21,7 +21,7 @@ import com.happy3w.autobuy.driver.AtExeThrdPool;
 import com.happy3w.autobuy.exe.step.StepManager;
 import com.happy3w.autobuy.exe.step.StepRegister;
 import com.happy3w.autobuy.exe.step.UserRegister;
-import com.happy3w.autobuy.task.operation.HandlerRegister;
+import com.happy3w.autobuy.task.action.HandlerRegister;
 import com.happy3w.autobuy.transfer.TransferProxy;
 import com.happy3w.autobuy.transfer.TransferUrl;
 import com.happy3w.autobuy.util.HttpUtil;

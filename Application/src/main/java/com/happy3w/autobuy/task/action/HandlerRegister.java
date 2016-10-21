@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.operation;
+package com.happy3w.autobuy.task.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.happy3w.autobuy.config.SysConfig;
 import com.happy3w.autobuy.exe.step.Steps;
 import com.happy3w.autobuy.model.AtUser;
+import com.happy3w.autobuy.task.yy.action.YYVerifyImg;
 import com.happy3w.autobuy.transfer.TransferUrl;
 import com.happy3w.autobuy.util.HttpUtil;
 
@@ -24,7 +25,7 @@ import com.happy3w.autobuy.util.HttpUtil;
  *
  */
 public class HandlerRegister {
-	private Map<String, List<IHandler>> mapEvent = new HashMap<String, List<IHandler>>();
+	private Map<String, List<IAction>> mapEvent = new HashMap<String, List<IAction>>();
 	private long timeout = 500;
 	private HttpUtil http;
 	private TransferUrl transfer;
@@ -39,17 +40,17 @@ public class HandlerRegister {
 	}
 
 	private void init() {
-		List<IHandler> events = new ArrayList<IHandler>();
+		List<IAction> events = new ArrayList<IAction>();
 		mapEvent.put(Steps.YY_LOGIN, events);
 		events.add(new OpenPage("https://www.yyfax.com/user/login.html", "我的友金所", config.getTimeout()));
 		events.add(new Input("//*[@id=\"accountName\"]", AtUser.USERID));
 		events.add(new Input("//*[@id=\"password1\"]", AtUser.PASSWORD));
-		events.add(new VerifyCode(config, transfer, http, "//*[@id=\"_verifyImg\"]", Param.VERIFYCODE));
+		events.add(new YYVerifyImg(config,http,config.getWebServerUrl()));
 		events.add(new Input("//*[@id=\"verifyCode\"]", Param.VERIFYCODE));
 	}
 
-	public IHandler[] getEvents(String action) {
-		return mapEvent.get(action).toArray(new IHandler[0]);
+	public IAction[] getEvents(String action) {
+		return mapEvent.get(action).toArray(new IAction[0]);
 	}
 
 }

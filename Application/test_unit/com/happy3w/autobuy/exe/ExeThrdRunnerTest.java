@@ -21,12 +21,12 @@ import com.happy3w.autobuy.exe.step.Steps;
 import com.happy3w.autobuy.exe.step.UserRegister;
 import com.happy3w.autobuy.model.AtUser;
 import com.happy3w.autobuy.model.PurchaseOrder;
-import com.happy3w.autobuy.task.operation.HandlerRegister;
-import com.happy3w.autobuy.task.operation.IHandler;
-import com.happy3w.autobuy.task.operation.Input;
-import com.happy3w.autobuy.task.operation.OpenPage;
-import com.happy3w.autobuy.task.operation.Param;
-import com.happy3w.autobuy.task.operation.VerifyCode;
+import com.happy3w.autobuy.task.action.HandlerRegister;
+import com.happy3w.autobuy.task.action.IAction;
+import com.happy3w.autobuy.task.action.Input;
+import com.happy3w.autobuy.task.action.OpenPage;
+import com.happy3w.autobuy.task.action.Param;
+import com.happy3w.autobuy.task.action.VerifyImg;
 import com.happy3w.autobuy.transfer.TransferUrl;
 import com.happy3w.autobuy.util.HttpUtil;
 
@@ -58,7 +58,7 @@ public class ExeThrdRunnerTest extends BaseTest {
 	@Mock
 	private HandlerRegister eventRegister;
 	@Mock
-	private VerifyCode readImg;
+	private VerifyImg readImg;
 
 	@BeforeMethod
 	public void setup() {
@@ -66,21 +66,21 @@ public class ExeThrdRunnerTest extends BaseTest {
 		eventRegister = new HandlerRegister(http, transfer, config);
 		manager = new StepManager(driver, userRegister, stepRegister, eventRegister);
 		Mockito.when(eventRegister.getEvents(Steps.YY_LOGIN)).thenReturn(getEvents());
-		Mockito.when(readImg.handle(driver, param));
+		//Mockito.when(readImg.handle(driver, param));
 		runner = new AtExeThrdRunner(orders[0], manager);
 
 	}
 
-	private IHandler[] getEvents() {
-		List<IHandler> events = new ArrayList<IHandler>();
+	private IAction[] getEvents() {
+		List<IAction> events = new ArrayList<IAction>();
 		events.add(new OpenPage("https://www.yyfax.com/user/login.html", "我的友金所", config.getTimeout()));
 		events.add(new Input("//*[@id=\"accountName\"]", AtUser.USERID));
 		events.add(new Input("//*[@id=\"password1\"]", AtUser.PASSWORD));
 		// Event_ReadImg readImg = Mockito.mock(EventRead)
 		events.add(readImg);
-		Mockito.when(readImg.handle(driver, param)).events
-				.add(new Input("//*[@id=\"verifyCode\"]", Param.VERIFYCODE));
-		return events.toArray(new IHandler[0]);
+//		Mockito.when(readImg.handle(driver, param)).events
+//				.add(new Input("//*[@id=\"verifyCode\"]", Param.VERIFYCODE));
+		return events.toArray(new IAction[0]);
 	}
 
 	@Test
