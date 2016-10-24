@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.yy;
+package com.happy3w.autobuy.yy.task;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,8 +27,10 @@ import com.happy3w.autobuy.config.SysConfig;
 import com.happy3w.autobuy.model.AtUser;
 import com.happy3w.autobuy.model.PurchaseOrder;
 import com.happy3w.autobuy.task.action.Param;
-import com.happy3w.autobuy.task.yy.action.YYVerifyImg;
 import com.happy3w.autobuy.util.HttpUtil;
+import com.happy3w.autobuy.yy.task.ChoseProduct;
+import com.happy3w.autobuy.yy.task.YYLoginInner;
+import com.happy3w.autobuy.yy.task.action.YYVerifyImg;
 
 import driver.RemoteDriver;
 import junit.framework.Assert;
@@ -38,7 +40,7 @@ import testkit.com.happy3w.autoby.BaseTest;
  * @version 2016年10月19日下午2:21:40
  * @author happy3w
  */
-public class YYOpenProductTest  extends BaseTest{
+public class ChoseProductTest  extends BaseTest{
 	@Autowired
 	private SysConfig config;
 	private WebDriver driver;
@@ -50,7 +52,7 @@ public class YYOpenProductTest  extends BaseTest{
 	@BeforeTest
 	public void beforeTest()
 	{
-		driver  =RemoteDriver.getInstance().getDriver();
+		driver  =RemoteDriver.getInstance().getDriver(10);
 		order  =new PurchaseOrder();
 		order.setAmount(100);
 		Calendar c = Calendar.getInstance();
@@ -59,7 +61,9 @@ public class YYOpenProductTest  extends BaseTest{
 		order.setOrderid("test01");
 		order.setProduct("YY-C");
 		AtUser user = new AtUser("chenjij@yonyou.com","yy2900");
-		param  =new Param(order,user);
+		param  =new Param();
+		param.put(user);
+		param.put(order);
 	}
 	@AfterTest
 	public void afterTest()
@@ -68,12 +72,12 @@ public class YYOpenProductTest  extends BaseTest{
 	}
 	@Test
 	public void testOpen(){
-	   driver = RemoteDriver.getInstance().getDriver();
+	   driver = RemoteDriver.getInstance().getDriver(10);
 	   driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 	   YYVerifyImg vc=new YYVerifyImg(config,http,srv);
-	   YYLogin login  =new YYLogin(config,vc);
+	   YYLoginInner login  =new YYLoginInner(config,vc);
 	   login.handle(driver, param);
-	   YYOpenProduct finder = new YYOpenProduct(config);
+	   ChoseProduct finder = new ChoseProduct(config);
 	   finder.handle(driver, param);
 	   System.out.println("end");
 	}

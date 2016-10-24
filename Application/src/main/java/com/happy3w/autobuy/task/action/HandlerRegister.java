@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.happy3w.autobuy.config.SysConfig;
 import com.happy3w.autobuy.exe.step.Steps;
 import com.happy3w.autobuy.model.AtUser;
-import com.happy3w.autobuy.task.yy.action.YYVerifyImg;
 import com.happy3w.autobuy.transfer.TransferUrl;
 import com.happy3w.autobuy.util.HttpUtil;
+import com.happy3w.autobuy.yy.task.action.YYVerifyImg;
 
 /**
  * 注册事件。

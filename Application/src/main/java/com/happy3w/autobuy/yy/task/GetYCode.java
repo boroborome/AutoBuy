@@ -1,13 +1,15 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.yy;
+package com.happy3w.autobuy.yy.task;
 
 import com.happy3w.autobuy.config.SysConfig;
 import com.happy3w.autobuy.task.action.OpenPage;
-import com.happy3w.autobuy.task.yy.action.FilterYCode;
+import com.happy3w.autobuy.task.base.TaskHandler;
+import com.happy3w.autobuy.yy.task.action.FilterYCode;
 
 /**
+ * 获取ycode验证码。
  * @version 2016年10月21日上午11:41:07
  * @author happy3w
  */

@@ -5,6 +5,7 @@ package driver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -24,8 +25,8 @@ public class RemoteDriver {
 		}
 		return instance;
 	}
-	private String urlStr="http://localhost:20893";
-	public  WebDriver getDriver()
+	private String urlStr="http://localhost:11991";
+	public  WebDriver getDriver(long timeout)
 	{
 		WebDriver   driver = null;
 		URL url = null;
@@ -37,6 +38,7 @@ public class RemoteDriver {
 		}
 			driver = new RemoteWebDriver(url,
 			         DesiredCapabilities.chrome());
+			driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
 			return driver;
 	}
 

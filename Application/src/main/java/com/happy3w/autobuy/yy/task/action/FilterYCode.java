@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.yy.action;
+package com.happy3w.autobuy.yy.task.action;
 
 import com.happy3w.autobuy.task.action.TableXPath;
 import com.happy3w.autobuy.task.action.ClickCell;

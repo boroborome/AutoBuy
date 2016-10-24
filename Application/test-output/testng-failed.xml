@@ -3,18 +3,18 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.happy3w.autobuy.task.yy.GetYCodeTest">
+      <class name="com.happy3w.autobuy.yy.task.BuyTest">
         <methods>
           <include name="springTestContextBeforeTestClass"/>
           <include name="beforeTest"/>
           <include name="initMocks"/>
           <include name="springTestContextPrepareTestInstance"/>
           <include name="springTestContextAfterTestClass"/>
+          <include name="testBuy"/>
           <include name="springTestContextBeforeTestMethod"/>
-          <include name="testGet"/>
           <include name="springTestContextAfterTestMethod"/>
         </methods>
-      </class> <!-- com.happy3w.autobuy.task.yy.GetYCodeTest -->
+      </class> <!-- com.happy3w.autobuy.yy.task.BuyTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

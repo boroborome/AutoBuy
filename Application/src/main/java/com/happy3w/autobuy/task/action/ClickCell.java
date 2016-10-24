@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.happy3w.autobuy.model.PurchaseOrder;
 import com.happy3w.autobuy.util.LogUtil;
 
 
@@ -22,14 +23,14 @@ import com.happy3w.autobuy.util.LogUtil;
 public class ClickCell implements IAction{
 	private int end;
 	private int start;
-	private String enableFlag;
 	private TableXPath xpath;
-	public ClickCell(int start,int end,TableXPath xpath,String enableFlag)
+	private String conditionName;
+	public ClickCell(int start,int end,TableXPath xpath,String conditionName)
 	{
 		this.start=start;
 		this.end=end;
 		this.xpath=xpath;
-		this.enableFlag=enableFlag;
+		this.conditionName=conditionName;
 	}
 	@Override
 	public Result[] handle(WebDriver driver, Param param) {
@@ -42,7 +43,7 @@ public class ClickCell implements IAction{
 			{
 				continue;
 			}
-			if(product.getText().contains(param.getOrder().getProduct()))
+			if(product.getText().contains(param.getValue(conditionName)))
 			{
 				WebElement target = row.findElement(By.xpath(xpath.getTarget()));
 				target.click();

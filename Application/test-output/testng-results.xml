@@ -1,63 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="1" passed="1">
+<testng-results skipped="0" failed="1" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="90717" started-at="2016-10-21T08:02:34Z" finished-at="2016-10-21T08:04:05Z">
+  <suite name="Default suite" duration-ms="89021" started-at="2016-10-24T06:19:50Z" finished-at="2016-10-24T06:21:19Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="90717" started-at="2016-10-21T08:02:34Z" finished-at="2016-10-21T08:04:05Z">
-      <class name="com.happy3w.autobuy.task.yy.YYOpenProductTest">
-        <test-method status="PASS" signature="initMocks()[pri:0, instance:com.happy3w.autobuy.task.yy.YYOpenProductTest@959ca4]" name="initMocks" is-config="true" duration-ms="93" started-at="2016-10-21T16:02:34Z" finished-at="2016-10-21T16:02:35Z">
+    <test name="Default test" duration-ms="89021" started-at="2016-10-24T06:19:50Z" finished-at="2016-10-24T06:21:19Z">
+      <class name="com.happy3w.autobuy.yy.task.BuyTest">
+        <test-method status="PASS" signature="initMocks()[pri:0, instance:com.happy3w.autobuy.yy.task.BuyTest@bd8be5]" name="initMocks" is-config="true" duration-ms="84" started-at="2016-10-24T14:19:50Z" finished-at="2016-10-24T14:19:50Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initMocks -->
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.happy3w.autobuy.task.yy.YYOpenProductTest@959ca4]" name="beforeTest" is-config="true" duration-ms="1974" started-at="2016-10-21T16:02:35Z" depends-on-methods="testkit.com.happy3w.autoby.BaseTest.initMocks" finished-at="2016-10-21T16:02:37Z">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.happy3w.autobuy.yy.task.BuyTest@bd8be5]" name="beforeTest" is-config="true" duration-ms="0" started-at="2016-10-24T14:19:50Z" depends-on-methods="testkit.com.happy3w.autoby.BaseTest.initMocks" finished-at="2016-10-24T14:19:50Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.happy3w.autobuy.task.yy.YYOpenProductTest@959ca4]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="4" started-at="2016-10-21T16:02:37Z" finished-at="2016-10-21T16:02:37Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.happy3w.autobuy.yy.task.BuyTest@bd8be5]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="1" started-at="2016-10-24T14:19:50Z" finished-at="2016-10-24T14:19:50Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestClass -->
-        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.happy3w.autobuy.task.yy.YYOpenProductTest@959ca4]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="3170" started-at="2016-10-21T16:02:37Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2016-10-21T16:02:40Z">
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.happy3w.autobuy.yy.task.BuyTest@bd8be5]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="2763" started-at="2016-10-24T14:19:50Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2016-10-24T14:19:52Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextPrepareTestInstance -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.happy3w.autobuy.task.yy.YYOpenProductTest@959ca4]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="4" started-at="2016-10-21T16:02:40Z" finished-at="2016-10-21T16:02:40Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.happy3w.autobuy.yy.task.BuyTest@bd8be5]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="1" started-at="2016-10-24T14:19:52Z" finished-at="2016-10-24T14:19:52Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void com.happy3w.autobuy.task.yy.YYOpenProductTest.testOpen()]]>
+                <![CDATA[public void com.happy3w.autobuy.yy.task.BuyTest.testBuy()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="testOpen()[pri:0, instance:com.happy3w.autobuy.task.yy.YYOpenProductTest@959ca4]" name="testOpen" duration-ms="85425" started-at="2016-10-21T16:02:40Z" finished-at="2016-10-21T16:04:05Z">
+        <test-method status="FAIL" signature="testBuy()[pri:0, instance:com.happy3w.autobuy.yy.task.BuyTest@bd8be5]" name="testBuy" duration-ms="86146" started-at="2016-10-24T14:19:52Z" finished-at="2016-10-24T14:21:19Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at java.lang.String.contains(Unknown Source)
+	at com.happy3w.autobuy.task.action.ClickCell.handle(ClickCell.java:46)
+	at com.happy3w.autobuy.task.base.TaskHandler.handle(TaskHandler.java:45)
+	at com.happy3w.autobuy.yy.flow.Buy.handle(Buy.java:38)
+	at com.happy3w.autobuy.yy.task.BuyTest.testBuy(BuyTest.java:57)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:100)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:189)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:175)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:201)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:642)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:811)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1137)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:753)
+	at org.testng.TestRunner.run(TestRunner.java:607)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:368)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:363)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:321)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:270)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1284)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1209)
+	at org.testng.TestNG.runSuites(TestNG.java:1124)
+	at org.testng.TestNG.run(TestNG.java:1096)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:236)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:81)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testOpen -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.happy3w.autobuy.task.yy.YYOpenProductTest@959ca4]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2016-10-21T16:04:05Z" finished-at="2016-10-21T16:04:05Z">
+        </test-method> <!-- testBuy -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.happy3w.autobuy.yy.task.BuyTest@bd8be5]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2016-10-24T14:21:19Z" finished-at="2016-10-24T14:21:19Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void com.happy3w.autobuy.task.yy.YYOpenProductTest.testOpen()]]>
+                <![CDATA[public void com.happy3w.autobuy.yy.task.BuyTest.testBuy()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.happy3w.autobuy.task.yy.YYOpenProductTest@959ca4]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2016-10-21T16:04:05Z" finished-at="2016-10-21T16:04:05Z">
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.happy3w.autobuy.yy.task.BuyTest@bd8be5]" name="springTestContextAfterTestClass" is-config="true" duration-ms="0" started-at="2016-10-24T14:21:19Z" finished-at="2016-10-24T14:21:19Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestClass -->
-        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.happy3w.autobuy.task.yy.YYOpenProductTest@959ca4]" name="afterTest" is-config="true" duration-ms="0" started-at="2016-10-21T16:04:05Z" finished-at="2016-10-21T16:04:05Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterTest -->
-      </class> <!-- com.happy3w.autobuy.task.yy.YYOpenProductTest -->
+      </class> <!-- com.happy3w.autobuy.yy.task.BuyTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

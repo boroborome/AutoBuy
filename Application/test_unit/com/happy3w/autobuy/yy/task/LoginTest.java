@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.yy;
+package com.happy3w.autobuy.yy.task;
 
 import java.util.Calendar;
 
@@ -23,11 +23,11 @@ import com.happy3w.autobuy.task.action.OpenPage;
 import com.happy3w.autobuy.task.action.Param;
 import com.happy3w.autobuy.task.action.Result;
 import com.happy3w.autobuy.task.action.VerifyImg;
-import com.happy3w.autobuy.task.yy.YYLogin;
-import com.happy3w.autobuy.task.yy.action.YYVerifyImg;
 import com.happy3w.autobuy.transfer.TransferUrl;
 import com.happy3w.autobuy.util.HttpUtil;
 import com.happy3w.autobuy.util.WebDriverUtil;
+import com.happy3w.autobuy.yy.task.YYLoginInner;
+import com.happy3w.autobuy.yy.task.action.YYVerifyImg;
 
 import driver.RemoteDriver;
 import testkit.com.happy3w.autoby.BaseTest;
@@ -37,7 +37,7 @@ import testkit.com.happy3w.autoby.BaseTest;
  * @version 2016年10月17日下午2:24:40
  * @author happy3w
  */
-public class YYLoginTest extends BaseTest{
+public class LoginTest extends BaseTest{
 	@Autowired
 	private SysConfig config;
 	@Autowired
@@ -47,7 +47,7 @@ public class YYLoginTest extends BaseTest{
 	@BeforeTest
 	public void beforeTest()
 	{
-		driver  =RemoteDriver.getInstance().getDriver();
+		driver  =RemoteDriver.getInstance().getDriver(config.getTimeout());
 	}
 	@AfterTest
 	public void afterTest()
@@ -62,7 +62,7 @@ public class YYLoginTest extends BaseTest{
 	public void login()
 	{
 		YYVerifyImg vc=new YYVerifyImg(config,http,srv);
-		YYLogin login = new YYLogin(config,vc);
+		YYLoginInner login = new YYLoginInner(config,vc);
 		PurchaseOrder order  =new PurchaseOrder();
 		order.setAmount(100);
 		Calendar c = Calendar.getInstance();
@@ -71,7 +71,9 @@ public class YYLoginTest extends BaseTest{
 		order.setOrderid("test01");
 		order.setProduct("YY-C");
 		AtUser user = new AtUser("chenjij@yonyou.com","yy2900");
-		Param arg  =new Param(order, user);
+		Param arg  =new Param();
+		arg.put(user);
+		arg.put(order);
 		
 		//Mockito.when(vc.handle(driver, arg)).thenReturn(new Result[]{new Result(VerifyCode.RETURNNAME,"11")});
 		login.handle(driver,arg);

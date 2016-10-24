@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.yy;
+package com.happy3w.autobuy.task.base;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,20 +38,14 @@ public class TaskHandler {
 	{
 		this.config=config;
 	}
-	public void handle(WebDriver driver,Param arg)
+	public void handle(WebDriver driver,Param param)
 	{
 		for(IAction handler:events)
 		{
-			Result[] results=handler.handle(driver, arg);
+			Result[] results=handler.handle(driver, param);
 			if(null!=results&&results.length>0)
 			{
-				arg.put(results);
-			}
-			try {
-				Thread.sleep(config.getStepSpan());
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				param.put(results);
 			}
 		}
 	}

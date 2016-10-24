@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.yy;
+package com.happy3w.autobuy.yy.task;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,6 +20,7 @@ import com.happy3w.autobuy.task.action.OpenPage;
 import com.happy3w.autobuy.task.action.Param;
 import com.happy3w.autobuy.task.action.Result;
 import com.happy3w.autobuy.task.action.VerifyImg;
+import com.happy3w.autobuy.task.base.TaskHandler;
 import com.happy3w.autobuy.util.WebDriverUtil;
 
 /**
@@ -27,13 +28,13 @@ import com.happy3w.autobuy.util.WebDriverUtil;
  * @version 2016年10月17日下午3:15:23
  * @author happy3w
  */
-public class YYLogin extends TaskHandler{
+public class YYLoginInner extends TaskHandler{
 	/**
 	 * 登录构造器。
 	 * @param config  配置信息。
 	 * @param verifycode 验证码处理器。
 	 */
-	public YYLogin(SysConfig config,IAction verifycode)
+	public YYLoginInner(SysConfig config,IAction verifycode)
 	{
 		super(config);
 		this.getEvents().add(new OpenPage("https://www.yyfax.com/user/login.html","友金所-用户登录",config.getTimeout()));

@@ -18,30 +18,19 @@ import com.happy3w.autobuy.model.PurchaseOrder;
 public class Param {
 	private Map<String, String> mapParam = new HashMap<String, String>();
 	public static String VERIFYCODE = "verifycode";
-	private PurchaseOrder order;
-	private AtUser user;
-	
-	public PurchaseOrder getOrder() {
-		return order;
+	public Param() {
 	}
-	public void setOrder(PurchaseOrder order) {
-		this.order = order;
-	}
-	public AtUser getUser() {
-		return user;
-	}
-	public void setUser(AtUser user) {
-		this.user = user;
-	}
-	public Param(PurchaseOrder order, AtUser user) {
+	public void put(PurchaseOrder order)
+	{
 		mapParam.put(order.AMOUNT, String.valueOf(order.getAmount()));
 		mapParam.put(order.BUYTIME, order.BUYTIME);
 		mapParam.put(order.ORDERID, order.getOrderid());
 		mapParam.put(order.PRODUCT, order.getProduct());
+	}
+	public void put(AtUser user)
+	{
 		mapParam.put(AtUser.PASSWORD, user.getPassword());
 		mapParam.put(AtUser.USERID, user.getUserId());
-		this.order=order;
-		this.user=user;
 	}
 	/**
 	 * 获取值。

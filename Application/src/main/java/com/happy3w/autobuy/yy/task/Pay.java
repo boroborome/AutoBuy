@@ -1,10 +1,11 @@
 /**
  * 
  */
-package com.happy3w.autobuy.task.yy;
+package com.happy3w.autobuy.yy.task;
 
 import com.happy3w.autobuy.config.SysConfig;
 import com.happy3w.autobuy.task.action.ClickElement;
+import com.happy3w.autobuy.task.base.TaskHandler;
 
 /**
  * 下单购买。
