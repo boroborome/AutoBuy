@@ -22,7 +22,7 @@ public class TaskCache {
 	private static TaskCache instance;
 	public TaskCache()
 	{
-		Task task  =new Task("YY","YY");
+		Task task  =new Task("yy","yy");
 		tasks.put(task.getTaskCode(), task);
 		Stage  ycode = new Stage("ycode","ycode","chenjij@yonyou.com","***");
 		task.put(ycode);

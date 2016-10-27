@@ -73,7 +73,7 @@ public class LoginTest extends BaseTest{
 		param.put("srv",config.getWebServerUrl());
 		ActionExe exe  =new ActionExe();
 		//Mockito.when(vc.handle(driver, arg)).thenReturn(new Result[]{new Result(VerifyCode.RETURNNAME,"11")});
-		for(ActStruct act:TaskCache.getInstance().get("YY").getStage("ycode").getActions("login"))
+		for(ActStruct act:TaskCache.getInstance().get("yy").getStage("ycode").getActions("login"))
 		{
 			param.put(exe.handle(driver, param, act));
 		}

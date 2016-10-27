@@ -59,7 +59,7 @@ public class GetYCodeTest extends BaseTest{
 	public void login()
 	{
 		ActionExe exe  =new ActionExe();
-		for(ActStruct act:TaskCache.getInstance().get("YY").getStage("ycode").getActions())
+		for(ActStruct act:TaskCache.getInstance().get("yy").getStage("ycode").getActions())
 		{
 			param.put(exe.handle(driver, param, act));
 		}

@@ -77,7 +77,7 @@ public class ChoseProductTest  extends BaseTest{
 	   driver = RemoteDriver.getInstance().getDriver(10);
 	   driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 	   ActionExe exe  =new ActionExe();
-	   for(ActStruct act:TaskCache.getInstance().get("YY").getStage("buy").getActions("choose"))
+	   for(ActStruct act:TaskCache.getInstance().get("yy").getStage("buy").getActions("choose"))
 	   {
 			param.put(exe.handle(driver, param, act));
 	   }

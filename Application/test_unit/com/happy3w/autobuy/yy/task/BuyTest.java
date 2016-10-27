@@ -44,14 +44,14 @@ public class BuyTest extends BaseTest {
 		order.setOrderid("t01");
 		order.setProduct("YY-A");
 		order.setRate("8.0%");
-		order.setTask("YY");
+		order.setTask("yy");
 		param.put(order);
 	}
 
 	@Test
 	public void testBuy() {
 		param.put("srv",config.getWebServerUrl());
-		Task task = TaskCache.getInstance().get("YY");
+		Task task = TaskCache.getInstance().get("yy");
 		ActionExe exe = new ActionExe();
 		for (Stage stage : task.getStages()) {
 			driver = RemoteDriver.getInstance().getDriver(10);

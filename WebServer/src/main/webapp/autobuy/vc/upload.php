@@ -4,7 +4,7 @@ master上传本地验证码图片到中转站。
 */
 include 'head.php';
 $dir="upload/";
-$resul="upload/verifycode.txt";
+$resul="upload/".$_POST["file"].".txt";
 if ((($_FILES["file"]["type"] == "image/gif")
 || ($_FILES["file"]["type"] == "image/jpeg")
 || ($_FILES["file"]["type"] == "image/pjpeg"))
