@@ -17,16 +17,14 @@ import com.happy3w.autobuy.config.SysConfig;
  */
 @Component
 public class TransferUrl {
-	@Autowired
-	private SysConfig config;
-	private static TransferUrl context = new TransferUrl();
-
-	public static TransferUrl getInstance() {
-		return context;
+	private String service;
+	public TransferUrl(String service)
+	{
+		this.service=service;
 	}
 
 	public String getUploadUrl() {
-		return config.getWebServerUrl() + "vc/upload.php";
+		return this.service+ "vc/upload.php";
 	}
 
 	public String getFileParamName() {
@@ -34,22 +32,22 @@ public class TransferUrl {
 	}
 
 	public String getVerifyCodeResultUrl() {
-		return config.getWebServerUrl() + "vc/result.php";
+		return this.service+ "vc/result.php";
 	}
 
 	public String getDownloadOrderUrl() {
-		return config.getWebServerUrl() + "order/buy.php";
+		return this.service + "order/buy.php";
 	}
 
 	public String getOrdeFinishUrl() {
-		return config.getWebServerUrl() + "order/finish.php";
+		return this.service+ "order/finish.php";
 	}
 
 	public String getIdentifyUrl() {
-		return config.getWebServerUrl() + "vc/identify.php";
+		return this.service+ "vc/identify.php";
 	}
 
 	public String getIsNewUrl() {
-		return config.getWebServerUrl() + "vc/isnew.php";
+		return this.service+ "vc/isnew.php";
 	}
 }

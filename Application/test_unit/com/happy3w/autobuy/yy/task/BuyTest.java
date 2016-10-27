@@ -10,50 +10,56 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.happy3w.autobuy.action.ActionExe;
+import com.happy3w.autobuy.action.BaseAction;
+import com.happy3w.autobuy.action.IAction;
+import com.happy3w.autobuy.action.Param;
+import com.happy3w.autobuy.action.Result;
 import com.happy3w.autobuy.config.SysConfig;
-import com.happy3w.autobuy.model.AtUser;
-import com.happy3w.autobuy.model.PurchaseOrder;
-import com.happy3w.autobuy.task.action.Param;
-import com.happy3w.autobuy.yy.flow.Buy;
-import com.happy3w.autobuy.yy.flow.YCode;
+import com.happy3w.autobuy.model.ActStruct;
+import com.happy3w.autobuy.model.UserOrder;
+import com.happy3w.autobuy.model.Stage;
+import com.happy3w.autobuy.model.Task;
+import com.happy3w.autobuy.model.TaskCache;
 
 import driver.RemoteDriver;
 import testkit.com.happy3w.autoby.BaseTest;
 
 /**
- * 下单购买。
- * @version 2016年10月21日下午4:11:09
+ * @version 2016年10月25日上午10:38:57
  * @author happy3w
  */
 public class BuyTest extends BaseTest {
+	private WebDriver driver;
+	private Param param;
 	@Autowired
 	private SysConfig config;
-	private AtUser ycodeUser;
-	private AtUser buyUser;
-	private PurchaseOrder order;
-	private Param arg;
 	@BeforeTest
-	public void beforeTest()
-	{
-		ycodeUser = new AtUser("chenjij@yonyou.com","yy2900");
-		buyUser  =new AtUser("chjj402@sina.com","yy2900");
-		order  =new PurchaseOrder();
+	public void beforeTest() {
+	
+		param = new Param();
+		UserOrder order = new UserOrder();
 		order.setAmount(100);
 		order.setBuytime(new Date());
 		order.setOrderid("t01");
-		order.setProduct("YY-C");
+		order.setProduct("YY-A");
 		order.setRate("8.0%");
+		order.setTask("YY");
+		param.put(order);
+	}
 
-	}
 	@Test
-	public void testBuy()
-	{
-		arg = new Param();
-		arg.put(ycodeUser);
-		YCode ycode = new YCode(config);
-		ycode.handle(RemoteDriver.getInstance().getDriver(config.getTimeout()), arg);
-		Buy buy  =new Buy(config);
-		arg.put(buyUser);
-		buy.handle(RemoteDriver.getInstance().getDriver(config.getTimeout()), arg);
+	public void testBuy() {
+		param.put("srv",config.getWebServerUrl());
+		Task task = TaskCache.getInstance().get("YY");
+		ActionExe exe = new ActionExe();
+		for (Stage stage : task.getStages()) {
+			driver = RemoteDriver.getInstance().getDriver(10);
+			param.put(stage.getUser());
+			for (ActStruct act : stage.getActions()) {
+				param.put(exe.handle(driver,param,act));
+			}
+		} 
 	}
+
 }

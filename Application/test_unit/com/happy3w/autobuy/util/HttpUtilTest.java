@@ -16,7 +16,7 @@ import com.happy3w.autobuy.transfer.TransferUrl;
 public class HttpUtilTest {
 	private String service = "http://192.168.3.7:8190/autobuy/";
 	private HttpUtil http = new HttpUtil();
-	private TransferUrl transfer = new TransferUrl();
+	private TransferUrl transfer = new TransferUrl(service);
 
 	@Test
 	public void testIsNew() {

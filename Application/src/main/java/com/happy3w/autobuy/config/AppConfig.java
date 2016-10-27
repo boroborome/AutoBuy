@@ -12,20 +12,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-
-import com.happy3w.autobuy.cache.OrderCache;
-import com.happy3w.autobuy.down.AtDownloadTask;
-import com.happy3w.autobuy.down.AtDownloader;
-import com.happy3w.autobuy.driver.AtExeSchedulor;
-import com.happy3w.autobuy.driver.AtExeThrdPool;
-import com.happy3w.autobuy.exe.step.StepManager;
-import com.happy3w.autobuy.exe.step.StepRegister;
-import com.happy3w.autobuy.exe.step.UserRegister;
-import com.happy3w.autobuy.task.action.HandlerRegister;
+import com.happy3w.autobuy.driver.ExeSchedulor;
+import com.happy3w.autobuy.driver.ThrdPool;
 import com.happy3w.autobuy.transfer.TransferProxy;
 import com.happy3w.autobuy.transfer.TransferUrl;
 import com.happy3w.autobuy.util.HttpUtil;
 import com.happy3w.autobuy.util.WebDriverUtil;
+
+import driver.RemoteDriver;
 
 /**
  * spring configuration file.
@@ -78,21 +72,6 @@ public class AppConfig {
 	}
 
 	@Bean
-	public AtDownloader provider() {
-		return new AtDownloader(getDownloadTask(), getFirstTime(), getPeriod());
-	}
-
-	@Bean
-	public TimerTask getDownloadTask() {
-		return new AtDownloadTask(getCache(), getTransferProxy());
-	}
-
-	@Bean
-	public OrderCache getCache() {
-		return new OrderCache(getExecutor());
-	}
-
-	@Bean
 	public TransferProxy getTransferProxy() {
 		return new TransferProxy(getHttp(), getTransferUrl());
 	}
@@ -104,41 +83,21 @@ public class AppConfig {
 
 	@Bean
 	public TransferUrl getTransferUrl() {
-		return new TransferUrl();
+		return new TransferUrl(this.getSysConfig().getWebServerUrl());
 	}
 
 	@Bean
-	public AtExeSchedulor getExecutor() {
-		return new AtExeSchedulor(getPool());
+	public ExeSchedulor getExecutor() {
+		return new ExeSchedulor();
 	}
 
 	@Bean
-	public AtExeThrdPool getPool() {
-		return new AtExeThrdPool(getSysConfig().getThreadConfig(), getStepManager());
-	}
-
-	@Bean
-	public StepManager getStepManager() {
-		return new StepManager(getWebDriver(), getUserRegister(), getStepRegister(), getEventRegister());
+	public ThrdPool getPool() {
+		return new ThrdPool(getSysConfig().getThreadConfig().getCoreSize());
 	}
 
 	@Bean
 	public WebDriver getWebDriver() {
-		return WebDriverUtil.getWebDriver();
-	}
-
-	@Bean
-	public UserRegister getUserRegister() {
-		return new UserRegister();
-	}
-
-	@Bean
-	public HandlerRegister getEventRegister() {
-		return new HandlerRegister(getHttp(), getTransferUrl(), getSysConfig());
-	}
-
-	@Bean
-	public StepRegister getStepRegister() {
-		return new StepRegister();
+		return RemoteDriver.getInstance().getDriver(10);
 	}
 }

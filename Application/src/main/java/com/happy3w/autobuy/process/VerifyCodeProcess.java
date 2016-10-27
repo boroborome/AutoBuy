@@ -73,7 +73,7 @@ public class VerifyCodeProcess {
 
 	public VerifyCodeProcess() {
 		http = new HttpUtil();
-		transfer = new TransferUrl();
+		//transfer = new TransferUrl();
 	}
 
 	public String getVerifyCode(WebDriver wd) {

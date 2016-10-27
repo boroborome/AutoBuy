@@ -42,7 +42,7 @@ public class HttpsClientRequestFactory extends SimpleClientHttpRequestFactory {
         try {
             System.setProperty("https.protocols", "TLSv1");
 
-            // Set ssl trust manager. Verify against our server thumbprint
+            // Set ssl trust manager. VerifyStruct against our server thumbprint
             final SSLContext ctx = SSLContext.getInstance("TLSv1");
 //            final SslThumbprintVerifier verifier = new SslThumbprintVerifier(serverInfo);
             final ThumbprintTrustManager thumbPrintTrustManager =

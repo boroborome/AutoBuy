@@ -13,7 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.happy3w.autobuy.model.PurchaseOrder;
+import com.happy3w.autobuy.model.UserOrder;
 import com.happy3w.autobuy.util.HttpUtil;
 
 import testkit.com.happy3w.autoby.BaseTest;
@@ -44,7 +44,7 @@ public class TranferProxyTest extends BaseTest {
 	@Test
 	public void testDownload_0() {
 		Mockito.when(http.sendPost(transfer.getDownloadOrderUrl(), null)).thenReturn(TestUtil.getJson(0, 0));
-		PurchaseOrder[] orders = manager.download();
+		UserOrder[] orders = manager.download();
 		Assert.assertNotNull(orders);
 		Assert.assertEquals(orders.length, 0);
 	}
@@ -55,7 +55,7 @@ public class TranferProxyTest extends BaseTest {
 	@Test
 	public void testDownload_1() {
 		Mockito.when(http.sendPost(transfer.getDownloadOrderUrl(), null)).thenReturn(TestUtil.getJson(1, 1));
-		PurchaseOrder[] orders = manager.download();
+		UserOrder[] orders = manager.download();
 		Assert.assertNotNull(orders);
 		Assert.assertEquals(orders.length, 1);
 		Assert.assertEquals(orders[0].getAmount(), new Double(100));
@@ -77,7 +77,7 @@ public class TranferProxyTest extends BaseTest {
 	@Test
 	public void testDownload_2() {
 		Mockito.when(http.sendPost(transfer.getDownloadOrderUrl(), null)).thenReturn(TestUtil.getJson(2, 1));
-		PurchaseOrder[] orders = manager.download();
+		UserOrder[] orders = manager.download();
 		Assert.assertNotNull(orders);
 		Assert.assertEquals(orders.length, 2);
 		Assert.assertEquals(orders[0].getAmount(), new Double(100));

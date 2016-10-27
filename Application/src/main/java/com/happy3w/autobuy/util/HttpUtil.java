@@ -135,7 +135,7 @@ public class HttpUtil {
 					if (inputValue == null) {
 						continue;
 					}
-					String filename = inputValue;
+					String filename = inputValue+".jpg";
 					String contentType = "image/jpeg";
 
 					StringBuffer strBuf = new StringBuffer();

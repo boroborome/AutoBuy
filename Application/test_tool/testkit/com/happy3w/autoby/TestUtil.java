@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.happy3w.autobuy.model.PurchaseOrder;
+import com.happy3w.autobuy.model.UserOrder;
 
 /**
  *
@@ -24,7 +24,7 @@ public class TestUtil {
 	 * @return
 	 */
 	public static String getJson(int count, int start) {
-		PurchaseOrder[] orders = getOrders(count, start);
+		UserOrder[] orders = getOrders(count, start);
 		Gson gson = new Gson();
 		return gson.toJson(orders);
 
@@ -37,10 +37,10 @@ public class TestUtil {
 	 * @param start
 	 * @return
 	 */
-	public static PurchaseOrder[] getOrders(int count, int start) {
-		List<PurchaseOrder> lst = new ArrayList<PurchaseOrder>();
+	public static UserOrder[] getOrders(int count, int start) {
+		List<UserOrder> lst = new ArrayList<UserOrder>();
 		for (int i = 0; i < count; i++) {
-			PurchaseOrder order = new PurchaseOrder();
+			UserOrder order = new UserOrder();
 			order.setAmount(100);
 			SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			try {
@@ -53,6 +53,6 @@ public class TestUtil {
 			order.setProduct("YY-A");
 			lst.add(order);
 		}
-		return lst.toArray(new PurchaseOrder[0]);
+		return lst.toArray(new UserOrder[0]);
 	}
 }

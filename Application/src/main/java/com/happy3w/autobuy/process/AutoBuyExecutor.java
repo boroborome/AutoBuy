@@ -3,7 +3,6 @@ package com.happy3w.autobuy.process;
 import org.openqa.selenium.WebDriver;
 
 import com.happy3w.autobuy.model.Order;
-import com.happy3w.autobuy.schedule.Context;
 import com.happy3w.autobuy.transfer.TransferProxy;
 import com.happy3w.autobuy.util.WebDriverUtil;
 
@@ -22,10 +21,10 @@ public class AutoBuyExecutor implements Runnable {
 
 	@Override
 	public void run() {
-		process();
-		TransferProxy manager = new TransferProxy();
-		manager.finish(order);
-		Context.getInstance().getOrders().remove(order.getContent().getOrderid());
+//		process();
+//		TransferProxy manager = new TransferProxy();
+//		manager.finish(order);
+//		Context.getInstance().getOrders().remove(order.getContent().getOrderid());
 	}
 
 	private void process() {

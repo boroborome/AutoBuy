@@ -10,15 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.happy3w.autobuy.action.ActionExe;
+import com.happy3w.autobuy.action.BaseAction;
+import com.happy3w.autobuy.action.Param;
+import com.happy3w.autobuy.action.Result;
 import com.happy3w.autobuy.config.SysConfig;
-import com.happy3w.autobuy.model.AtUser;
-import com.happy3w.autobuy.model.PurchaseOrder;
-import com.happy3w.autobuy.task.action.Param;
+import com.happy3w.autobuy.model.ActStruct;
+import com.happy3w.autobuy.model.User;
+import com.happy3w.autobuy.model.TaskCache;
+import com.happy3w.autobuy.model.UserOrder;
 import com.happy3w.autobuy.util.HttpUtil;
-import com.happy3w.autobuy.yy.task.GetYCode;
-import com.happy3w.autobuy.yy.task.YYLoginInner;
-import com.happy3w.autobuy.yy.task.action.YYVerifyImg;
-
 import driver.RemoteDriver;
 import testkit.com.happy3w.autoby.BaseTest;
 
@@ -38,14 +39,14 @@ public class GetYCodeTest extends BaseTest{
 	public void beforeTest()
 	{
 		driver  =RemoteDriver.getInstance().getDriver(10);
-		PurchaseOrder order  =new PurchaseOrder();
+		UserOrder order  =new UserOrder();
 		order.setAmount(100);
 		Calendar c = Calendar.getInstance();
 		c.set(2016, 10, 17);
 		order.setBuytime(c.getTime());
 		order.setOrderid("test01");
 		order.setProduct("YY-C");
-		AtUser user = new AtUser("chenjij@yonyou.com","yy2900");
+		User user = new User("chenjij@yonyou.com","***");
 		param  =new Param();
 		param.put(user);
 		param.put(order);
@@ -54,25 +55,13 @@ public class GetYCodeTest extends BaseTest{
 	public void testGet()
 	{
 		login();
-		GetYCode ycode=new GetYCode(config);
-		ycode.handle(driver, param);
 	}
 	public void login()
 	{
-		YYVerifyImg vc=new YYVerifyImg(config,http,srv);
-		YYLoginInner login = new YYLoginInner(config,vc);
-		PurchaseOrder order  =new PurchaseOrder();
-		order.setAmount(100);
-		Calendar c = Calendar.getInstance();
-		c.set(2016, 10, 17);
-		order.setBuytime(c.getTime());
-		order.setOrderid("test01");
-		order.setProduct("YY-C");
-		AtUser user = new AtUser("chenjij@yonyou.com","yy2900");
-		Param arg  =new Param();
-		arg.put(user);
-		arg.put(order);
-		//Mockito.when(vc.handle(driver, arg)).thenReturn(new Result[]{new Result(VerifyCode.RETURNNAME,"11")});
-		login.handle(driver,arg);
+		ActionExe exe  =new ActionExe();
+		for(ActStruct act:TaskCache.getInstance().get("YY").getStage("ycode").getActions())
+		{
+			param.put(exe.handle(driver, param, act));
+		}
 	}
 }

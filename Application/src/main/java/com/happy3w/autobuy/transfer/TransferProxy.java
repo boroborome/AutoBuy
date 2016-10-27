@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.happy3w.autobuy.model.Order;
-import com.happy3w.autobuy.model.PurchaseOrder;
+import com.happy3w.autobuy.model.UserOrder;
 import com.happy3w.autobuy.util.HttpUtil;
 
 /**
@@ -33,10 +33,10 @@ public class TransferProxy {
 		this.http = http;
 		this.transfer = transfer;
 	}
-
+/*
 	public TransferProxy() {
 		// TODO Auto-generated constructor stub
-	}
+	}*/
 
 	/**
 	 * 下载最新订单。
@@ -44,15 +44,15 @@ public class TransferProxy {
 	 * @param service
 	 * @return
 	 */
-	public PurchaseOrder[] download() {
+	public UserOrder[] download() {
 		String result = http.sendPost(transfer.getDownloadOrderUrl(), null);
 		Gson gson = new Gson();
-		List<PurchaseOrder> orders = gson.fromJson(result, new TypeToken<List<PurchaseOrder>>() {
+		List<UserOrder> orders = gson.fromJson(result, new TypeToken<List<UserOrder>>() {
 		}.getType());
 		if (null == orders) {
-			return new PurchaseOrder[0];
+			return new UserOrder[0];
 		}
-		return orders.toArray(new PurchaseOrder[0]);
+		return orders.toArray(new UserOrder[0]);
 	}
 
 	public String finish(Order order) {

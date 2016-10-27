@@ -19,7 +19,7 @@ public class Order {
 	/**
 	 * 指令内容。
 	 */
-	private PurchaseOrder content;
+	private UserOrder content;
 
 	public SysConfig getSite() {
 		return site;
@@ -27,10 +27,10 @@ public class Order {
 	public void setSite(SysConfig site) {
 		this.site = site;
 	}
-	public PurchaseOrder getContent() {
+	public UserOrder getContent() {
 		return content;
 	}
-	public void setContent(PurchaseOrder content) {
+	public void setContent(UserOrder content) {
 		this.content = content;
 	}
 	

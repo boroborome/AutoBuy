@@ -13,22 +13,23 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.happy3w.autobuy.action.ActionExe;
+import com.happy3w.autobuy.action.BaseAction;
+import com.happy3w.autobuy.action.Click;
+import com.happy3w.autobuy.action.IAction;
+import com.happy3w.autobuy.action.Input;
+import com.happy3w.autobuy.action.OpenPage;
+import com.happy3w.autobuy.action.Param;
+import com.happy3w.autobuy.action.Result;
+import com.happy3w.autobuy.action.VerifyImg;
 import com.happy3w.autobuy.config.SysConfig;
-import com.happy3w.autobuy.model.AtUser;
-import com.happy3w.autobuy.model.PurchaseOrder;
-import com.happy3w.autobuy.task.action.ClickElement;
-import com.happy3w.autobuy.task.action.IAction;
-import com.happy3w.autobuy.task.action.Input;
-import com.happy3w.autobuy.task.action.OpenPage;
-import com.happy3w.autobuy.task.action.Param;
-import com.happy3w.autobuy.task.action.Result;
-import com.happy3w.autobuy.task.action.VerifyImg;
+import com.happy3w.autobuy.model.ActStruct;
+import com.happy3w.autobuy.model.User;
+import com.happy3w.autobuy.model.TaskCache;
+import com.happy3w.autobuy.model.UserOrder;
 import com.happy3w.autobuy.transfer.TransferUrl;
 import com.happy3w.autobuy.util.HttpUtil;
 import com.happy3w.autobuy.util.WebDriverUtil;
-import com.happy3w.autobuy.yy.task.YYLoginInner;
-import com.happy3w.autobuy.yy.task.action.YYVerifyImg;
-
 import driver.RemoteDriver;
 import testkit.com.happy3w.autoby.BaseTest;
 
@@ -42,13 +43,9 @@ public class LoginTest extends BaseTest{
 	private SysConfig config;
 	@Autowired
 	private HttpUtil http;
-	private String srv="http://localhost:8190/autobuy/";
+
 	private WebDriver driver;
-	@BeforeTest
-	public void beforeTest()
-	{
-		driver  =RemoteDriver.getInstance().getDriver(config.getTimeout());
-	}
+
 	@AfterTest
 	public void afterTest()
 	{
@@ -57,25 +54,28 @@ public class LoginTest extends BaseTest{
 	@Test
 	public void testLogin()
 	{
+		driver  =RemoteDriver.getInstance().getDriver(config.getTimeout());		
 		this.login();
 	}
 	public void login()
 	{
-		YYVerifyImg vc=new YYVerifyImg(config,http,srv);
-		YYLoginInner login = new YYLoginInner(config,vc);
-		PurchaseOrder order  =new PurchaseOrder();
+		UserOrder order  =new UserOrder();
 		order.setAmount(100);
 		Calendar c = Calendar.getInstance();
 		c.set(2016, 10, 17);
 		order.setBuytime(c.getTime());
 		order.setOrderid("test01");
 		order.setProduct("YY-C");
-		AtUser user = new AtUser("chenjij@yonyou.com","yy2900");
-		Param arg  =new Param();
-		arg.put(user);
-		arg.put(order);
-		
+		User user = new User("chenjij@yonyou.com","***");
+		Param param  =new Param();
+		param.put(user);
+		param.put(order);
+		param.put("srv",config.getWebServerUrl());
+		ActionExe exe  =new ActionExe();
 		//Mockito.when(vc.handle(driver, arg)).thenReturn(new Result[]{new Result(VerifyCode.RETURNNAME,"11")});
-		login.handle(driver,arg);
+		for(ActStruct act:TaskCache.getInstance().get("YY").getStage("ycode").getActions("login"))
+		{
+			param.put(exe.handle(driver, param, act));
+		}
 	}
 }
