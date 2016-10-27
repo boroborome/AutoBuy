@@ -27,7 +27,7 @@ public class ATProcessTest extends BaseTest{
 		order.put(UserOrder.BUYTIME, "2016-10-2");
 		order.put(UserOrder.ORDERID, "t01");
 		order.put(UserOrder.PRODUCT, "YY-C");
-		order.put(UserOrder.TASK, "YY");
+		order.put(UserOrder.TASK, "yy");
 		Mockito.when(transfer.download()).thenReturn(new UserOrder[]{order});
 		DownloadRunner runner  =new DownloadRunner(transfer,Context.getInstance().getListeners());
 		//Context.getInstance().getPool().schedule(runner,0, 1000, Context.getInstance().getThrdTimeUnit());
