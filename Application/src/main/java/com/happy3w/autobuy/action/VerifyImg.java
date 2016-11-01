@@ -28,11 +28,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.happy3w.autobuy.action.strc.ActStruct;
+import com.happy3w.autobuy.action.strc.VerifyStruct;
 import com.happy3w.autobuy.config.SysConfig;
 import com.happy3w.autobuy.exp.SysException;
-import com.happy3w.autobuy.model.ActStruct;
 import com.happy3w.autobuy.model.UserOrder;
-import com.happy3w.autobuy.model.VerifyStruct;
 import com.happy3w.autobuy.transfer.TransferUrl;
 import com.happy3w.autobuy.util.HttpUtil;
 import com.happy3w.autobuy.util.ThreadUtil;

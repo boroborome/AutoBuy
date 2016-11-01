@@ -22,8 +22,8 @@ import com.happy3w.autobuy.action.OpenPage;
 import com.happy3w.autobuy.action.Param;
 import com.happy3w.autobuy.action.Result;
 import com.happy3w.autobuy.action.VerifyImg;
+import com.happy3w.autobuy.action.strc.ActStruct;
 import com.happy3w.autobuy.config.SysConfig;
-import com.happy3w.autobuy.model.ActStruct;
 import com.happy3w.autobuy.model.User;
 import com.happy3w.autobuy.model.TaskCache;
 import com.happy3w.autobuy.model.UserOrder;
@@ -73,7 +73,7 @@ public class LoginTest extends BaseTest{
 		param.put("srv",config.getWebServerUrl());
 		ActionExe exe  =new ActionExe();
 		//Mockito.when(vc.handle(driver, arg)).thenReturn(new Result[]{new Result(VerifyCode.RETURNNAME,"11")});
-		for(ActStruct act:TaskCache.getInstance().get("yy").getStage("ycode").getActions("login"))
+		for(ActStruct act:TaskCache.getInstance().getTask("yy").getStage("ycode").getActions("login"))
 		{
 			param.put(exe.handle(driver, param, act));
 		}

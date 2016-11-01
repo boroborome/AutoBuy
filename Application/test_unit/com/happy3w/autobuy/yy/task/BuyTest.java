@@ -15,8 +15,8 @@ import com.happy3w.autobuy.action.BaseAction;
 import com.happy3w.autobuy.action.IAction;
 import com.happy3w.autobuy.action.Param;
 import com.happy3w.autobuy.action.Result;
+import com.happy3w.autobuy.action.strc.ActStruct;
 import com.happy3w.autobuy.config.SysConfig;
-import com.happy3w.autobuy.model.ActStruct;
 import com.happy3w.autobuy.model.UserOrder;
 import com.happy3w.autobuy.model.Stage;
 import com.happy3w.autobuy.model.Task;
@@ -51,7 +51,7 @@ public class BuyTest extends BaseTest {
 	@Test
 	public void testBuy() {
 		param.put("srv",config.getWebServerUrl());
-		Task task = TaskCache.getInstance().get("yy");
+		Task task = TaskCache.getInstance().getTask("yy");
 		ActionExe exe = new ActionExe();
 		for (Stage stage : task.getStages()) {
 			driver = RemoteDriver.getInstance().getDriver(10);

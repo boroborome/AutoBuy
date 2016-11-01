@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.happy3w.autobuy.model.ActStruct;
+import com.happy3w.autobuy.action.strc.ActStruct;
 
 /**
  * 输入内容。

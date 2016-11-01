@@ -10,32 +10,29 @@ import com.happy3w.autobuy.action.Param;
 import com.happy3w.autobuy.action.strc.ActStruct;
 import com.happy3w.autobuy.model.Stage;
 import com.happy3w.autobuy.model.TaskCache;
-import com.happy3w.autobuy.model.UserOrder;
+import com.happy3w.autobuy.model.TaskClock;
 
 /**
- * 单独立线程执行。
- * 
- * @version 2016年9月9日 上午9:59:19
- * @author Happy3W Cherry
- *
+ * @version 2016年11月1日下午2:17:34
+ * @author happy3w
  */
-public class ExeRunner implements Runnable {
-
+public class TriggerRunner implements Runnable{
+	private TaskClock task;
 	private WebDriver driver;
-	private Stage stage;
-	private Param param;
 
-	public ExeRunner( WebDriver driver, Stage stage, Param param) {
-		this.driver = driver;
+	public TriggerRunner(TaskClock task, WebDriver driver) {
+		this.task=task;
+		this.driver=driver;
 	}
 
 	@Override
 	public void run() {
+		Stage stage  =TaskCache.getInstance().getStage(task.getTaskid());
 		ActionExe exe  =new ActionExe();
+		Param param  =new Param();
 		param.put(stage.getUser());
 		for (ActStruct act : stage.getActions()) {
 			param.put(exe.handle(driver, param, act));
 		}
 	}
-
 }

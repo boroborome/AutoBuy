@@ -9,8 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.happy3w.autobuy.model.ActStruct;
-import com.happy3w.autobuy.model.CellStruct;
+import com.happy3w.autobuy.action.strc.ActStruct;
+import com.happy3w.autobuy.action.strc.CellStruct;
 
 /**
  * 获取单元格内容。
@@ -21,14 +21,11 @@ public class GetCell extends BaseAction {
 	private int end;
 	private int start;
 	private String condition;
-	private TableXPath xpath;
+	private CellStruct xpath;
 	private String returnName;
-	public GetCell(int start,int end,TableXPath xpath,String condition)
+	public GetCell(ActStruct struct)
 	{
-		this.start=start;
-		this.end=end;
-		this.xpath=xpath;
-		this.condition=condition;
+		this.setStruct(struct);
 	}
 	public GetCell()
 	{
@@ -38,16 +35,7 @@ public class GetCell extends BaseAction {
 	public void setStruct(ActStruct struct)
 	{
 		super.setStruct(struct);
-		CellStruct cellStruct = (CellStruct) struct;
-		this.returnName=cellStruct.getReturnName();
-		this.end=cellStruct.getEndRw();
-		this.start=cellStruct.getStartRw();
-		this.condition=cellStruct.getCondition();
-		this.xpath=new TableXPath();
-		this.xpath.setFilter(cellStruct.getFilter());
-		this.xpath.setRow(cellStruct.getRow());
-		this.xpath.setTable(cellStruct.getTable());
-		this.xpath.setTarget(cellStruct.getTarget());
+		this.xpath = (CellStruct) struct;
 	}
 	@Override
 	public Result[] handle(WebDriver driver, Param param) {

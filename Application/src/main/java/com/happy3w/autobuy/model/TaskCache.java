@@ -12,6 +12,10 @@ import com.happy3w.autobuy.action.GetCell;
 import com.happy3w.autobuy.action.Input;
 import com.happy3w.autobuy.action.OpenPage;
 import com.happy3w.autobuy.action.VerifyImg;
+import com.happy3w.autobuy.action.strc.ActStruct;
+import com.happy3w.autobuy.action.strc.CellStruct;
+import com.happy3w.autobuy.action.strc.VerifyStruct;
+import com.happy3w.autobuy.driver.Context;
 
 /**
  * @version 2016年10月25日上午9:34:18
@@ -24,7 +28,7 @@ public class TaskCache {
 	{
 		Task task  =new Task("yy","yy");
 		tasks.put(task.getTaskCode(), task);
-		Stage  ycode = new Stage("ycode","ycode","chenjij@yonyou.com","***");
+		Stage  ycode = new Stage("ycode","ycode",Context.getInstance().getYCodeUser().getUserId(),Context.getInstance().getYCodeUser().getPassword());
 		task.put(ycode);
 		ycode.put(new ActStruct("login", OpenPage.class.getName(), "https://www.yyfax.com/user/login.html", null, null, "我的YCode-友金所"));
 		ycode.put(new ActStruct("login",Input.class.getName(),"//*[@id=\"accountName\"]",User.USERID,null,null));
@@ -34,7 +38,7 @@ public class TaskCache {
 		ycode.put(new ActStruct("login",Click.class.getName(),"//*[@id=\"login\"]",null,null,null));
 		ycode.put(new ActStruct("get",OpenPage.class.getName(),"https://www.yyfax.com/user/spread/wdycode.html",null,null,null));
 		ycode.put(new CellStruct("get",GetCell.class.getName(),null,"/html/body/div[2]/div[2]/form/div/div[1]/table/tbody", 2, 10, "td[1]", "td[3]",null,"可用","ycode"));
-		Stage buy  =new Stage("buy","buy","chjj402@sina.com","***");
+		Stage buy  =new Stage("buy","buy",Context.getInstance().getLoginUser().getUserId(),Context.getInstance().getLoginUser().getPassword());
 		task.put(buy);
 		buy.putAll(ycode.getActions("login"));
 		buy.put(new ActStruct("chose",OpenPage.class.getName(),"https://www.yyfax.com/financing/yxlc/yxlb.html",null,null,null));
@@ -59,8 +63,12 @@ public class TaskCache {
 		}
 		return instance;
 	}
-	public Task get(String taskCode)
+	public Task getTask(String taskCode)
 	{
 		return tasks.get(taskCode);
+	}
+	public Stage getStage(String stageCode)
+	{
+		return this.getTask("yy").getStage(stageCode);
 	}
 }

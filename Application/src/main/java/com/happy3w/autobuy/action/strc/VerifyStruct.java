@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.model;
+package com.happy3w.autobuy.action.strc;
 
 /**
  * @version 2016年10月25日上午10:02:57

@@ -3,6 +3,7 @@
  */
 package com.happy3w.autobuy.driver;
 
+import com.happy3w.autobuy.model.TaskClock;
 import com.happy3w.autobuy.model.UserOrder;
 
 /**
@@ -16,7 +17,11 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		DownloadRunner runner  =new DownloadRunner(Context.getInstance().getTransfer(),Context.getInstance().getListeners());
-		Context.getInstance().getPool().schedule(runner,0,1000, Context.getInstance().getThrdTimeUnit());
+//		DownloadRunner runner  =new DownloadRunner(Context.getInstance().getTransfer(),Context.getInstance().getListeners());
+//		Context.getInstance().getPool().schedule(runner,0,10*1000, Context.getInstance().getThrdTimeUnit());
+		for(TaskClock task:Context.getInstance().getTaskSchedulor().getTasks())
+		{
+			Context.getInstance().getTriggerSchedulor().handle(task);
+		}
 	}
 }

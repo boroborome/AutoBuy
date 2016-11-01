@@ -5,7 +5,7 @@ package com.happy3w.autobuy.action;
 
 import org.openqa.selenium.WebDriver;
 
-import com.happy3w.autobuy.model.ActStruct;
+import com.happy3w.autobuy.action.strc.ActStruct;
 import com.happy3w.autobuy.util.WebDriverUtil;
 
 /**

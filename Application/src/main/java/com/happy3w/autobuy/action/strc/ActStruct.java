@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.model;
+package com.happy3w.autobuy.action.strc;
 
 
 
@@ -37,10 +37,13 @@ public class ActStruct {
 	 */
 	private String returnName;
 	/**
+	 * 某个操作的重复刷新页面时间按。
+	 */
+	private String refreshTime;
+	/**
 	 * 验证操作成功的条件。
 	 */
 	private String condition;
-
 	public String getOperation() {
 		return operation;
 	}
@@ -86,6 +89,13 @@ public class ActStruct {
 	
 	public String getCondition() {
 		return condition;
+	}
+	
+	public String getRefreshTime() {
+		return refreshTime;
+	}
+	public void setRefreshTime(String refreshTime) {
+		this.refreshTime = refreshTime;
 	}
 	public ActStruct(String operation,String className,String target,String paramName,String returnName,String condition)
 	{

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.happy3w.autobuy.action.strc.ActStruct;
+
 /**
  * 任务阶段。
  * @version 2016年10月25日上午9:20:32

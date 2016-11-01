@@ -28,8 +28,8 @@ import com.happy3w.autobuy.action.BaseAction;
 import com.happy3w.autobuy.action.IAction;
 import com.happy3w.autobuy.action.Param;
 import com.happy3w.autobuy.action.Result;
+import com.happy3w.autobuy.action.strc.ActStruct;
 import com.happy3w.autobuy.config.SysConfig;
-import com.happy3w.autobuy.model.ActStruct;
 import com.happy3w.autobuy.model.User;
 import com.happy3w.autobuy.model.TaskCache;
 import com.happy3w.autobuy.model.UserOrder;
@@ -77,7 +77,7 @@ public class ChoseProductTest  extends BaseTest{
 	   driver = RemoteDriver.getInstance().getDriver(10);
 	   driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 	   ActionExe exe  =new ActionExe();
-	   for(ActStruct act:TaskCache.getInstance().get("yy").getStage("buy").getActions("choose"))
+	   for(ActStruct act:TaskCache.getInstance().getTask("yy").getStage("buy").getActions("choose"))
 	   {
 			param.put(exe.handle(driver, param, act));
 	   }

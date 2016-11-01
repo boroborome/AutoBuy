@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.happy3w.autobuy.model;
+package com.happy3w.autobuy.action.strc;
 
 /**
  * 操作单元格所需参数。

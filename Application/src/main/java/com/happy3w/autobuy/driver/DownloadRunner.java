@@ -3,6 +3,10 @@
  */
 package com.happy3w.autobuy.driver;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 import com.happy3w.autobuy.model.UserOrder;
@@ -16,7 +20,7 @@ import com.happy3w.autobuy.util.LogUtil;
  * @author happy3w
  */
 public class DownloadRunner implements Runnable{
-
+	private Map<String,UserOrder> map= new HashMap<String,UserOrder>();
 	private TransferProxy transfer;
 	private IDownloadListener[] listeners;
 	public DownloadRunner(TransferProxy transfer,IDownloadListener[] listeners)
@@ -29,9 +33,18 @@ public class DownloadRunner implements Runnable{
 		try
 		{
 			UserOrder[] orders =this.transfer.download();
+			List<UserOrder> list = new ArrayList<UserOrder>();
+			for(UserOrder order:orders)
+			{
+				if(!map.containsKey(order.getOrderid()))
+				{
+					map.put(order.getOrderid(), order);
+					list.add(order);
+				}
+			}
 			for(IDownloadListener listener:this.listeners)
 			{
-				listener.handle(orders);
+				listener.handle(list.toArray(new UserOrder[0]));
 			}
 		}
 		catch(Exception e)

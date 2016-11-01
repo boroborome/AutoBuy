@@ -14,8 +14,8 @@ import com.happy3w.autobuy.action.ActionExe;
 import com.happy3w.autobuy.action.BaseAction;
 import com.happy3w.autobuy.action.Param;
 import com.happy3w.autobuy.action.Result;
+import com.happy3w.autobuy.action.strc.ActStruct;
 import com.happy3w.autobuy.config.SysConfig;
-import com.happy3w.autobuy.model.ActStruct;
 import com.happy3w.autobuy.model.User;
 import com.happy3w.autobuy.model.TaskCache;
 import com.happy3w.autobuy.model.UserOrder;
@@ -59,7 +59,7 @@ public class GetYCodeTest extends BaseTest{
 	public void login()
 	{
 		ActionExe exe  =new ActionExe();
-		for(ActStruct act:TaskCache.getInstance().get("yy").getStage("ycode").getActions())
+		for(ActStruct act:TaskCache.getInstance().getTask("yy").getStage("ycode").getActions())
 		{
 			param.put(exe.handle(driver, param, act));
 		}

@@ -13,6 +13,7 @@ public class UserOrder {
     public static final String AMOUNT="amount";
     public static final String BUYTIME ="buytime";
     public static final String TASK="task";
+    public static final String EndTime="endtime";
     private Map<String,String> items  =new HashMap<String,String>();
     public void put(String key,String value)
     {
@@ -83,6 +84,9 @@ public class UserOrder {
 	public String getTask() {
 		// TODO Auto-generated method stub
 		return this.task;
+	}
+	public static String getEndtime() {
+		return EndTime;
 	}
     
 }
