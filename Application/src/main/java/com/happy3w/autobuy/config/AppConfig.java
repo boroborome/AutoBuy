@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+
+import com.happy3w.autobuy.driver.Context;
 import com.happy3w.autobuy.driver.ExeSchedulor;
 import com.happy3w.autobuy.driver.ThrdPool;
 import com.happy3w.autobuy.transfer.TransferProxy;
@@ -98,6 +100,6 @@ public class AppConfig {
 
 	@Bean
 	public WebDriver getWebDriver() {
-		return RemoteDriver.getInstance().getDriver(10);
+		return RemoteDriver.getInstance().getDriver(10,Context.getInstance().getChrome());
 	}
 }

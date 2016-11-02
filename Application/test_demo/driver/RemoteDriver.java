@@ -3,11 +3,13 @@
  */
 package driver;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -17,29 +19,28 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  */
 public class RemoteDriver {
 	private static RemoteDriver instance;
-	public static RemoteDriver getInstance()
-	{
-		if(null==instance)
-		{
-			instance=new RemoteDriver();
+
+	public static RemoteDriver getInstance() {
+		if (null == instance) {
+			instance = new RemoteDriver();
 		}
 		return instance;
 	}
-	private String urlStr="http://localhost:11991";
-	public  WebDriver getDriver(long timeout)
-	{
-		WebDriver   driver = null;
+
+	private String urlStr = "http://localhost:32441";
+
+	public WebDriver getDriver(long timeout,String urlStr) {
+		WebDriver driver = new ChromeDriver();
 		URL url = null;
-		try {
-			url = new URL(urlStr);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			driver = new RemoteWebDriver(url,
-			         DesiredCapabilities.chrome());
-			driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
-			return driver;
+//		try {
+//			url = new URL(urlStr);
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		driver = new RemoteWebDriver(url, DesiredCapabilities.chrome());
+		driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+		return driver;
 	}
 
 }

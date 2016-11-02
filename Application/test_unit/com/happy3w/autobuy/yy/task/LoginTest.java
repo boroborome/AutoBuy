@@ -24,6 +24,7 @@ import com.happy3w.autobuy.action.Result;
 import com.happy3w.autobuy.action.VerifyImg;
 import com.happy3w.autobuy.action.strc.ActStruct;
 import com.happy3w.autobuy.config.SysConfig;
+import com.happy3w.autobuy.driver.Context;
 import com.happy3w.autobuy.model.User;
 import com.happy3w.autobuy.model.TaskCache;
 import com.happy3w.autobuy.model.UserOrder;
@@ -54,7 +55,7 @@ public class LoginTest extends BaseTest{
 	@Test
 	public void testLogin()
 	{
-		driver  =RemoteDriver.getInstance().getDriver(config.getTimeout());		
+		driver  =RemoteDriver.getInstance().getDriver(config.getTimeout(),Context.getInstance().getChrome());		
 		this.login();
 	}
 	public void login()

@@ -17,6 +17,7 @@ import com.happy3w.autobuy.action.Param;
 import com.happy3w.autobuy.action.Result;
 import com.happy3w.autobuy.action.strc.ActStruct;
 import com.happy3w.autobuy.config.SysConfig;
+import com.happy3w.autobuy.driver.Context;
 import com.happy3w.autobuy.model.UserOrder;
 import com.happy3w.autobuy.model.Stage;
 import com.happy3w.autobuy.model.Task;
@@ -54,7 +55,7 @@ public class BuyTest extends BaseTest {
 		Task task = TaskCache.getInstance().getTask("yy");
 		ActionExe exe = new ActionExe();
 		for (Stage stage : task.getStages()) {
-			driver = RemoteDriver.getInstance().getDriver(10);
+			driver = RemoteDriver.getInstance().getDriver(10,Context.getInstance().getChrome());
 			param.put(stage.getUser());
 			for (ActStruct act : stage.getActions()) {
 				param.put(exe.handle(driver,param,act));

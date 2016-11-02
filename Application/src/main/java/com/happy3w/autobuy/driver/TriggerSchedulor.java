@@ -22,13 +22,13 @@ public class TriggerSchedulor {
 	}
 
 	public void handle(TaskClock task) {
-		timer.schedule(new TimerTask() {
+		timer.schedule(new TimerTask() { 
 
 			@Override
 			public void run() {
 				Context.getInstance().getPool()
 						.execute(new TriggerRunner(task, Context.getInstance().getDriver(task.getTaskid())));
 			}
-		}, task.getStart(), task.getUnit().toMillis(task.getPeriod()));
+		}, 0, task.getUnit().toMillis(task.getPeriod()));
 	}
 }

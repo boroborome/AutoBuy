@@ -30,6 +30,7 @@ import com.happy3w.autobuy.action.Param;
 import com.happy3w.autobuy.action.Result;
 import com.happy3w.autobuy.action.strc.ActStruct;
 import com.happy3w.autobuy.config.SysConfig;
+import com.happy3w.autobuy.driver.Context;
 import com.happy3w.autobuy.model.User;
 import com.happy3w.autobuy.model.TaskCache;
 import com.happy3w.autobuy.model.UserOrder;
@@ -54,7 +55,7 @@ public class ChoseProductTest  extends BaseTest{
 	@BeforeTest
 	public void beforeTest()
 	{
-		driver  =RemoteDriver.getInstance().getDriver(10);
+		driver  =RemoteDriver.getInstance().getDriver(10,Context.getInstance().getChrome());
 		order  =new UserOrder();
 		order.setAmount(100);
 		Calendar c = Calendar.getInstance();
@@ -74,12 +75,12 @@ public class ChoseProductTest  extends BaseTest{
 	}
 	@Test
 	public void testOpen(){
-	   driver = RemoteDriver.getInstance().getDriver(10);
+	   driver = RemoteDriver.getInstance().getDriver(10,Context.getInstance().getChrome());
 	   driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 	   ActionExe exe  =new ActionExe();
 	   for(ActStruct act:TaskCache.getInstance().getTask("yy").getStage("buy").getActions("choose"))
 	   {
 			param.put(exe.handle(driver, param, act));
-	   }
+	   } 
 	}
 }

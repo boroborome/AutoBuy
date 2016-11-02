@@ -34,6 +34,7 @@ public class Context {
 	private User ycodeUser = new User("chenjij@yonyou.com","yy2900");
 	private User loginUser = new User("chjj402@sina.com","yy2900");
 	private String srv = "http://localhost:8190/autobuy/";
+	private String chrome="http://localhost:4172";
 	private TaskSchedulor driverContainer;
 	private TriggerSchedulor trigger;
 	public Context()
@@ -50,7 +51,7 @@ public class Context {
 	public WebDriver getDriver(String key) {
 		if(!drivers.containsKey(key))
 		{
-			drivers.put(key, RemoteDriver.getInstance().getDriver(10));
+			drivers.put(key, RemoteDriver.getInstance().getDriver(10,chrome));
 		}
 		return drivers.get(key);
 	}
@@ -115,5 +116,8 @@ public class Context {
 			trigger = new TriggerSchedulor();
 		}
 		return trigger;
+	}
+	public String getChrome() {
+		return this.chrome;
 	}
 }

@@ -16,6 +16,7 @@ import com.happy3w.autobuy.action.Param;
 import com.happy3w.autobuy.action.Result;
 import com.happy3w.autobuy.action.strc.ActStruct;
 import com.happy3w.autobuy.config.SysConfig;
+import com.happy3w.autobuy.driver.Context;
 import com.happy3w.autobuy.model.User;
 import com.happy3w.autobuy.model.TaskCache;
 import com.happy3w.autobuy.model.UserOrder;
@@ -38,7 +39,7 @@ public class GetYCodeTest extends BaseTest{
 	@BeforeTest
 	public void beforeTest()
 	{
-		driver  =RemoteDriver.getInstance().getDriver(10);
+		driver  =RemoteDriver.getInstance().getDriver(10,Context.getInstance().getChrome());
 		UserOrder order  =new UserOrder();
 		order.setAmount(100);
 		Calendar c = Calendar.getInstance();
