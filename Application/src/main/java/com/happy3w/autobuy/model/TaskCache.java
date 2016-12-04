@@ -22,53 +22,93 @@ import com.happy3w.autobuy.driver.Context;
  * @author happy3w
  */
 public class TaskCache {
-	private Map<String,Task> tasks=  new HashMap<String,Task>();
+	private Map<String, Task> tasks = new HashMap<String, Task>();
 	private static TaskCache instance;
-	public TaskCache()
-	{
-		Task task  =new Task("yy","yy");
+
+	public interface IValue {
+		Object getValue();
+	}
+
+	public class WaitValue implements IValue {
+		private Object value;
+
+		@Override
+		public Object getValue() {
+			if (value == null) {
+				synchronized (this) {
+					try {
+						this.wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			return this;
+		}
+
+		public void setValue(Object v) {
+			synchronized (this) {
+				value = v;
+				this.notifyAll();
+			}
+		}
+
+	}
+
+	public TaskCache() {
+		Task task = new Task("yy", "yy");
 		tasks.put(task.getTaskCode(), task);
-		Stage  ycode = new Stage("ycode","ycode",Context.getInstance().getYCodeUser().getUserId(),Context.getInstance().getYCodeUser().getPassword());
+		Stage ycode = new Stage("ycode", "ycode", Context.getInstance().getYCodeUser().getUserId(),
+				Context.getInstance().getYCodeUser().getPassword());
 		task.put(ycode);
-		ycode.put(new ActStruct("login", OpenPage.class.getName(), "https://www.yyfax.com/user/login.html", null, null, "我的YCode-友金所"));
-		ycode.put(new ActStruct("login",Input.class.getName(),"//*[@id=\"accountName\"]",User.USERID,null,null));
-		ycode.put(new ActStruct("login",Input.class.getName(),"//*[@id=\"password1\"]",User.PASSWORD,null,null));
-		ycode.put(new VerifyStruct("login",VerifyImg.class.getName(),null,null,"//*[@id=\"_verifyImg\"]", "/vc/upload.php", "/vc/result.php", "vc"));
-		ycode.put(new ActStruct("login",Input.class.getName(),"//*[@id=\"verifyCode\"]","vc",null,null));
-		ycode.put(new ActStruct("login",Click.class.getName(),"//*[@id=\"login\"]",null,null,null));
-		ycode.put(new ActStruct("get",OpenPage.class.getName(),"https://www.yyfax.com/user/spread/wdycode.html",null,null,null));
-		ycode.put(new CellStruct("get",GetCell.class.getName(),null,"/html/body/div[2]/div[2]/form/div/div[1]/table/tbody", 2, 10, "td[1]", "td[3]",null,"可用","ycode"));
-		Stage buy  =new Stage("buy","buy",Context.getInstance().getLoginUser().getUserId(),Context.getInstance().getLoginUser().getPassword());
+		ycode.put(new ActStruct("login", OpenPage.class.getName(), "https://www.yyfax.com/user/login.html", null, null,
+				"我的YCode-友金所"));
+		ycode.put(new ActStruct("login", Input.class.getName(), "//*[@id=\"accountName\"]", User.USERID, null, null));
+		ycode.put(new ActStruct("login", Input.class.getName(), "//*[@id=\"password1\"]", User.PASSWORD, null, null));
+		ycode.put(new VerifyStruct("login", VerifyImg.class.getName(), null, null, "//*[@id=\"_verifyImg\"]",
+				"/vc/upload.php", "/vc/result.php", "vc"));
+		ycode.put(new ActStruct("login", Input.class.getName(), "//*[@id=\"verifyCode\"]", "vc", null, null));
+		ycode.put(new ActStruct("login", Click.class.getName(), "//*[@id=\"login\"]", null, null, null));
+		ycode.put(new ActStruct("get", OpenPage.class.getName(), "https://www.yyfax.com/user/spread/wdycode.html", null,
+				null, null));
+		ycode.put(new CellStruct("get", GetCell.class.getName(), null,
+				"/html/body/div[2]/div[2]/form/div/div[1]/table/tbody", 2, 10, "td[1]", "td[3]", null, "可用", "ycode"));
+		Stage buy = new Stage("buy", "buy", Context.getInstance().getLoginUser().getUserId(),
+				Context.getInstance().getLoginUser().getPassword());
 		task.put(buy);
 		buy.putAll(ycode.getActions("login"));
-		buy.put(new ActStruct("chose",OpenPage.class.getName(),"https://www.yyfax.com/financing/yxlc/yxlb.html",null,null,null));
-		buy.put(new CellStruct("chose",ClickCell.class.getName(),null,"/html/body/div[2]/div/div[2]/div[2]/table/tbody", 2, 10, "td[7]", "td[1]", UserOrder.PRODUCT, null,null));
-		buy.put(new ActStruct("confirm",Input.class.getName(),"//*[@id=\"gmMoney\"]",UserOrder.AMOUNT,null,null));
-		buy.put(new ActStruct("confirm",Input.class.getName(),"//*[@id=\"yCode\"]","ycode",null,null));
-		buy.put(new ActStruct("confirm",Click.class.getName(),"//*[@id=\"otButton\"]",null,null,null));
-		buy.put(new ActStruct("pay",Click.class.getName(),"//*[@id=\"chooseBuyWayDlg\"]/div/div/div[2]/label[1]",null,null,null));
-		buy.put(new ActStruct("pay",Click.class.getName(),"//*[@id=\"btn-gollbuy\"]",null,null,null));
-		buy.put(new ActStruct("pay",Click.class.getName(),"//*[@id=\"iAgree\"]",null,null,null));
-		buy.put(new ActStruct("pay",Click.class.getName(),"//*[@id=\"ok\"]",null,null,null));
-		buy.put(new ActStruct("pay",Click.class.getName(),"//*[@id=\"getValidCode\"]",null,null,null));
-		buy.put(new ActStruct("pay",Click.class.getName(),"//*[@id=\"phoneCode\"]",null,null,null));
-		buy.put(new ActStruct("pay",Click.class.getName(),"//*[@id=\"btnPurchase\"]",null,null,null));
-		buy.put(new ActStruct("pay",Click.class.getName(),"//*[@id=\"info\"]/div/div[2]/div[3]/a",null,null,null));
+		buy.put(new ActStruct("chose", OpenPage.class.getName(), "https://www.yyfax.com/financing/yxlc/yxlb.html", null,
+				null, null));
+		buy.put(new CellStruct("chose", ClickCell.class.getName(), null,
+				"/html/body/div[2]/div/div[2]/div[2]/table/tbody", 2, 10, "td[7]", "td[1]", UserOrder.PRODUCT, null,
+				null));
+		buy.put(new ActStruct("confirm", Input.class.getName(), "//*[@id=\"gmMoney\"]", UserOrder.AMOUNT, null, null));
+		buy.put(new ActStruct("confirm", Input.class.getName(), "//*[@id=\"yCode\"]", "ycode", null, null));
+		buy.put(new ActStruct("confirm", Click.class.getName(), "//*[@id=\"otButton\"]", null, null, null));
+		buy.put(new ActStruct("pay", Click.class.getName(), "//*[@id=\"chooseBuyWayDlg\"]/div/div/div[2]/label[1]",
+				null, null, null));
+		buy.put(new ActStruct("pay", Click.class.getName(), "//*[@id=\"btn-gollbuy\"]", null, null, null));
+		buy.put(new ActStruct("pay", Click.class.getName(), "//*[@id=\"iAgree\"]", null, null, null));
+		buy.put(new ActStruct("pay", Click.class.getName(), "//*[@id=\"ok\"]", null, null, null));
+		buy.put(new ActStruct("pay", Click.class.getName(), "//*[@id=\"getValidCode\"]", null, null, null));
+		buy.put(new ActStruct("pay", Click.class.getName(), "//*[@id=\"phoneCode\"]", null, null, null));
+		buy.put(new ActStruct("pay", Click.class.getName(), "//*[@id=\"btnPurchase\"]", null, null, null));
+		buy.put(new ActStruct("pay", Click.class.getName(), "//*[@id=\"info\"]/div/div[2]/div[3]/a", null, null, null));
 	}
-	public static TaskCache getInstance()
-	{
-		if(null==instance)
-		{
+
+	public static TaskCache getInstance() {
+		if (null == instance) {
 			instance = new TaskCache();
 		}
 		return instance;
 	}
-	public Task getTask(String taskCode)
-	{
+
+	public Task getTask(String taskCode) {
 		return tasks.get(taskCode);
 	}
-	public Stage getStage(String stageCode)
-	{
+
+	public Stage getStage(String stageCode) {
 		return this.getTask("yy").getStage(stageCode);
 	}
 }
