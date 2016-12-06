@@ -14,17 +14,18 @@ import java.util.concurrent.TimeUnit;
  * @author happy3w
  */
 public class TaskSchedulor {
-	private List<TaskClock> tasks  =new ArrayList<TaskClock>();
-	public TaskSchedulor()
-	{
-		Calendar cl= Calendar.getInstance();
-		cl.set(2016, 11, 1, 13, 50, 00);
+	private List<TaskClock> tasks = new ArrayList<TaskClock>();
+
+	public TaskSchedulor() {
+		Calendar cl = Calendar.getInstance();
+		cl.set(2016, 12, 6, 18, 24, 00);
 		Date start = cl.getTime();
-		cl.set(2016, 11, 1, 14, 30, 00);
+		cl.set(2016, 12, 6, 18, 30, 00);
 		Date end = cl.getTime();
 		tasks.add(new TaskClock("ycode", start, end, 1, TimeUnit.DAYS));
-		tasks.add(new TaskClock("buy",start,end,1,TimeUnit.DAYS));
+		tasks.add(new TaskClock("buy", start, end, 1, TimeUnit.DAYS));
 	}
+
 	public TaskClock[] getTasks() {
 		return tasks.toArray(new TaskClock[0]);
 	}

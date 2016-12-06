@@ -25,6 +25,7 @@ public class TriggerRunner implements Runnable {
 	@Override
 	public void run() {
 		Stage stage = TaskCache.getInstance().getStage(task.getTaskid());
+		System.out.println(task.getTaskid() + ">" + task.getStart() + ">hello");
 		// ActionExe exe =new ActionExe();
 		// Param param =new Param();
 		// param.put(stage.getUser());
