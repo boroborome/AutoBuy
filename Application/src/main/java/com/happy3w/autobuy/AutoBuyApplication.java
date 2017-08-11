@@ -1,16 +1,11 @@
 package com.happy3w.autobuy;
 
-import java.io.File;
-
-import javax.servlet.MultipartConfigElement;
-
+import com.happy3w.autobuy.config.SysConfig;
 import org.apache.catalina.connector.Connector;
-import org.apache.poi.poifs.nio.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.MultipartConfigFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +17,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.happy3w.autobuy.AutoBuyApplication.TomcatSslConnectorProperties;
-import com.happy3w.autobuy.config.SysConfig;
+import java.io.File;
 
 /**
  * Created by ysgao on 5/14/16.
@@ -62,13 +56,13 @@ public class AutoBuyApplication {
 		};
 	}
 
-	@Bean
-	public MultipartConfigElement multipartConfigElement() {
-		MultipartConfigFactory factory = new MultipartConfigFactory();
-		// factory.setMaxFileSize("128KB");
-		// factory.setMaxRequestSize("128KB");
-		return factory.createMultipartConfig();
-	}
+//	@Bean
+//	public MultipartConfigElement multipartConfigElement() {
+//		MultipartConfigFactory factory = new MultipartConfigFactory();
+//		// factory.setMaxFileSize("128KB");
+//		// factory.setMaxRequestSize("128KB");
+//		return factory.createMultipartConfig();
+//	}
 
 	@Bean
 	public JdbcTemplate jdbcTemplate() {

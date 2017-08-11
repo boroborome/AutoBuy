@@ -3,24 +3,19 @@
  */
 package com.happy3w.autobuy.driver;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.WebDriver;
-
-import com.happy3w.autobuy.config.SysConfig;
-import com.happy3w.autobuy.model.Stage;
 import com.happy3w.autobuy.model.TaskCache;
 import com.happy3w.autobuy.model.TaskSchedulor;
 import com.happy3w.autobuy.model.User;
 import com.happy3w.autobuy.transfer.TransferProxy;
 import com.happy3w.autobuy.transfer.TransferUrl;
 import com.happy3w.autobuy.util.HttpUtil;
+import org.openqa.selenium.WebDriver;
 
-import driver.RemoteDriver;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @version 2016年10月26日下午3:26:54

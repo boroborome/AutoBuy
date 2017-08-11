@@ -3,9 +3,13 @@
  */
 package com.happy3w.autobuy.config;
 
-import java.util.Date;
-import java.util.TimerTask;
-
+import com.happy3w.autobuy.driver.Context;
+import com.happy3w.autobuy.driver.ExeSchedulor;
+import com.happy3w.autobuy.driver.RemoteDriver;
+import com.happy3w.autobuy.driver.ThrdPool;
+import com.happy3w.autobuy.transfer.TransferProxy;
+import com.happy3w.autobuy.transfer.TransferUrl;
+import com.happy3w.autobuy.util.HttpUtil;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,15 +17,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import com.happy3w.autobuy.driver.Context;
-import com.happy3w.autobuy.driver.ExeSchedulor;
-import com.happy3w.autobuy.driver.ThrdPool;
-import com.happy3w.autobuy.transfer.TransferProxy;
-import com.happy3w.autobuy.transfer.TransferUrl;
-import com.happy3w.autobuy.util.HttpUtil;
-import com.happy3w.autobuy.util.WebDriverUtil;
+import java.util.Date;
 
-import driver.RemoteDriver;
 
 /**
  * spring configuration file.
